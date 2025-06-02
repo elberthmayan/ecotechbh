@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sobre o Projeto - EcoTech BH</title>
+    <style>
+        /* Reset básico */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: #f9fafb;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .page-content-wrapper {
+            display: flex;
+            flex-direction: row;
+            flex-grow: 1;
+        }
+
+        
+        .user-top-right {
+            position: fixed;
+            top: 30px;    
+            right: 40px;   
+            width: 44px;
+            height: 44px;
+            background-color: #000;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.25);
+            transition: background-color 0.3s ease;
+            z-index: 1000;
+            text-decoration: none;
+        }
+
+        .user-top-right:hover {
+            background-color: #222;
+        }
+
+        .user-top-right svg {
+            fill: #fff;
+            width: 24px;
+            height: 24px;
+        }
+
+        /* Sidebar */
+        nav.sidebar {
+            width: 240px;
+            background-color: #e3eaf6;
+            padding: 70px 20px 20px 20px;
+            display: flex;
+            flex-direction: column;
+            border-radius: 0 12px 12px 0;
+            box-shadow: 2px 0 8px rgba(0, 0, 0, 0.05);
+            margin-left: 10px;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            align-self: flex-start;
+        }
+
+        nav.sidebar h1 {
+            color: #1a237e;
+            margin-bottom: 35px;
+            font-size: 2em;
+            text-align: center;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        nav.sidebar ul {
+            list-style: none;
+        }
+
+        nav.sidebar ul li {
+            margin-bottom: 18px;
+        }
+
+        nav.sidebar ul li a {
+            color: #1a237e;
+            font-weight: 600;
+            text-decoration: none;
+            display: block;
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 1.05em;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        nav.sidebar ul li a:hover,
+        nav.sidebar ul li a:focus {
+            background-color: #3f51b5;
+            color: #fff;
+            outline: none;
+        }
+
+        nav.sidebar ul li a[aria-current="page"] {
+            background-color: #3f51b5;
+            color: #fff;
+            font-weight: 700;
+        }
+
+
+        
+        main.content {
+            flex-grow: 1;
+            padding: 36px 36px 36px 48px;
+            background-color: #fff;
+            border-radius: 12px;
+            margin: 20px auto; 
+            box-shadow: 0 0 12px rgba(0, 0, 0, 0.08);
+            max-width: 900px;   
+        }
+
+        main.content h2 {
+            margin-bottom: 25px;
+            color: #1a237e;
+            font-size: 2.3em;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+        }
+
+        main.content h3 {
+            margin-top: 30px;
+            margin-bottom: 14px;
+            color: #283593;
+            font-size: 1.5em;
+            font-weight: 600;
+            border-left: 4px solid #3f51b5;
+            padding-left: 12px;
+        }
+        main.content h3:first-of-type {
+            margin-top: 0;
+        }
+
+
+        main.content p,
+        main.content ul {
+            margin-bottom: 22px;
+            font-size: 1.1em;
+            color: #444;
+        }
+
+        main.content ul {
+            padding-left: 24px;
+            list-style-type: disc;
+        }
+
+        main.content ul li {
+            margin-bottom: 12px;
+        }
+
+        
+        @media (max-width: 900px) {
+            .page-content-wrapper {
+                flex-direction: column;
+            }
+            nav.sidebar {
+                width: 100%;
+                border-radius: 0 0 12px 12px;
+                margin-left: 0;
+                padding: 80px 20px 20px 20px; 
+                flex-direction: row;
+                justify-content: space-around;
+                position: static;
+                height: auto;
+            }
+            nav.sidebar h1 {
+                margin-bottom: 0;
+                font-size: 1.6em;
+                align-self: center;
+            }
+            nav.sidebar ul {
+                display: flex;
+                flex-direction: row;
+                gap: 16px;
+                margin: 0;
+            }
+            nav.sidebar ul li {
+                margin-bottom: 0;
+            }
+            nav.sidebar ul li a {
+                padding: 8px 12px;
+                font-size: 1em;
+            }
+            main.content {
+                margin: 20px 16px 40px 16px;
+                padding: 20px 16px;
+                max-width: 100%; 
+                border-radius: 8px;
+            }
+
+            
+            .user-top-right {
+                top: 20px;
+                right: 20px;
+                width: 40px;
+                height: 40px;
+            }
+            .user-top-right svg {
+                width: 20px;
+                height: 20px;
+            }
+        }
+    </style>
+    <script>
+        
+    </script>
+</head>
+<body>
+
+    <a href="login.html" class="user-top-right" title="Área do Usuário" aria-label="Área do Usuário">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+        </svg>
+    </a>
+
+    <div class="page-content-wrapper">
+        <nav class="sidebar" role="navigation" aria-label="Menu principal">
+            <h1>EcoTech BH</h1>
+            <ul>
+                <li><a href="index.html" tabindex="0">Início</a></li>
+                <li><a href="sobre.html" tabindex="0" aria-current="page">Sobre o Projeto</a></li>
+                <li><a href="guia.html" tabindex="0">Guia de Descarte</a></li>
+                <li><a href="doacoes.html" tabindex="0">Doações</a></li>
+                <li><a href="pontos.html" tabindex="0">Pontos de Descarte</a></li>
+            </ul>
+        </nav>
+
+        <main class="content" role="main">
+            <h2>Sobre o Projeto</h2>
+
+            <h3>Nossa Missão</h3>
+            <p>Na EcoTech BH, acreditamos que dá pra mudar a forma como Belo Horizonte se relaciona com o descarte de eletrônicos. Queremos incentivar hábitos mais conscientes e responsáveis, tornando mais fácil recuperar e reaproveitar esses aparelhos. Tudo isso com um olhar voltado para a sustentabilidade e a inovação</p>
+
+            <h3>Nossa Visão</h3>
+            <p>Imaginamos uma BH mais limpa e sustentável, onde o lixo eletrônico deixe de ser problema e passe a ser visto como oportunidade. Sonhamos com uma cidade em que a reciclagem e o reaproveitamento façam parte do dia a dia de todos, através de soluções inteligentes e acessíveis.</p>
+
+            <h3>Nossos Objetivos</h3>
+            <ul>
+                <li>Educar e conscientizar a população sobre os impactos ambientais do lixo eletrônico e a importância do descarte correto.</li>
+                <li>Simplificar o descarte por meio de soluções acessíveis e seguras, promovendo a participação ativa dos cidadãos.</li>
+            </ul>
+
+            <h3>Importância da EcoTech BH</h3>
+            <p>Quando cuidamos melhor dos nossos resíduos eletrônicos, ajudamos a preservar o meio ambiente, evitamos desperdícios e ainda impulsionamos o desenvolvimento social. A EcoTech BH nasceu pra isso: pra fazer parte de um futuro mais sustentável aqui na nossa cidade.</p>
+
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const userIconLink = document.querySelector('.user-top-right');
+            const estaLogado = localStorage.getItem('usuarioLogadoEcoTechBH') === 'sim';
+
+            if (userIconLink && estaLogado) {
+                userIconLink.title = "Menu do Usuário";
+                userIconLink.setAttribute('aria-label', 'Menu do Usuário');
+                userIconLink.href = "#";
+
+                let dropdownMenu = document.getElementById('userDropdownMenu');
+                if (!dropdownMenu) {
+                    dropdownMenu = document.createElement('div');
+                    dropdownMenu.id = 'userDropdownMenu';
+                    dropdownMenu.style.display = 'none';
+                    dropdownMenu.style.position = 'fixed';
+                    dropdownMenu.style.top = '78px'; 
+                    dropdownMenu.style.right = '40px'; 
+                    dropdownMenu.style.backgroundColor = 'white';
+                    dropdownMenu.style.border = '1px solid #e0e0e0';
+                    dropdownMenu.style.borderRadius = '8px';
+                    dropdownMenu.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.15)';
+                    dropdownMenu.style.padding = '12px';
+                    dropdownMenu.style.zIndex = '1001';
+                    dropdownMenu.style.minWidth = '200px';
+
+                    dropdownMenu.innerHTML = `
+                        <p style="margin: 0 0 10px 0; font-weight: 600; color: #1a237e; font-size: 0.9em; padding-bottom: 8px; border-bottom: 1px solid #eee;">Configurações do usuário</p>
+                        <button id="logoutButtonFromMenu" style="width: 100%; padding: 9px 12px; background-color: #d9534f; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 0.9em; text-align: left;">Sair da conta</button>
+                    `;
+                    document.body.appendChild(dropdownMenu);
+
+                    const logoutButtonFromMenu = document.getElementById('logoutButtonFromMenu');
+                    if (logoutButtonFromMenu) {
+                        logoutButtonFromMenu.addEventListener('click', function() {
+                            if (confirm("Você tem certeza que deseja sair?")) {
+                                localStorage.removeItem('usuarioLogadoEcoTechBH');
+                                alert('Você saiu com sucesso!');
+                                dropdownMenu.style.display = 'none';
+                                window.location.href = 'login.html';
+                            }
+                        });
+                    }
+                }
+
+                userIconLink.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    if (dropdownMenu) {
+                        dropdownMenu.style.display = dropdownMenu.style.display === 'none' ? 'block' : 'none';
+                    }
+                });
+
+                document.addEventListener('click', function(event) {
+                    if (dropdownMenu && dropdownMenu.style.display === 'block') {
+                        if (!userIconLink.contains(event.target) && !dropdownMenu.contains(event.target)) {
+                            dropdownMenu.style.display = 'none';
+                        }
+                    }
+                });
+
+            } else if (userIconLink && !estaLogado) {
+                userIconLink.title = "Área do Usuário";
+                userIconLink.setAttribute('aria-label', 'Área do Usuário');
+                userIconLink.href = 'login.html';
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>EcoTech BH - Pontos de Descarte</title>
+  <style>
+    /* Reset básico */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      min-height: 100vh;
+      background-color: #f9fafb;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    /* Ícone do usuário fixo no topo direito */
+    .user-top-right {
+      position: fixed;
+      top: 12px;
+      right: 12px;
+      width: 44px;
+      height: 44px;
+      background-color: #000;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.25);
+      transition: background-color 0.3s ease;
+      z-index: 1000;
+      text-decoration: none;
+    }
+
+    .user-top-right:hover {
+      background-color: #222;
+    }
+
+    /* SVG ícone dentro do link */
+    .user-top-right svg {
+      fill: #fff;
+      width: 24px;
+      height: 24px;
+    }
+
+    /* Sidebar */
+    nav.sidebar {
+      width: 240px;
+      background-color: #e3eaf6;
+      padding: 70px 20px 20px 20px; /* espaço para topo do ícone */
+      display: flex;
+      flex-direction: column;
+      border-radius: 0 12px 12px 0;
+      box-shadow: 2px 0 8px rgba(0, 0, 0, 0.05);
+      margin-left: 10px;
+      min-height: 100vh;
+      position: sticky;
+      top: 0;
+    }
+
+    nav.sidebar h1 {
+      color: #1a237e;
+      margin-bottom: 35px;
+      font-size: 2em;
+      text-align: center;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    nav.sidebar ul {
+      list-style: none;
+    }
+
+    nav.sidebar ul li {
+      margin-bottom: 18px;
+    }
+
+    nav.sidebar ul li a {
+      color: #1a237e;
+      font-weight: 600;
+      text-decoration: none;
+      display: block;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 1.05em;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    nav.sidebar ul li a:hover,
+    nav.sidebar ul li a:focus,
+    nav.sidebar ul li a[aria-current="page"] { 
+      background-color: #3f51b5;
+      color: #fff;
+      outline: none;
+    }
+
+    
+    main.content {
+      flex-grow: 1;
+      padding: 36px 36px 36px 48px;
+      background-color: #fff;
+      border-radius: 12px;
+      margin: 20px auto; 
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.08);
+      max-width: 900px; 
+    }
+
+    main.content h2 {
+      margin-bottom: 25px;
+      color: #1a237e;
+      font-size: 2.3em;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    /* Keyframes para animação de entrada dos cards */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px); 
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .pontos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    .ponto-card {
+      background-color: #fefefe;
+      border-radius: 12px;
+      padding: 24px 28px;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+      color: #333;
+      transition: box-shadow 0.3s ease, transform 0.3s ease;
+      opacity: 0; 
+      transform: translateY(30px); 
+      animation: fadeInUp 0.5s ease-out forwards; 
+    }
+
+    /* Stagger (escalonamento) da animação para cada card */
+    .pontos-grid > .ponto-card:nth-child(1) {
+      animation-delay: 0.1s;
+    }
+    .pontos-grid > .ponto-card:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+    .pontos-grid > .ponto-card:nth-child(3) {
+      animation-delay: 0.3s;
+    }
+    .pontos-grid > .ponto-card:nth-child(4) {
+      animation-delay: 0.4s;
+    }
+
+    .ponto-card:hover {
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+      transform: translateY(-5px); 
+    }
+
+    .ponto-card h3 {
+      color: #1a237e;
+      font-weight: 700;
+      margin-bottom: 16px;
+      border-left: 5px solid #3f51b5;
+      padding-left: 14px;
+      font-size: 1.4em;
+    }
+
+    .ponto-card p {
+      margin-bottom: 12px;
+      font-size: 1.1em;
+      line-height: 1.4;
+    }
+
+    .ponto-card p strong {
+      color: #1a237e;
+    }
+
+    .ponto-card a {
+      color: #3f51b5;
+      text-decoration: none;
+      transition: color 0.3s ease; 
+    }
+
+    .ponto-card a:hover,
+    .ponto-card a:focus {
+      color: #1a237e;
+      outline: none;
+    }
+
+    
+    @media (max-width: 900px) {
+      body {
+        flex-direction: column;
+      }
+      nav.sidebar {
+        width: 100%;
+        border-radius: 0 0 12px 12px;
+        margin-left: 0;
+        padding: 80px 20px 20px 20px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+      }
+      nav.sidebar h1 {
+        margin-bottom: 0;
+        font-size: 1.6em;
+        align-self: center;
+      }
+      nav.sidebar ul {
+        display: flex;
+        flex-direction: row;
+        gap: 16px;
+        margin: 0;
+      }
+      nav.sidebar ul li {
+        margin-bottom: 0;
+      }
+      nav.sidebar ul li a {
+        padding: 8px 12px;
+        font-size: 1em;
+      }
+      main.content {
+        margin: 20px 16px 40px 16px; 
+        padding: 20px 16px;
+        max-width: 100%; 
+        border-radius: 8px;
+      }
+      .user-top-right {
+        top: 12px;
+        right: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <a href="login.html" class="user-top-right" title="Área do Usuário" aria-label="Área do Usuário">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+    </svg>
+  </a>
+
+  <nav class="sidebar" role="navigation" aria-label="Menu principal">
+    <h1>EcoTech BH</h1>
+    <ul>
+      <li><a href="index.html" tabindex="0">Início</a></li>
+      <li><a href="sobre.html" tabindex="0">Sobre o Projeto</a></li>
+      <li><a href="guia.html" tabindex="0">Guia de Descarte</a></li>
+      <li><a href="doacoes.html" tabindex="0">Doações</a></li>
+      <li><a href="pontos.html" tabindex="0" aria-current="page">Pontos de Descarte</a></li>
+    </ul>
+  </nav>
+
+  <main class="content" role="main">
+    <h2>Pontos de Descarte em Belo Horizonte</h2>
+
+    <div class="pontos-grid">
+      <section class="ponto-card">
+        <h3>MG Recicla</h3>
+        <p>Coleta e compra lixo eletrônico residencial e comercial, faz descaracterização dos materiais.</p>
+        <p><strong>Contato:</strong> (31) 3565-5294 / (31) 97104-7254</p>
+        <p><strong>Endereço:</strong> Rua Sararé, 47 - Jardimópolis, Belo Horizonte</p>
+      </section>
+
+      <section class="ponto-card">
+        <h3>Reciclagem TC</h3>
+        <p>Coleta domiciliar de eletrodomésticos e eletrônicos em Belo Horizonte.</p>
+        <p><strong>Contato:</strong> (31) 3191-6026</p>
+        <p><em>Endereço não informado publicamente, funciona via contato para agendamento.</em></p>
+      </section>
+
+      <section class="ponto-card">
+        <h3>Abree (Associação Brasileira de Reciclagem de Eletrônicos e Eletrodomésticos)</h3>
+        <p>Consulta pontos de coleta por CEP para descarte correto em BH e todo Brasil.</p>
+        <p><strong>Contato:</strong> abree@abree.org.br / (11) 98991-4558</p>
+        <p><strong>Site para consulta de pontos:</strong> <a href="https://abree.org.br/" target="_blank" rel="noopener noreferrer">https://abree.org.br/</a></p>
+      </section>
+
+      <section class="ponto-card">
+        <h3>Prodabel</h3>
+        <p>Coleta gratuita com agendamento para descarte de eletrônicos em Belo Horizonte.</p>
+        <p><strong>Contato:</strong> 3277-4771</p>
+        <p><strong>Endereço:</strong> Rua José Clemente Pereira, 440 - Ipiranga, Belo Horizonte</p>
+      </section>
+    </div>
+  </main>
+
+</body>
+</html>

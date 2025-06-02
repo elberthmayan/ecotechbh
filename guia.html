@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>EcoTech BH - Guia de Descarte</title>
+  <style>
+    /* Reset básico */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      background-color: #f9fafb; 
+      color: #333;
+      line-height: 1.6; 
+    }
+
+    .page-wrapper {
+      display: flex;
+      flex-grow: 1; 
+      width: 100%;
+    }
+
+    .user-top-right {
+      position: fixed;
+      top: 12px;
+      right: 12px;
+      width: 44px;
+      height: 44px;
+      background-color: #000;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+      transition: background-color 0.3s ease;
+      z-index: 1000;
+      text-decoration: none;
+      font-size: 24px; 
+      color: #fff; 
+      line-height: 1; 
+      text-align: center; 
+      user-select: none; 
+    }
+
+    .user-top-right:hover {
+      background-color: #222;
+    }
+
+    .user-top-right svg {
+      width: 24px;  
+      height: 24px; 
+      transform: translate(0.5px, 0.5px); 
+    }
+
+    nav.sidebar {
+      width: 240px;
+      background-color: #e3eaf6; 
+      padding: 70px 20px 20px 20px; 
+      display: flex;
+      flex-direction: column;
+      border-radius: 0 12px 12px 0; 
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); 
+      min-height: 100vh; 
+      position: sticky;
+      top: 0;
+      flex-shrink: 0; 
+    }
+
+    nav.sidebar h1 {
+      color: #1a237e;
+      margin-bottom: 25px;
+      font-size: 2em;
+      text-align: center;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    nav.sidebar ul {
+      list-style: none;
+    }
+
+    nav.sidebar ul li {
+      margin-bottom: 18px;
+    }
+
+    nav.sidebar ul li a {
+      color: #1a237e;
+      font-weight: 600;
+      text-decoration: none;
+      display: block;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 1.05em;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    nav.sidebar ul li a:hover,
+    nav.sidebar ul li a:focus,
+    nav.sidebar ul li a[aria-current="page"] { 
+      background-color: #3f51b5;
+      color: #fff;
+      outline: none;
+    }
+    
+    main.content {
+      flex-grow: 1; 
+      padding: 40px 48px; 
+      background-color: #fff; 
+      border-radius: 12px; 
+      margin: 20px auto; 
+      max-width: 960px;  
+      width: 100%; 
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.07); 
+    }
+
+    main.content section { 
+      margin-bottom: 45px;
+    }
+    main.content section:last-of-type { 
+        margin-bottom: 20px;
+    }
+
+    main.content h2 {
+      margin-bottom: 25px; 
+      color: #1a237e; 
+      font-size: 2.1em; 
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      padding-bottom: 10px; 
+      border-bottom: 2px solid #e3eaf6; 
+      display: inline-block; 
+    }
+
+    main.content p,
+    main.content ul { 
+      margin-bottom: 20px;
+      font-size: 1.05em; 
+      color: #454545; 
+      line-height: 1.7; 
+    }
+
+    main.content ul {
+      list-style: none; 
+      padding-left: 0;
+    }
+
+    main.content ul li {
+      padding-left: 30px; 
+      position: relative;
+      margin-bottom: 12px; 
+    }
+
+    main.content ul li::before { 
+      content: '➔'; 
+      position: absolute;
+      left: 0;
+      top: -1px; 
+      color: #3f51b5; 
+      font-size: 1.2em;
+      font-weight: bold;
+    }
+
+    main.content strong {
+      font-weight: 600; 
+      color: #2d3748;   
+    }
+
+    main.content ul li strong {
+      font-weight: bold; 
+      color: #000000;   
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px 20px; 
+      font-size: 0.9em;
+      color: #555; 
+      background-color: #dde3ee; 
+      border-top: 1px solid #c5cde0; 
+      width: 100%; 
+    }
+
+    @media (max-width: 900px) {
+      .page-wrapper { 
+        flex-direction: column;
+      }
+      nav.sidebar {
+        width: 100%; 
+        border-radius: 0; 
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1); 
+        padding: 20px; 
+        flex-direction: column; 
+        align-items: center; 
+        position: static; 
+        min-height: auto;
+        margin-bottom: 0; 
+      }
+      nav.sidebar h1 {
+        margin-bottom: 15px; 
+        font-size: 1.8em;
+      }
+      nav.sidebar ul {
+        display: flex; 
+        flex-wrap: wrap; 
+        justify-content: center; 
+        gap: 10px; 
+        width: 100%;
+      }
+      nav.sidebar ul li {
+        margin-bottom: 10px; 
+      }
+      nav.sidebar ul li a {
+        font-size: 0.95em;
+        padding: 8px 12px;
+      }
+      main.content {
+        margin: 0; 
+        padding: 25px 20px; 
+        border-radius: 0; 
+        box-shadow: none; 
+        max-width: none; 
+      }
+      main.content h2 {
+        font-size: 1.8em; 
+      }
+      .user-top-right { 
+        top: 8px;
+        right: 8px;
+        width: 40px;
+        height: 40px;
+      }
+      .user-top-right svg { 
+          width: 20px; 
+          height: 20px;
+          transform: translate(0.5px, 0.5px); 
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <a href="login.html" class="user-top-right" title="Área do Usuário" aria-label="Área do Usuário" tabindex="0">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="#fff" aria-hidden="true" focusable="false">
+      <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+    </svg>
+  </a>
+
+  <div class="page-wrapper">
+    <nav class="sidebar" role="navigation" aria-label="Menu principal">
+      <h1>EcoTech BH</h1>
+      <ul>
+        <li><a href="index.html">Início</a></li>
+        <li><a href="sobre.html">Sobre o Projeto</a></li>
+        <li><a href="guia.html" aria-current="page">Guia de Descarte</a></li>
+        <li><a href="doacoes.html">Doações</a></li>
+        <li><a href="pontos.html">Pontos de Descarte</a></li>
+      </ul>
+    </nav>
+
+    <main class="content" role="main">
+      <section>
+        <h2>O que é lixo eletrônico?</h2>
+        <p>Lixo eletrônico, também conhecido como e-lixo ou resíduo eletrônico, é todo dispositivo descartado que possui componentes elétricos ou eletrônicos. Isso inclui celulares, computadores, televisores, impressoras, eletrodomésticos, entre outros. Peças menores, como cabos, carregadores, baterias, placas-mãe, chips e controles remotos também fazem parte desse tipo de resíduo, mesmo que não funcionem mais.</p>
+      </section>
+
+      <section>
+        <h2>Por que descartar corretamente?</h2>
+        <p>O descarte correto do lixo eletrônico é essencial para proteger o meio ambiente e a saúde pública. Muitos desses equipamentos contêm metais pesados e substâncias tóxicas, como chumbo, mercúrio e cádmio, que podem contaminar o solo, os lençóis freáticos e até o ar, se forem queimados.</p>
+        <p>Além disso, muitos materiais presentes nos eletrônicos são recicláveis e podem ser reaproveitados na fabricação de novos produtos, reduzindo a extração de recursos naturais. Esse cuidado está alinhado com a Lei nº 6.938/81, que institui a Política Nacional do Meio Ambiente e estabelece que todos têm o dever de preservar, recuperar e melhorar a qualidade ambiental, visando ao bem-estar das presentes e futuras gerações.</p>
+      </section>
+
+      <section>
+        <h2>Como descartar corretamente?</h2>
+        <ul>
+          <li><strong>Apague todos os seus dados pessoais:</strong> formate celulares, computadores e outros dispositivos para proteger sua privacidade.</li>
+          <li><strong>Remova baterias, se possível:</strong> baterias devem ser descartadas separadamente, pois requerem tratamento especial.</li>
+          <li><strong>Reúna acessórios soltos:</strong> cabos, fontes, controles e outros itens podem ser reciclados junto com o equipamento.</li>
+          <li><strong>Leve até um ponto de coleta autorizado:</strong> muitas cidades oferecem ecopontos, campanhas de coleta ou parcerias com lojas e fabricantes que recebem eletrônicos para descarte ou reciclagem.</li>
+        </ul>
+      </section>
+    </main>
+  </div>
+  <footer>
+    <p>© 2025 EcoTech BH - Todos os direitos reservados.</p>
+  </footer>
+
+</body>
+</html>

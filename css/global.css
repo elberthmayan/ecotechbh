@@ -1,0 +1,274 @@
+/* Reset básico */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      min-height: 100vh;
+      background-color: #f9fafb;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    /* Ícone do usuário fixo no topo direito */
+    .user-top-right {
+      position: fixed;
+      top: 12px;
+      right: 12px;
+      width: 44px;
+      height: 44px;
+      background-color: #000;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.25);
+      transition: background-color 0.3s ease;
+      z-index: 1000;
+      text-decoration: none;
+    }
+
+    .user-top-right:hover {
+      background-color: #222;
+    }
+
+    /* SVG ícone dentro do link */
+    .user-top-right svg {
+      fill: #fff;
+      width: 24px;
+      height: 24px;
+    }
+
+    /* Sidebar */
+    nav.sidebar {
+      width: 240px;
+      background-color: #e3eaf6;
+      padding: 70px 20px 20px 20px; /* espaço para topo do ícone */
+      display: flex;
+      flex-direction: column;
+      border-radius: 0 12px 12px 0;
+      box-shadow: 2px 0 8px rgba(0, 0, 0, 0.05);
+      margin-left: 10px;
+      min-height: 100vh;
+      position: sticky;
+      top: 0;
+    }
+
+    nav.sidebar h1 {
+      color: #1a237e;
+      margin-bottom: 35px;
+      font-size: 2em;
+      text-align: center;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    nav.sidebar ul {
+      list-style: none;
+    }
+
+    nav.sidebar ul li {
+      margin-bottom: 18px;
+    }
+
+    nav.sidebar ul li a {
+      color: #1a237e;
+      font-weight: 600;
+      text-decoration: none;
+      display: block;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 1.05em;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    nav.sidebar ul li a:hover,
+    nav.sidebar ul li a:focus {
+      background-color: #3f51b5;
+      color: #fff;
+      outline: none;
+    }
+
+    /* Conteúdo principal */
+    main.content {
+      flex-grow: 1;
+      padding: 36px 36px 36px 48px;
+      background-color: #fff;
+      border-radius: 12px;
+      /* Margem direita ajustada para 0px para acomodar a imagem lateral */
+      margin: 20px 0px 20px 0; /* Topo, Direita, Inferior, Esquerda */
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.08);
+      max-width: 900px;
+    }
+
+    main.content h2 {
+      margin-bottom: 25px;
+      color: #1a237e;
+      font-size: 2.3em;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    /* Keyframes para animação de entrada dos cards */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .pontos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    .ponto-card {
+      background-color: #fefefe;
+      border-radius: 12px;
+      padding: 24px 28px;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+      color: #333;
+      transition: box-shadow 0.3s ease, transform 0.3s ease;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 0.5s ease-out forwards;
+    }
+
+    .pontos-grid > .ponto-card:nth-child(1) {
+      animation-delay: 0.1s;
+    }
+    .pontos-grid > .ponto-card:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+    .pontos-grid > .ponto-card:nth-child(3) {
+      animation-delay: 0.3s;
+    }
+    .pontos-grid > .ponto-card:nth-child(4) {
+      animation-delay: 0.4s;
+    }
+
+    .ponto-card:hover {
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+      transform: translateY(-5px);
+    }
+
+    .ponto-card h3 {
+      color: #1a237e;
+      font-weight: 700;
+      margin-bottom: 16px;
+      border-left: 5px solid #3f51b5;
+      padding-left: 14px;
+      font-size: 1.4em;
+    }
+
+    .ponto-card p {
+      margin-bottom: 12px;
+      font-size: 1.1em;
+      line-height: 1.4;
+    }
+
+    .ponto-card p strong {
+      color: #1a237e;
+    }
+
+    .ponto-card a {
+      color: #3f51b5;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .ponto-card a:hover,
+    .ponto-card a:focus {
+      color: #1a237e;
+      outline: none;
+    }
+
+    /* Estilos para o container da imagem à direita */
+    .image-container-right {
+      margin-top: 20px;   /* Alinha o topo com a margem superior do conteúdo principal */
+      margin-left: 24px;  /* Cria um espaço entre o conteúdo principal e a imagem */
+      margin-right: 30px; /* Margem direita da página */
+    }
+
+    .image-container-right img {
+      display: block;       /* Garante que a imagem se comporte como um bloco */
+      max-width: 300px;     /* Largura máxima da imagem (ajuste conforme necessário) */
+      width: 100%;          /* Faz a imagem ser responsiva dentro do seu container */
+      height: auto;         /* Mantém a proporção da imagem */
+      border-radius: 12px;  /* Bordas arredondadas, como nos cards */
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.08); /* Sombra sutil */
+    }
+
+
+    /* --- Responsividade --- */
+
+    /* Em telas médias/pequenas, escondemos a coluna da imagem e restauramos a margem do conteúdo */
+    @media (max-width: 1300px) {
+      .image-container-right {
+        display: none;
+      }
+      main.content {
+        margin-right: 30px; /* Restaura a margem direita do main.content quando a imagem está oculta */
+      }
+    }
+
+    /* Sua Responsividade simples existente */
+    @media (max-width: 900px) {
+      body {
+        flex-direction: column;
+      }
+      nav.sidebar {
+        width: 100%;
+        border-radius: 0 0 12px 12px;
+        margin-left: 0;
+        padding: 80px 20px 20px 20px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        /* Ajustes adicionais para sidebar no mobile, se necessário */
+        min-height: auto; /* Override min-height: 100vh */
+        position: static; /* Override position: sticky */
+      }
+      nav.sidebar h1 {
+        margin-bottom: 0;
+        font-size: 1.6em;
+        align-self: center;
+      }
+      nav.sidebar ul {
+        display: flex;
+        flex-direction: row;
+        gap: 16px;
+        margin: 0;
+        flex-wrap: wrap; /* Permite que os itens quebrem linha se não couberem */
+        justify-content: center; /* Centraliza os itens do menu no mobile */
+      }
+      nav.sidebar ul li {
+        margin-bottom: 0;
+      }
+      nav.sidebar ul li a {
+        padding: 8px 12px;
+        font-size: 1em;
+      }
+      main.content {
+        /* Esta regra já define todas as margens para mobile, incluindo a direita */
+        margin: 20px 16px 40px 16px;
+        padding: 20px 16px;
+        max-width: 100%;
+        border-radius: 8px;
+      }
+      .user-top-right {
+        top: 12px;
+        right: 12px;
+      }
+      /* .image-container-right já estará display: none pela regra de max-width: 1300px */
+    }

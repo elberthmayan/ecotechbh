@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>EcoTech BH - Doações</title>
+  <style>
+    /* Reset básico */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      background-color: #f9fafb;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    .page-content-wrapper {
+      display: flex;
+      flex-direction: row;
+      flex-grow: 1;
+    }
+
+    /* Ícone do usuário fixo no topo direito */
+    .user-top-right {
+      position: fixed;
+      top: 12px;
+      right: 12px;
+      width: 44px;
+      height: 44px;
+      background-color: #000;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.25);
+      transition: background-color 0.3s ease;
+      z-index: 1000;
+      text-decoration: none;
+    }
+
+    .user-top-right svg {
+      width: 24px;
+      height: 24px;
+      fill: #fff;
+    }
+
+    .user-top-right:hover {
+      background-color: #222;
+    }
+
+    /* Sidebar */
+    nav.sidebar {
+      width: 240px;
+      background-color: #e3eaf6;
+      padding: 70px 20px 20px 20px;
+      display: flex;
+      flex-direction: column;
+      border-radius: 0 12px 12px 0;
+      box-shadow: 2px 0 8px rgba(0, 0, 0, 0.05);
+      margin-left: 10px;
+      position: sticky;
+      top: 0;
+      align-self: flex-start;
+      height: 100vh;
+      flex-shrink: 0; 
+    }
+
+    nav.sidebar h1 {
+      color: #1a237e;
+      margin-bottom: 25px;
+      font-size: 2em;
+      text-align: center;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    nav.sidebar ul {
+      list-style: none;
+    }
+
+    nav.sidebar ul li {
+      margin-bottom: 18px;
+    }
+
+    nav.sidebar ul li a {
+      color: #1a237e;
+      font-weight: 600;
+      text-decoration: none;
+      display: block;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 1.05em;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    nav.sidebar ul li a:hover,
+    nav.sidebar ul li a:focus {
+      background-color: #3f51b5;
+      color: #fff;
+      outline: none;
+    }
+
+    nav.sidebar ul li a[aria-current="page"] {
+      background-color: #3f51b5;
+      color: #fff;
+      font-weight: 700;
+    }
+
+    /* Conteúdo principal */
+    main.content {
+      flex-grow: 1;
+      padding: 40px; 
+      background-color: #fff;
+      border-radius: 12px;
+      margin: 20px auto;
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.08);
+      max-width: 900px; 
+    }
+
+    main.content h2 {
+      margin-bottom: 25px;
+      color: #1a237e;
+      font-size: 2.3em;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #e3eaf6;
+      display: inline-block;
+    }
+    
+    main.content p {
+      margin-bottom: 20px;
+      font-size: 1.1em; /* MODIFICADO */
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    label {
+      font-weight: 600;
+      color: #1a237e;
+      margin-bottom: 6px;
+      display: block;
+      font-size: 1.1em;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="date"],
+    textarea,
+    select {
+      padding: 10px 12px;
+      font-size: 1em;
+      border: 2px solid #ccc;
+      border-radius: 8px;
+      resize: vertical;
+      transition: border-color 0.3s ease;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    input[type="date"] {
+        min-height: calc(1em + 20px + 4px); 
+    }
+
+    input[type="text"]:focus,
+    input[type="number"]:focus,
+    input[type="date"]:focus,
+    textarea:focus,
+    select:focus {
+      border-color: #3f51b5;
+      outline: none;
+    }
+    
+    input.error, textarea.error, input[type="date"].error {
+        border-color: #d32f2f !important;
+    }
+
+    textarea {
+      min-height: 80px;
+    }
+
+    fieldset {
+        border: 1px solid #c0c0c0;
+        padding: 10px;
+    }
+
+    legend {
+        font-weight: bold;
+        color: #1a237e;
+        padding: 0 5px;
+        font-size: 1.1em; /* MODIFICADO */
+    }
+
+    .radio-group {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .radio-group input[type="radio"] {
+      margin-right: 8px;
+      cursor: pointer;
+    }
+    .radio-group label {
+        display: flex;
+        align-items: center;
+        font-weight: normal;
+        color: #333;
+    }
+    
+    #endereco-container > div {
+        margin-bottom: 15px;
+    }
+    #endereco-container > div:last-child {
+        margin-bottom: 0;
+    }
+
+    button[type="submit"] {
+      background-color: #3f51b5;
+      color: #fff;
+      border: none;
+      padding: 14px 0;
+      font-size: 1.2em;
+      font-weight: 700;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      width: 100%;
+    }
+
+    button[type="submit"]:hover,
+    button[type="submit"]:focus {
+      background-color: #303f9f;
+      outline: none;
+    }
+    
+    .form-message {
+        padding: 10px;
+        margin-bottom: 20px;
+        border-radius: 8px;
+        font-size: 0.95em;
+    }
+    .form-message.error {
+        background-color: #ffebee;
+        color: #c62828;
+        border: 1px solid #c62828;
+    }
+    .form-message.success {
+        background-color: #e8f5e9;
+        color: #2e7d32;
+        border: 1px solid #2e7d32;
+    }
+
+    footer {
+      width: 100%;
+      text-align: center;
+      padding: 20px 10px;
+      font-size: 0.9em;
+      color: #666;
+      margin-top: auto;
+      background: transparent;
+    }
+
+    @media (max-width: 900px) {
+      .page-content-wrapper {
+        flex-direction: column;
+      }
+      nav.sidebar {
+        width: 100%;
+        border-radius: 0 0 12px 12px;
+        margin-left: 0;
+        padding: 20px; 
+        padding-top: 60px; 
+        position: static;
+        height: auto;
+        min-height: auto;
+      }
+      nav.sidebar h1 {
+        margin-bottom: 15px; 
+        font-size: 1.6em;
+        align-self: center;
+      }
+      nav.sidebar ul {
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        margin: 0;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      nav.sidebar ul li {
+        margin-bottom: 0;
+      }
+      nav.sidebar ul li a {
+        padding: 8px 10px;
+        font-size: 0.9em;
+      }
+      main.content {
+        margin: 20px 15px 40px 15px; 
+        padding: 25px 20px;
+        max-width: none; 
+        border-radius: 8px;
+      }
+        .user-top-right { 
+        top: 15px;
+        right: 15px;
+      }
+    }
+      /* Ajustes finos para telas bem pequenas */
+    @media (max-width: 600px) {
+      main.content h2 {
+        font-size: 1.9em;
+      }
+      nav.sidebar {
+        padding-top: 50px; 
+      }
+        nav.sidebar h1 {
+        font-size: 1.6em;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <a href="login.html" class="user-top-right" title="Área do Usuário" aria-label="Área do Usuário">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+      <path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v3h20v-3c0-3.3-6.7-5-10-5z"/>
+    </svg>
+  </a>
+
+  <div class="page-content-wrapper">
+    <nav class="sidebar" role="navigation" aria-label="Menu principal">
+      <h1>EcoTech BH</h1>
+      <ul>
+        <li><a href="index.html">Início</a></li>
+        <li><a href="sobre.html">Sobre o Projeto</a></li>
+        <li><a href="guia.html">Guia de Descarte</a></li>
+        <li><a href="doacoes.html" aria-current="page">Doações</a></li>
+        <li><a href="pontos.html">Pontos de Descarte</a></li>
+      </ul>
+    </nav>
+
+    <main class="content" role="main">
+      <h2>Faça sua Doação</h2>
+      <p>Se você tem equipamentos eletrônicos que deseja doar, preencha o formulário abaixo. A EcoTech BH pode buscar no seu endereço ou você pode levar até nós.</p>
+      
+      <div id="form-feedback-message" class="form-message" style="display: none;"></div>
+
+      <form action="#" method="post" novalidate>
+        <div>
+          <label for="tipo-item">Item para doação</label>
+          <input type="text" id="tipo-item" name="tipo-item"/>
+        </div>
+
+        <div>
+          <label for="descricao">Descrição do item</label>
+          <textarea id="descricao" name="descricao" required></textarea>
+        </div>
+
+        <div>
+          <label for="quantidade">Quantidade</label>
+          <input type="number" id="quantidade" name="quantidade" min="1" value="1" required />
+        </div>
+
+        <fieldset>
+          <legend>Precisa que busque?</legend> <div class="radio-group">
+            <label>
+              <input type="radio" name="coleta" value="sim" />
+              Sim
+            </label>
+            <label>
+              <input type="radio" name="coleta" value="nao" />
+              Não
+            </label>
+          </div>
+        </fieldset>
+
+        <div id="endereco-container" style="display: none;">
+          <div>
+            <label for="data-coleta">Data desejada para coleta</label>
+            <input type="date" id="data-coleta" name="data-coleta" />
+          </div>
+          <div>
+            <label for="cep">CEP</label>
+            <input type="text" id="cep" name="cep" placeholder="">
+          </div>
+          <div>
+            <label for="rua">Rua</label>
+            <input type="text" id="rua" name="rua" placeholder="">
+          </div>
+          <div>
+            <label for="numero-casa">Número</label>
+            <input type="text" id="numero-casa" name="numero-casa" placeholder="">
+          </div>
+          <div>
+            <label for="complemento">Complemento (opcional)</label>
+            <input type="text" id="complemento" name="complemento" placeholder="">
+          </div>
+            <div>
+            <label for="bairro">Bairro</label>
+            <input type="text" id="bairro" name="bairro" placeholder="">
+          </div>
+        </div>
+
+        <button type="submit">Enviar</button>
+      </form>
+    </main>
+  </div>
+
+  <footer>
+    &copy; 2025 EcoTech BH. Todos os direitos reservados.
+  </footer>
+
+<script>
+  const coletaRadios = document.querySelectorAll('input[name="coleta"]');
+  const enderecoContainer = document.getElementById('endereco-container');
+  const dataColetaInput = document.getElementById('data-coleta');
+  const cepInput = document.getElementById('cep');
+  const ruaInput = document.getElementById('rua');
+  const numeroCasaInput = document.getElementById('numero-casa');
+  const complementoInput = document.getElementById('complemento'); 
+  const bairroInput = document.getElementById('bairro');
+
+  const requiredAddressFields = [dataColetaInput, cepInput, ruaInput, numeroCasaInput, bairroInput];
+  const allAddressFields = [dataColetaInput, cepInput, ruaInput, numeroCasaInput, complementoInput, bairroInput];
+
+  const donationForm = document.querySelector('form');
+  const formFeedbackMessage = document.getElementById('form-feedback-message');
+
+  if(dataColetaInput) {
+      const today = new Date().toISOString().split('T')[0];
+      dataColetaInput.setAttribute('min', today);
+  }
+
+  function clearErrorStyles() {
+      const errorFields = donationForm.querySelectorAll('.error');
+      errorFields.forEach(field => field.classList.remove('error'));
+      allAddressFields.forEach(field => field.classList.remove('error'));
+  }
+
+  function showFeedbackMessage(message, type) {
+      formFeedbackMessage.textContent = message;
+      formFeedbackMessage.className = `form-message ${type}`;
+      formFeedbackMessage.style.display = 'block';
+  }
+  
+  function hideFeedbackMessage() {
+      formFeedbackMessage.style.display = 'none';
+  }
+
+  coletaRadios.forEach(radio => {
+    radio.addEventListener('change', () => {
+      hideFeedbackMessage();
+      clearErrorStyles();
+      if (radio.value === 'sim' && radio.checked) {
+        enderecoContainer.style.display = 'block';
+        requiredAddressFields.forEach(field => field.setAttribute('required', 'required'));
+      } else {
+        enderecoContainer.style.display = 'none';
+        allAddressFields.forEach(field => {
+            if (requiredAddressFields.includes(field)) {
+              field.removeAttribute('required');
+            }
+            field.value = ''; 
+            field.classList.remove('error'); 
+        });
+      }
+    });
+  });
+
+  donationForm.addEventListener('submit', function(event) {
+    event.preventDefault();
+    hideFeedbackMessage();
+    clearErrorStyles();
+
+    let isValid = true;
+    const errorMessages = [];
+
+    const tipoItem = document.getElementById('tipo-item');
+    if (!tipoItem.value.trim()) {
+      isValid = false;
+      errorMessages.push("O campo 'Item para doação' é obrigatório.");
+      tipoItem.classList.add('error');
+    }
+
+    const descricao = document.getElementById('descricao');
+    if (!descricao.value.trim()) {
+      isValid = false;
+      errorMessages.push("O campo 'Descrição do item' é obrigatório.");
+      descricao.classList.add('error');
+    }
+
+    const quantidade = document.getElementById('quantidade');
+    if (!quantidade.value.trim() || parseInt(quantidade.value, 10) < 1) {
+      isValid = false;
+      errorMessages.push("O campo 'Quantidade' deve ser um número igual ou maior que 1.");
+      quantidade.classList.add('error');
+    }
+
+    const coletaSelecionada = document.querySelector('input[name="coleta"]:checked');
+    if (!coletaSelecionada) {
+      isValid = false;
+      errorMessages.push("Por favor, selecione se precisa que o item seja buscado ('Sim' ou 'Não').");
+      
+    } else {
+      if (coletaSelecionada.value === 'sim') {
+        // Validação dos campos de endereço
+        if (!dataColetaInput.value.trim()) {
+          isValid = false; errorMessages.push("O campo 'Data para coleta' é obrigatório."); dataColetaInput.classList.add('error');
+        } else { 
+          const dataSelecionada = new Date(dataColetaInput.value + "T00:00:00");
+          const hoje = new Date();
+          hoje.setHours(0,0,0,0);
+          if (dataSelecionada < hoje) {
+              isValid = false; errorMessages.push("A 'Data para coleta' não pode ser no passado."); dataColetaInput.classList.add('error');
+          }
+        }
+        if (!cepInput.value.trim()) {
+          isValid = false; errorMessages.push("O campo 'CEP' é obrigatório."); cepInput.classList.add('error');
+        }
+        if (!ruaInput.value.trim()) {
+          isValid = false; errorMessages.push("O campo 'Rua' é obrigatório."); ruaInput.classList.add('error');
+        }
+        if (!numeroCasaInput.value.trim()) {
+          isValid = false; errorMessages.push("O campo 'Número' é obrigatório."); numeroCasaInput.classList.add('error');
+        }
+        if (!bairroInput.value.trim()) {
+          isValid = false; errorMessages.push("O campo 'Bairro' é obrigatório."); bairroInput.classList.add('error');
+        }
+      }
+    }
+
+    if (isValid) {
+      const formData = {
+        tipoItem: tipoItem.value.trim(),
+        descricao: descricao.value.trim(),
+        quantidade: quantidade.value.trim(),
+        coleta: coletaSelecionada.value,
+        dataColeta: (coletaSelecionada.value === 'sim') ? dataColetaInput.value.trim() : 'N/A',
+        cep: (coletaSelecionada.value === 'sim') ? cepInput.value.trim() : 'N/A',
+        rua: (coletaSelecionada.value === 'sim') ? ruaInput.value.trim() : 'N/A',
+        numeroCasa: (coletaSelecionada.value === 'sim') ? numeroCasaInput.value.trim() : 'N/A',
+        complemento: (coletaSelecionada.value === 'sim' && complementoInput) ? complementoInput.value.trim() : '',
+        bairro: (coletaSelecionada.value === 'sim') ? bairroInput.value.trim() : 'N/A',
+      };
+
+      console.log('Dados do Pedido (JSON):', JSON.stringify(formData, null, 2));
+      console.log('Dados do Pedido (Objeto):', formData);
+      
+      showFeedbackMessage('Pedido de doação registrado com sucesso! Entraremos em contato em breve.', 'success');
+
+      donationForm.reset();  
+      enderecoContainer.style.display = 'none';
+      allAddressFields.forEach(field => {
+          if (requiredAddressFields.includes(field)) {
+            field.removeAttribute('required');
+          }
+          field.value = ''; 
+          field.classList.remove('error'); 
+      });
+  
+    } else {
+      showFeedbackMessage('Por favor, corrija os erros no formulário:\n- ' + errorMessages.join('\n- '), 'error');
+      const firstErrorField = donationForm.querySelector('.error');
+      if (firstErrorField) {
+          firstErrorField.focus();
+      }
+    }
+  });
+</script>
+
+</body>
+</html>
