@@ -16,7 +16,7 @@
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       display: flex;
       min-height: 100vh;
-      background-color: #f9fafb;
+      background-color: #f0f2f5; /* Fundo um pouco mais acinzentado para contraste com cards brancos */
       color: #333;
       line-height: 1.6;
     }
@@ -102,30 +102,62 @@
       outline: none;
     }
 
-    
+    /* Conteúdo Principal */
     main.content {
       flex-grow: 1;
       padding: 36px 36px 36px 48px;
-      background-color: #fff;
+      /* Removido background-color e box-shadow daqui para aplicar ao body ou .pontos-grid */
       border-radius: 12px;
       margin: 20px auto; 
-      box-shadow: 0 0 12px rgba(0, 0, 0, 0.08);
       max-width: 900px; 
     }
 
     main.content h2 {
-      margin-bottom: 25px;
+      margin-bottom: 20px; 
       color: #1a237e;
       font-size: 2.3em;
       font-weight: 700;
       letter-spacing: 0.02em;
+      text-align: center; /* Centralizar título da seção */
+    }
+
+    /* Estilo para o campo de busca melhorado */
+    .search-container {
+        margin-bottom: 30px; 
+        position: relative;
+        background-color: #fff; /* Fundo branco para a caixa de busca */
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.07); 
+    }
+    .search-input {
+        width: 100%;
+        padding: 12px 15px 12px 40px; 
+        border: 1px solid #ced4da; 
+        border-radius: 8px;
+        font-size: 1em;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .search-input:focus {
+        border-color: #3f51b5;
+        box-shadow: 0 0 0 3px rgba(63, 81, 181, 0.25); 
+        outline: none;
+    }
+    .search-container .search-icon {
+        position: absolute;
+        left: 12px; 
+        top: 50%;
+        transform: translateY(-50%);
+        color: #6c757d; 
+        font-size: 1.1em; 
+        padding-left: 15px; 
     }
 
     /* Keyframes para animação de entrada dos cards */
     @keyframes fadeInUp {
       from {
         opacity: 0;
-        transform: translateY(30px); 
+        transform: translateY(20px); /* Reduzido o translateY */
       }
       to {
         opacity: 1;
@@ -135,73 +167,101 @@
 
     .pontos-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Aumentado minmax para cards um pouco maiores */
       gap: 24px;
     }
 
     .ponto-card {
-      background-color: #fefefe;
-      border-radius: 12px;
-      padding: 24px 28px;
-      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+      background-color: #ffffff; /* Fundo branco para os cards */
+      border-radius: 10px; /* Bordas levemente arredondadas como na imagem */
+      padding: 20px; /* Ajuste de padding interno */
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Sombra mais suave */
       color: #333;
       transition: box-shadow 0.3s ease, transform 0.3s ease;
       opacity: 0; 
-      transform: translateY(30px); 
+      transform: translateY(20px); 
       animation: fadeInUp 0.5s ease-out forwards; 
+      display: flex; 
+      flex-direction: column; 
     }
 
-    /* Stagger (escalonamento) da animação para cada card */
-    .pontos-grid > .ponto-card:nth-child(1) {
-      animation-delay: 0.1s;
-    }
-    .pontos-grid > .ponto-card:nth-child(2) {
-      animation-delay: 0.2s;
-    }
-    .pontos-grid > .ponto-card:nth-child(3) {
-      animation-delay: 0.3s;
-    }
-    .pontos-grid > .ponto-card:nth-child(4) {
-      animation-delay: 0.4s;
-    }
+    /* Stagger da animação */
+    .pontos-grid > .ponto-card:nth-child(1) { animation-delay: 0.05s; }
+    .pontos-grid > .ponto-card:nth-child(2) { animation-delay: 0.1s; }
+    .pontos-grid > .ponto-card:nth-child(3) { animation-delay: 0.15s; }
+    .pontos-grid > .ponto-card:nth-child(4) { animation-delay: 0.2s; }
+
 
     .ponto-card:hover {
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
-      transform: translateY(-5px); 
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+      transform: translateY(-4px); 
     }
 
-    .ponto-card h3 {
-      color: #1a237e;
-      font-weight: 700;
-      margin-bottom: 16px;
-      border-left: 5px solid #3f51b5;
-      padding-left: 14px;
-      font-size: 1.4em;
+    .ponto-card h3 { /* card-title */
+      color: #3f51b5; /* Azul mais vibrante para o título */
+      font-weight: 600; /* Um pouco menos bold que antes */
+      margin-bottom: 8px; /* Menor margem inferior */
+      font-size: 1.25em; /* Ajuste de tamanho */
+      border-left: none; /* Removida borda lateral */
+      padding-left: 0; /* Removido padding lateral */
     }
 
-    .ponto-card p {
-      margin-bottom: 12px;
-      font-size: 1.1em;
-      line-height: 1.4;
+    .ponto-card p { /* card-description, card-contact, card-address */
+      margin-bottom: 10px;
+      font-size: 0.95em; /* Levemente menor para mais informação caber bem */
+      line-height: 1.5;
+      color: #555; /* Cor de texto um pouco mais clara */
+    }
+    .ponto-card p.card-description {
+        min-height: 50px; /* Para alinhar melhor cards com descrições de tamanhos diferentes */
     }
 
-    .ponto-card p strong {
-      color: #1a237e;
-    }
 
-    .ponto-card a {
-      color: #3f51b5;
-      text-decoration: none;
-      transition: color 0.3s ease; 
+    .ponto-card p strong { /* Não mais usado diretamente, mas mantido caso necessário */
+      color: #3f51b5; 
+      font-weight: 500;
     }
-
-    .ponto-card a:hover,
-    .ponto-card a:focus {
-      color: #1a237e;
-      outline: none;
-    }
-
     
+    .info-line {
+        display: flex;
+        align-items: center;
+        margin-bottom: 8px;
+        font-size: 0.9em;
+        color: #454545;
+    }
+    .info-line i { /* Ícones de contato e endereço */
+        color: #3f51b5;
+        margin-right: 8px;
+        width: 16px; /* Largura fixa para alinhamento */
+        text-align: center;
+    }
+
+    /* Estilo para o link de ação no rodapé do card */
+    .action-link {
+        display: inline-block;
+        color: #3f51b5;
+        font-weight: 600;
+        text-decoration: none;
+        transition: color 0.3s ease, transform 0.2s ease;
+        margin-top: auto; /* Empurra para o final do card */
+        padding-top: 10px; /* Espaço acima do link */
+        font-size: 0.95em;
+        align-self: flex-start;
+    }
+    .action-link:hover {
+        color: #1a237e;
+        transform: translateX(3px); /* Pequeno efeito de deslize */
+    }
+    .action-link i { /* Seta -> */
+        margin-left: 5px;
+        transition: transform 0.2s ease;
+    }
+    .action-link:hover i {
+        transform: translateX(2px);
+    }
+
+
+    /* Responsividade */
     @media (max-width: 900px) {
       body {
         flex-direction: column;
@@ -210,28 +270,31 @@
         width: 100%;
         border-radius: 0 0 12px 12px;
         margin-left: 0;
-        padding: 80px 20px 20px 20px;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
+        padding: 80px 20px 20px 20px; 
+        flex-direction: row; 
+        justify-content: space-between; 
+        align-items: center; 
+        min-height: auto; 
+        position: static; 
       }
       nav.sidebar h1 {
         margin-bottom: 0;
-        font-size: 1.6em;
-        align-self: center;
+        font-size: 1.4em; 
+        text-align: left;
       }
       nav.sidebar ul {
         display: flex;
         flex-direction: row;
-        gap: 16px;
+        gap: 10px; 
         margin: 0;
+        padding: 0; 
       }
       nav.sidebar ul li {
         margin-bottom: 0;
       }
       nav.sidebar ul li a {
-        padding: 8px 12px;
-        font-size: 1em;
+        padding: 8px 10px; 
+        font-size: 0.9em; 
       }
       main.content {
         margin: 20px 16px 40px 16px; 
@@ -243,8 +306,53 @@
         top: 12px;
         right: 12px;
       }
+      .search-container { 
+        padding: 15px;
+      }
+      .search-container .search-icon {
+        padding-left: 10px; 
+      }
+      .ponto-card p.card-description {
+        min-height: auto; /* Remover altura mínima em telas menores */
+      }
+    }
+     @media (max-width: 600px) { 
+        nav.sidebar {
+            flex-direction: column; 
+            align-items: center;
+            padding-top: 70px; 
+        }
+        nav.sidebar h1 {
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        nav.sidebar ul {
+            flex-direction: column; 
+            align-items: center;
+            width: 100%;
+        }
+        nav.sidebar ul li {
+            margin-bottom: 8px;
+            width: 80%; 
+        }
+        nav.sidebar ul li a {
+            text-align: center;
+        }
+        main.content h2 {
+            font-size: 1.8em;
+        }
+        .ponto-card h3 {
+            font-size: 1.15em;
+        }
+        .ponto-card p, .info-line {
+            font-size: 0.9em;
+        }
+        .action-link {
+            font-size: 0.9em;
+        }
     }
   </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
 
@@ -268,36 +376,88 @@
   <main class="content" role="main">
     <h2>Pontos de Descarte em Belo Horizonte</h2>
 
+    <div class="search-container">
+        <i class="fas fa-search search-icon"></i>
+        <input type="text" id="filtroBusca" class="search-input" onkeyup="filtrarCards()" placeholder="Buscar por nome, endereço ou tipo...">
+    </div>
+
     <div class="pontos-grid">
       <section class="ponto-card">
-        <h3>MG Recicla</h3>
-        <p>Coleta e compra lixo eletrônico residencial e comercial, faz descaracterização dos materiais.</p>
-        <p><strong>Contato:</strong> (31) 3565-5294 / (31) 97104-7254</p>
-        <p><strong>Endereço:</strong> Rua Sararé, 47 - Jardimópolis, Belo Horizonte</p>
+        <h3 class="card-title">MG Recicla</h3>
+        <p class="card-description">Coleta e compra lixo eletrônico residencial e comercial, faz descaracterização dos materiais.</p>
+        <div class="card-details">
+            <p class="info-line card-contact"><i class="fas fa-phone-alt"></i>(31) 3565-5294 / (31) 97104-7254</p>
+            <p class="info-line card-address"><i class="fas fa-map-marker-alt"></i>Rua Sararé, 47 - Jardimópolis, Belo Horizonte</p>
+        </div>
+        <a href="https://www.google.com/maps/search/?api=1&query=Rua+Sarar%C3%A9%2C+47+-+Jardim%C3%B3polis%2C+Belo+Horizonte" target="_blank" rel="noopener noreferrer" class="action-link">Ver no mapa <i class="fas fa-arrow-right"></i></a>
       </section>
 
       <section class="ponto-card">
-        <h3>Reciclagem TC</h3>
-        <p>Coleta domiciliar de eletrodomésticos e eletrônicos em Belo Horizonte.</p>
-        <p><strong>Contato:</strong> (31) 3191-6026</p>
-        <p><em>Endereço não informado publicamente, funciona via contato para agendamento.</em></p>
+        <h3 class="card-title">Reciclagem TC</h3>
+        <p class="card-description">Coleta domiciliar de eletrodomésticos e eletrônicos em Belo Horizonte.</p>
+        <div class="card-details">
+            <p class="info-line card-contact"><i class="fas fa-phone-alt"></i>(31) 3191-6026</p>
+            <p class="info-line card-address"><i class="fas fa-info-circle"></i>Endereço não informado publicamente, funciona via contato para agendamento.</p>
+        </div>
       </section>
 
       <section class="ponto-card">
-        <h3>Abree (Associação Brasileira de Reciclagem de Eletrônicos e Eletrodomésticos)</h3>
-        <p>Consulta pontos de coleta por CEP para descarte correto em BH e todo Brasil.</p>
-        <p><strong>Contato:</strong> abree@abree.org.br / (11) 98991-4558</p>
-        <p><strong>Site para consulta de pontos:</strong> <a href="https://abree.org.br/" target="_blank" rel="noopener noreferrer">https://abree.org.br/</a></p>
+        <h3 class="card-title">Abree</h3>
+        <p class="card-description">Associação Brasileira de Reciclagem de Eletrônicos e Eletrodomésticos. Consulta pontos de coleta por CEP.</p>
+        <div class="card-details">
+            <p class="info-line card-contact"><i class="fas fa-phone-alt"></i>(11) 98991-4558</p>
+            <p class="info-line card-website"><i class="fas fa-globe"></i><a href="https://abree.org.br/" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: none;">abree.org.br</a></p>
+        </div>
+        <a href="https://abree.org.br/" target="_blank" rel="noopener noreferrer" class="action-link">Consultar pontos <i class="fas fa-arrow-right"></i></a>
       </section>
 
       <section class="ponto-card">
-        <h3>Prodabel</h3>
-        <p>Coleta gratuita com agendamento para descarte de eletrônicos em Belo Horizonte.</p>
-        <p><strong>Contato:</strong> 3277-4771</p>
-        <p><strong>Endereço:</strong> Rua José Clemente Pereira, 440 - Ipiranga, Belo Horizonte</p>
+        <h3 class="card-title">Prodabel</h3>
+        <p class="card-description">Coleta gratuita com agendamento para descarte de eletrônicos em Belo Horizonte.</p>
+        <div class="card-details">
+            <p class="info-line card-contact"><i class="fas fa-phone-alt"></i>(31) 3277-4771</p>
+            <p class="info-line card-address"><i class="fas fa-map-marker-alt"></i>Rua José Clemente Pereira, 440 - Ipiranga, Belo Horizonte</p>
+        </div>
       </section>
     </div>
   </main>
+
+  <script>
+    function filtrarCards() {
+        const input = document.getElementById('filtroBusca');
+        const filter = input.value.toLowerCase();
+        const cards = document.querySelectorAll('.ponto-card');
+        let visibleCardCount = 0; 
+
+        cards.forEach((card, index) => {
+            const title = card.querySelector('.card-title') ? card.querySelector('.card-title').textContent.toLowerCase() : '';
+            let textContent = '';
+            // Inclui descrição e detalhes (contato, endereço, site) na busca
+            card.querySelectorAll('.card-description, .info-line').forEach(p => {
+                textContent += p.textContent.toLowerCase() + ' ';
+            });
+
+            if (title.includes(filter) || textContent.includes(filter)) {
+                card.style.display = ""; // Usar flex/grid conforme o container pai
+                card.style.animationDelay = (visibleCardCount * 0.05) + 's'; // Delay menor para mais fluidez
+                card.style.opacity = '0'; 
+                card.style.transform = 'translateY(20px)'; 
+                void card.offsetWidth; 
+                card.style.animationName = 'fadeInUp'; 
+                visibleCardCount++;
+            } else {
+                card.style.display = "none";
+                card.style.animationName = 'none'; 
+            }
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        // A animação inicial é tratada pelo CSS.
+        // Se quiser forçar a re-animação ao carregar, pode chamar filtrarCards() aqui
+        // com o campo de busca vazio, mas geralmente não é necessário.
+    });
+  </script>
 
 </body>
 </html>
