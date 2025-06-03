@@ -432,14 +432,13 @@
         cards.forEach((card, index) => {
             const title = card.querySelector('.card-title') ? card.querySelector('.card-title').textContent.toLowerCase() : '';
             let textContent = '';
-            // Inclui descrição e detalhes (contato, endereço, site) na busca
             card.querySelectorAll('.card-description, .info-line').forEach(p => {
                 textContent += p.textContent.toLowerCase() + ' ';
             });
 
             if (title.includes(filter) || textContent.includes(filter)) {
-                card.style.display = ""; // Usar flex/grid conforme o container pai
-                card.style.animationDelay = (visibleCardCount * 0.05) + 's'; // Delay menor para mais fluidez
+                card.style.display = "";
+                card.style.animationDelay = (visibleCardCount * 0.05) + 's';
                 card.style.opacity = '0'; 
                 card.style.transform = 'translateY(20px)'; 
                 void card.offsetWidth; 

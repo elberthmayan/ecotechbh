@@ -12,19 +12,17 @@
             align-items: center;
             min-height: 100vh;
             margin: 0;
-            color: #fff; /* Cor do texto padrão para branco */
-
-            /* --- Alteração aqui --- */
-            background-image: url('images/imagemum.jpg'); /* Caminho corrigido para a imagem */
-            background-size: cover;                      /* Para cobrir toda a área */
-            background-repeat: no-repeat;                /* Para não repetir a imagem */
-            background-position: center center;          /* Para centralizar a imagem */
+            color: #fff;
+            background-image: url('images/imagemum.jpg'); /* Certifique-se que este caminho está correto */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center center;
         }
         .login-container {
+            position: relative; /* Adicionado para posicionamento do botão de voltar */
             background-color: rgba(255, 255, 255, 0.1); 
             backdrop-filter: blur(10px); 
             -webkit-backdrop-filter: blur(10px); 
-            
             padding: 35px 45px; 
             border-radius: 15px; 
             border: 1px solid rgba(255, 255, 255, 0.2); 
@@ -62,6 +60,7 @@
         }
         .login-form input[type="text"],
         .login-form input[type="password"],
+        .login-form input[type="email"], 
         .forgot-password-form input[type="email"] {
             width: 100%;
             padding: 14px 18px; 
@@ -74,12 +73,13 @@
         }
         .login-form input[type="text"]::placeholder,
         .login-form input[type="password"]::placeholder,
+        .login-form input[type="email"]::placeholder,
         .forgot-password-form input[type="email"]::placeholder {
             color: rgba(255, 255, 255, 0.6);
         }
-
         .login-form input[type="text"]:focus,
         .login-form input[type="password"]:focus,
+        .login-form input[type="email"]:focus,
         .forgot-password-form input[type="email"]:focus {
             border-color: rgba(255, 255, 255, 0.7); 
             background-color: rgba(255, 255, 255, 0.2);
@@ -105,34 +105,28 @@
             background-color: #fff; 
             color: #303f9f;
         }
-        
         .message-area {
-            margin-top: 10px;
+            margin-top: 15px;
             font-size: 0.9em;
-            min-height: 1.5em;
+            min-height: 1.5em; 
             line-height: 1.5em;
             padding: 10px 15px; 
-            border-radius: 6px;     
+            border-radius: 6px;       
             border: 1px solid transparent; 
             text-align: center; 
         }
-
-        
-        .message-area:not(.success) { 
+        .message-area:not(.success):not(:empty) { 
             color: #842029;          
             background-color: #f8d7da; 
-            border-color: #f5c2c7;     
-            font-weight: 500;        
+            border-color: #f5c2c7;    
+            font-weight: 500;       
         }
-        
-        
-        .message-area.success {
+        .message-area.success:not(:empty) { 
             color: #0f5132;            
             background-color: #d1e7dd;  
-            border-color: #badbcc;      
-            font-weight: 500;          
+            border-color: #badbcc;     
+            font-weight: 500;       
         }
-
         .extra-links {
             margin-top: 25px; 
             font-size: 0.9em;
@@ -150,8 +144,8 @@
             color: rgba(255, 255, 255, 0.5); 
         }
         .back-link {
-            display: block;
-            margin-top: 15px;
+            display: block; 
+            margin-top: 20px;
             color: #f0f0f0;
             text-decoration: none;
             font-size: 0.9em;
@@ -160,11 +154,36 @@
             text-decoration: underline;
             color: #fff;
         }
+        
+        /* Estilo atualizado para o botão de voltar SVG no canto superior */
+        .top-back-button {
+            position: absolute;
+            top: 25px; 
+            left: 25px; 
+            color: #fff; 
+            text-decoration: none;
+            z-index: 10; 
+            padding: 5px;
+            display: inline-flex; 
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%; 
+            transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+        }
+        .top-back-button svg {
+            width: 28px; 
+            height: 28px; 
+            fill: currentColor; 
+        }
+        .top-back-button:hover {
+            color: #e0e0e0; 
+            background-color: rgba(255, 255, 255, 0.1); 
+        }
     </style>
 </head>
 <body>
     <div class="login-container">
-        <h1>Login</h1>
+        <h1 id="mainHeading">Login</h1>
         <p id="loginGreeting">Que bom ter você de volta!</p>
 
         <div id="loginFormSection" class="form-section">
@@ -179,11 +198,17 @@
                 </div>
                 <button type="submit">Entrar</button>
             </form>
-            <div id="loginMessageArea" class="message-area" style="display:none;"></div>
+            <div id="loginMessageArea" class="message-area" style="display:none;" aria-live="polite"></div>
         </div>
 
         <div id="forgotPasswordSection" class="form-section" style="display:none;">
-            <p style="color: #e0e0e0;">Insira seu e-mail para redefinir a senha.</p>
+            <a href="#" id="topLeftBackFromForgot" class="top-back-button" title="Voltar para o Login" style="display:none;">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                  <path d="M0 0h24v24H0V0z" fill="none"/>
+                  <path d="M19 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H19v-2z"/>
+                </svg>
+            </a>
+            <p style="color: #e0e0e0; margin-bottom: 20px; font-size: 1.05em;">Insira seu e-mail para redefinir a senha.</p> 
             <form id="forgotPasswordForm" class="forgot-password-form">
                 <div>
                     <label for="resetEmail">E-mail:</label>
@@ -191,8 +216,39 @@
                 </div>
                 <button type="submit">Enviar</button>
             </form>
-            <div id="forgotPasswordMessageArea" class="message-area" style="display:none;"></div>
+            <div id="forgotPasswordMessageArea" class="message-area" style="display:none;" aria-live="polite"></div>
             <a href="#" id="backToLoginLink" class="back-link" style="display:none;">Voltar para o Login</a>
+        </div>
+        
+        <div id="createAccountSection" class="form-section" style="display:none;">
+            <a href="#" id="topLeftBackFromCreate" class="top-back-button" title="Voltar para o Login" style="display:none;">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                  <path d="M0 0h24v24H0V0z" fill="none"/>
+                  <path d="M19 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H19v-2z"/>
+                </svg>
+            </a>
+            <p style="color: #e0e0e0; margin-bottom: 20px; font-size: 1.05em;">Preencha os dados abaixo para criar sua conta.</p>
+            <form id="createAccountForm" class="login-form">
+                <div>
+                    <label for="createName">Nome Completo:</label>
+                    <input type="text" id="createName" name="createName" >
+                </div>
+                <div>
+                    <label for="createEmail">E-mail:</label>
+                    <input type="email" id="createEmail" name="createEmail" >
+                </div>
+                <div>
+                    <label for="createPassword">Senha:</label>
+                    <input type="password" id="createPassword" name="createPassword">
+                </div>
+                <div>
+                    <label for="confirmPassword">Confirmar Senha:</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword">
+                </div>
+                <button type="submit">Criar Conta</button>
+            </form>
+            <div id="createAccountMessageArea" class="message-area" style="display:none;" aria-live="polite"></div>
+            <a href="#" id="backToLoginFromCreateLink" class="back-link" style="display:block; margin-top: 20px;">Já tem uma conta? Entrar</a>
         </div>
 
         <div id="formLinks" class="extra-links">
@@ -212,21 +268,63 @@
         const resetEmailInput = document.getElementById('resetEmail');
         const forgotPasswordMessageArea = document.getElementById('forgotPasswordMessageArea');
         
+        const createAccountSection = document.getElementById('createAccountSection');
+        const createAccountForm = document.getElementById('createAccountForm');
+        const createAccountMessageArea = document.getElementById('createAccountMessageArea');
+        
         const forgotPasswordLink = document.getElementById('forgotPasswordLink');
         const createAccountLink = document.getElementById('createAccountLink');
-        const backToLoginLink = document.getElementById('backToLoginLink');
+        
+        const backToLoginLink = document.getElementById('backToLoginLink'); 
+        const backToLoginFromCreateLink = document.getElementById('backToLoginFromCreateLink');
+
+        const topLeftBackFromForgot = document.getElementById('topLeftBackFromForgot');
+        const topLeftBackFromCreate = document.getElementById('topLeftBackFromCreate');
+        
         const formLinks = document.getElementById('formLinks'); 
         const loginGreeting = document.getElementById('loginGreeting');
+        const mainHeading = document.querySelector('.login-container h1');
 
         function showLoginMessage(message, isSuccess = false) {
             loginMessageArea.textContent = message;
-            loginMessageArea.className = isSuccess ? 'message-area success' : 'message-area';
-            loginMessageArea.style.display = message ? 'block' : 'none';
+            loginMessageArea.className = 'message-area' + (isSuccess ? ' success' : '');
+            loginMessageArea.style.display = message ? 'block' : 'none'; 
         }
+
         function showForgotPasswordMessage(message, isSuccess = false) {
             forgotPasswordMessageArea.textContent = message;
-            forgotPasswordMessageArea.className = isSuccess ? 'message-area success' : 'message-area';
+            forgotPasswordMessageArea.className = 'message-area' + (isSuccess ? ' success' : '');
             forgotPasswordMessageArea.style.display = message ? 'block' : 'none';
+        }
+
+        function showCreateAccountMessage(message, isSuccess = false) {
+            createAccountMessageArea.textContent = message;
+            createAccountMessageArea.className = 'message-area' + (isSuccess ? ' success' : '');
+            createAccountMessageArea.style.display = message ? 'block' : 'none';
+        }
+
+        function goBackToLoginScreen(event) {
+            if (event) event.preventDefault();
+
+            mainHeading.textContent = 'Login';
+            loginFormSection.style.display = 'block';
+            forgotPasswordSection.style.display = 'none';
+            createAccountSection.style.display = 'none';
+            
+            loginGreeting.style.display = 'block';
+            loginGreeting.textContent = 'Que bom ter você de volta!';
+            formLinks.style.display = 'block';
+
+            topLeftBackFromForgot.style.display = 'none';
+            topLeftBackFromCreate.style.display = 'none';
+            
+            showLoginMessage('');
+            showForgotPasswordMessage('');
+            showCreateAccountMessage('');
+            simpleLoginForm.reset();
+
+            backToLoginLink.style.display = 'none';
+            forgotPasswordForm.style.display = 'block'; 
         }
 
         simpleLoginForm.addEventListener('submit', function(event) {
@@ -238,49 +336,105 @@
                 showLoginMessage('Por favor, preencha usuário e senha.');
                 return;
             }
-            // login bem-sucedido
             localStorage.setItem('usuarioLogadoEcoTechBH', 'true'); 
-            window.location.href = 'index.html'; 
+            showLoginMessage('Login bem-sucedido! Redirecionando...', true);
+            this.querySelector('button[type="submit"]').disabled = true;
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 1500); 
         });
 
         forgotPasswordLink.addEventListener('click', function(event) {
             event.preventDefault();
+            mainHeading.textContent = 'Redefinir Senha';
             loginFormSection.style.display = 'none';
-            loginGreeting.style.display = 'none'; 
             forgotPasswordSection.style.display = 'block';
+            createAccountSection.style.display = 'none';
+            
+            loginGreeting.style.display = 'none'; 
             formLinks.style.display = 'none'; 
+            
+            topLeftBackFromForgot.style.display = 'block'; 
+            topLeftBackFromCreate.style.display = 'none';
+
             showForgotPasswordMessage(''); 
-            resetEmailInput.value = ''; 
+            forgotPasswordForm.reset();
+            resetEmailInput.focus(); 
             backToLoginLink.style.display = 'none'; 
             forgotPasswordForm.style.display = 'block'; 
+            showLoginMessage('');
         });
 
         createAccountLink.addEventListener('click', function(event) {
             event.preventDefault();
-            alert('A funcionalidade "Criar Conta" é apenas ilustrativa.');
+            mainHeading.textContent = 'Criar Conta';
+            loginFormSection.style.display = 'none';
+            forgotPasswordSection.style.display = 'none';
+            createAccountSection.style.display = 'block';
+
+            loginGreeting.style.display = 'none';
+            formLinks.style.display = 'none';
+
+            topLeftBackFromCreate.style.display = 'block'; 
+            topLeftBackFromForgot.style.display = 'none';
+            
+            createAccountForm.reset();
+            showCreateAccountMessage(''); 
+            document.getElementById('createName').focus(); 
+        });
+        
+        topLeftBackFromForgot.addEventListener('click', goBackToLoginScreen);
+        topLeftBackFromCreate.addEventListener('click', goBackToLoginScreen);
+        backToLoginLink.addEventListener('click', goBackToLoginScreen); 
+        backToLoginFromCreateLink.addEventListener('click', goBackToLoginScreen);
+
+
+        createAccountForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const name = document.getElementById('createName').value.trim();
+            const email = document.getElementById('createEmail').value.trim();
+            const password = document.getElementById('createPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            if (name === '' || email === '' || password === '' || confirmPassword === '') {
+                showCreateAccountMessage('Por favor, preencha todos os campos.');
+                return;
+            }
+            function isValidEmail(emailText) {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return emailRegex.test(emailText);
+            }
+            if (!isValidEmail(email)) {
+                showCreateAccountMessage('Por favor, insira um e-mail válido.');
+                return;
+            }
+            
+            if (password !== confirmPassword) {
+                showCreateAccountMessage('As senhas não coincidem.');
+                return;
+            }
+            showCreateAccountMessage('Conta criada com sucesso! Você já pode fazer o login.', true);
+            this.querySelector('button[type="submit"]').disabled = true;
+            setTimeout(() => { 
+                goBackToLoginScreen(); 
+                this.querySelector('button[type="submit"]').disabled = false;
+            }, 2500);
         });
 
         forgotPasswordForm.addEventListener('submit', function(event) {
             event.preventDefault();
             const email = resetEmailInput.value;
-
-            if (email.trim() === '' || !email.includes('@')) { 
+            function isValidEmail(emailText) {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return emailRegex.test(emailText);
+            }
+            if (email.trim() === '' || !isValidEmail(email)) { 
                 showForgotPasswordMessage('Por favor, insira um e-mail válido.');
                 return;
             }
-            //  envio bem-sucedido
-            showForgotPasswordMessage('Pedido de redefinição enviado com sucesso!', true);
+            showForgotPasswordMessage('Se uma conta existir para ' + email + ', um e-mail de redefinição foi enviado.', true);
             forgotPasswordForm.style.display = 'none'; 
             backToLoginLink.style.display = 'block'; 
-        });
-
-        backToLoginLink.addEventListener('click', function(event) {
-            event.preventDefault();
-            forgotPasswordSection.style.display = 'none';
-            loginFormSection.style.display = 'block';
-            loginGreeting.style.display = 'block'; 
-            formLinks.style.display = 'block'; 
-            showLoginMessage(''); 
         });
     </script>
 </body>
