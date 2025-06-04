@@ -1,462 +1,744 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>EcoTech BH - Pontos de Descarte</title>
-  <style>
-    /* Reset básico */
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      display: flex;
-      min-height: 100vh;
-      background-color: #f0f2f5; /* Fundo um pouco mais acinzentado para contraste com cards brancos */
-      color: #333;
-      line-height: 1.6;
-    }
-
-    /* Ícone do usuário fixo no topo direito */
-    .user-top-right {
-      position: fixed;
-      top: 12px;
-      right: 12px;
-      width: 44px;
-      height: 44px;
-      background-color: #000;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      box-shadow: 0 0 8px rgba(0, 0, 0, 0.25);
-      transition: background-color 0.3s ease;
-      z-index: 1000;
-      text-decoration: none;
-    }
-
-    .user-top-right:hover {
-      background-color: #222;
-    }
-
-    /* SVG ícone dentro do link */
-    .user-top-right svg {
-      fill: #fff;
-      width: 24px;
-      height: 24px;
-    }
-
-    /* Sidebar */
-    nav.sidebar {
-      width: 240px;
-      background-color: #e3eaf6;
-      padding: 70px 20px 20px 20px; /* espaço para topo do ícone */
-      display: flex;
-      flex-direction: column;
-      border-radius: 0 12px 12px 0;
-      box-shadow: 2px 0 8px rgba(0, 0, 0, 0.05);
-      margin-left: 10px;
-      min-height: 100vh;
-      position: sticky;
-      top: 0;
-    }
-
-    nav.sidebar h1 {
-      color: #1a237e;
-      margin-bottom: 35px;
-      font-size: 2em;
-      text-align: center;
-      font-weight: 700;
-      letter-spacing: 1px;
-    }
-
-    nav.sidebar ul {
-      list-style: none;
-    }
-
-    nav.sidebar ul li {
-      margin-bottom: 18px;
-    }
-
-    nav.sidebar ul li a {
-      color: #1a237e;
-      font-weight: 600;
-      text-decoration: none;
-      display: block;
-      padding: 10px 14px;
-      border-radius: 8px;
-      font-size: 1.05em;
-      transition: background-color 0.3s ease, color 0.3s ease;
-    }
-
-    nav.sidebar ul li a:hover,
-    nav.sidebar ul li a:focus,
-    nav.sidebar ul li a[aria-current="page"] { 
-      background-color: #3f51b5;
-      color: #fff;
-      outline: none;
-    }
-
-    /* Conteúdo Principal */
-    main.content {
-      flex-grow: 1;
-      padding: 36px 36px 36px 48px;
-      /* Removido background-color e box-shadow daqui para aplicar ao body ou .pontos-grid */
-      border-radius: 12px;
-      margin: 20px auto; 
-      max-width: 900px; 
-    }
-
-    main.content h2 {
-      margin-bottom: 20px; 
-      color: #1a237e;
-      font-size: 2.3em;
-      font-weight: 700;
-      letter-spacing: 0.02em;
-      text-align: center; /* Centralizar título da seção */
-    }
-
-    /* Estilo para o campo de busca melhorado */
-    .search-container {
-        margin-bottom: 30px; 
-        position: relative;
-        background-color: #fff; /* Fundo branco para a caixa de busca */
-        padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.07); 
-    }
-    .search-input {
-        width: 100%;
-        padding: 12px 15px 12px 40px; 
-        border: 1px solid #ced4da; 
-        border-radius: 8px;
-        font-size: 1em;
-        transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    }
-    .search-input:focus {
-        border-color: #3f51b5;
-        box-shadow: 0 0 0 3px rgba(63, 81, 181, 0.25); 
-        outline: none;
-    }
-    .search-container .search-icon {
-        position: absolute;
-        left: 12px; 
-        top: 50%;
-        transform: translateY(-50%);
-        color: #6c757d; 
-        font-size: 1.1em; 
-        padding-left: 15px; 
-    }
-
-    /* Keyframes para animação de entrada dos cards */
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px); /* Reduzido o translateY */
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .pontos-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Aumentado minmax para cards um pouco maiores */
-      gap: 24px;
-    }
-
-    .ponto-card {
-      background-color: #ffffff; /* Fundo branco para os cards */
-      border-radius: 10px; /* Bordas levemente arredondadas como na imagem */
-      padding: 20px; /* Ajuste de padding interno */
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Sombra mais suave */
-      color: #333;
-      transition: box-shadow 0.3s ease, transform 0.3s ease;
-      opacity: 0; 
-      transform: translateY(20px); 
-      animation: fadeInUp 0.5s ease-out forwards; 
-      display: flex; 
-      flex-direction: column; 
-    }
-
-    /* Stagger da animação */
-    .pontos-grid > .ponto-card:nth-child(1) { animation-delay: 0.05s; }
-    .pontos-grid > .ponto-card:nth-child(2) { animation-delay: 0.1s; }
-    .pontos-grid > .ponto-card:nth-child(3) { animation-delay: 0.15s; }
-    .pontos-grid > .ponto-card:nth-child(4) { animation-delay: 0.2s; }
-
-
-    .ponto-card:hover {
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
-      transform: translateY(-4px); 
-    }
-
-    .ponto-card h3 { /* card-title */
-      color: #3f51b5; /* Azul mais vibrante para o título */
-      font-weight: 600; /* Um pouco menos bold que antes */
-      margin-bottom: 8px; /* Menor margem inferior */
-      font-size: 1.25em; /* Ajuste de tamanho */
-      border-left: none; /* Removida borda lateral */
-      padding-left: 0; /* Removido padding lateral */
-    }
-
-    .ponto-card p { /* card-description, card-contact, card-address */
-      margin-bottom: 10px;
-      font-size: 0.95em; /* Levemente menor para mais informação caber bem */
-      line-height: 1.5;
-      color: #555; /* Cor de texto um pouco mais clara */
-    }
-    .ponto-card p.card-description {
-        min-height: 50px; /* Para alinhar melhor cards com descrições de tamanhos diferentes */
-    }
-
-
-    .ponto-card p strong { /* Não mais usado diretamente, mas mantido caso necessário */
-      color: #3f51b5; 
-      font-weight: 500;
-    }
-    
-    .info-line {
-        display: flex;
-        align-items: center;
-        margin-bottom: 8px;
-        font-size: 0.9em;
-        color: #454545;
-    }
-    .info-line i { /* Ícones de contato e endereço */
-        color: #3f51b5;
-        margin-right: 8px;
-        width: 16px; /* Largura fixa para alinhamento */
-        text-align: center;
-    }
-
-    /* Estilo para o link de ação no rodapé do card */
-    .action-link {
-        display: inline-block;
-        color: #3f51b5;
-        font-weight: 600;
-        text-decoration: none;
-        transition: color 0.3s ease, transform 0.2s ease;
-        margin-top: auto; /* Empurra para o final do card */
-        padding-top: 10px; /* Espaço acima do link */
-        font-size: 0.95em;
-        align-self: flex-start;
-    }
-    .action-link:hover {
-        color: #1a237e;
-        transform: translateX(3px); /* Pequeno efeito de deslize */
-    }
-    .action-link i { /* Seta -> */
-        margin-left: 5px;
-        transition: transform 0.2s ease;
-    }
-    .action-link:hover i {
-        transform: translateX(2px);
-    }
-
-
-    /* Responsividade */
-    @media (max-width: 900px) {
-      body {
-        flex-direction: column;
-      }
-      nav.sidebar {
-        width: 100%;
-        border-radius: 0 0 12px 12px;
-        margin-left: 0;
-        padding: 80px 20px 20px 20px; 
-        flex-direction: row; 
-        justify-content: space-between; 
-        align-items: center; 
-        min-height: auto; 
-        position: static; 
-      }
-      nav.sidebar h1 {
-        margin-bottom: 0;
-        font-size: 1.4em; 
-        text-align: left;
-      }
-      nav.sidebar ul {
-        display: flex;
-        flex-direction: row;
-        gap: 10px; 
-        margin: 0;
-        padding: 0; 
-      }
-      nav.sidebar ul li {
-        margin-bottom: 0;
-      }
-      nav.sidebar ul li a {
-        padding: 8px 10px; 
-        font-size: 0.9em; 
-      }
-      main.content {
-        margin: 20px 16px 40px 16px; 
-        padding: 20px 16px;
-        max-width: 100%; 
-        border-radius: 8px;
-      }
-      .user-top-right {
-        top: 12px;
-        right: 12px;
-      }
-      .search-container { 
-        padding: 15px;
-      }
-      .search-container .search-icon {
-        padding-left: 10px; 
-      }
-      .ponto-card p.card-description {
-        min-height: auto; /* Remover altura mínima em telas menores */
-      }
-    }
-     @media (max-width: 600px) { 
-        nav.sidebar {
-            flex-direction: column; 
-            align-items: center;
-            padding-top: 70px; 
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>EcoTech BH - Pontos de Descarte</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset básico */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
-        nav.sidebar h1 {
+
+        body {
+            font-family: 'Roboto', sans-serif; /* Usando Roboto para a aparência geral */
+            display: flex;
+            flex-direction: column; /* Necessário para que o footer fique no final */
+            min-height: 100vh;
+            background-color: #f0f2f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Container principal que envolve menu e conteúdo */
+        .page-wrapper {
+            display: flex;
+            flex-grow: 1; /* Permite que o wrapper ocupe o espaço restante */
+            width: 100%;
+            margin: 0;
+            gap: 30px; /* Espaço entre o menu e o conteúdo */
+            padding-right: 30px; /* Padding no lado direito do conteúdo principal */
+            padding-bottom: 20px; /* Padding na parte de baixo para o rodapé não colar */
+        }
+
+        /* Ícone do usuário fixo no topo direito */
+        .user-menu-container {
+            position: fixed;
+            top: 30px;
+            right: 40px;
+            z-index: 1000;
+        }
+
+        .user-top-right {
+            width: 44px;
+            height: 44px;
+            background-color: #000;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+        }
+
+        .user-top-right:hover {
+            background-color: #222;
+        }
+
+        .user-top-right svg {
+            fill: #fff;
+            width: 24px;
+            height: 24px;
+        }
+
+        /* Estilos para o menu suspenso */
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 10px);
+            right: 0;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            min-width: 230px;
+            padding: 15px;
+            display: none;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+            overflow: hidden;
+        }
+
+        .dropdown-menu.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .dropdown-menu h3 {
+            font-size: 1.1em;
+            color: #1a237e;
+            margin-bottom: 10px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #e3eaf6;
+            font-weight: 600;
+        }
+
+        .dropdown-menu ul {
+            list-style: none;
+            padding: 0;
             margin-bottom: 15px;
-            text-align: center;
         }
-        nav.sidebar ul {
-            flex-direction: column; 
+
+        .dropdown-menu ul li {
+            margin-bottom: 8px;
+        }
+
+        .dropdown-menu ul li:last-child {
+            margin-bottom: 0;
+        }
+
+        .dropdown-menu ul li a {
+            display: block;
+            padding: 8px 10px;
+            color: #333;
+            text-decoration: none;
+            font-size: 0.95em;
+            transition: background-color 0.2s ease, color 0.2s ease;
+            border-radius: 4px;
+            white-space: nowrap;
+        }
+
+        .dropdown-menu ul li a:hover {
+            background-color: #f0f0f0;
+            color: #1a237e;
+        }
+
+        .dropdown-menu .logout-button {
+            display: block;
+            width: 100%;
+            padding: 10px 15px;
+            background-color: #e74c3c;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            transition: background-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .dropdown-menu .logout-button:hover {
+            background-color: #c0392b;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* --- ESTILOS PARA O MENU LATERAL (EcoTech BH) --- */
+        .menu-container {
+            background-color: #fff;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            padding: 30px 20px;
+            width: 280px;
+            box-sizing: border-box;
+            flex-shrink: 0;
+
+            /* PROPRIEDADES PARA FIXAR E OCUPAR A ALTURA COMPLETA */
+            position: sticky; /* ou 'fixed' se preferir que ele não role com o conteúdo */
+            top: 0;
+            left: 0;
+            height: 100vh; /* Ocupa 100% da altura da viewport */
+            border-radius: 0 10px 10px 0; /* Arredonda apenas os cantos direitos */
+            display: flex;
+            flex-direction: column;
             align-items: center;
+        }
+
+        .menu-header {
+            text-align: center;
+            margin-bottom: 30px;
             width: 100%;
         }
-        nav.sidebar ul li {
-            margin-bottom: 8px;
-            width: 80%; 
+
+        .menu-header h1 {
+            color: #2c3e50;
+            font-size: 2em;
+            margin: 0;
+            font-weight: 700;
         }
-        nav.sidebar ul li a {
+
+        .menu-header p {
+            color: #4a69bd;
+            font-size: 1.2em;
+            margin-top: 5px;
+            font-weight: 700;
+        }
+
+        .menu-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            width: 100%;
+        }
+
+        .menu-item {
+            margin-bottom: 15px;
+        }
+
+        .menu-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .menu-item a {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            text-decoration: none;
+            color: #34495e;
+            font-size: 1.1em;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .menu-item a:hover {
+            background-color: #e6eaf3;
+            color: #4a69bd;
+            transform: translateX(5px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .menu-item a.active {
+            background-color: #2c3e50;
+            color: #fff;
+            font-weight: 700;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transform: none;
+        }
+
+        .menu-item a.active .menu-icon {
+            color: #fff;
+        }
+
+        .menu-icon {
+            margin-right: 15px;
+            font-size: 1.4em;
+            color: #6c7a89;
+            transition: color 0.3s ease;
+        }
+
+        .menu-item a:hover .menu-icon {
+            color: #4a69bd;
+        }
+
+        /* --- FIM DOS ESTILOS PARA O MENU LATERAL --- */
+
+
+        /* Conteúdo Principal */
+        main.content {
+            flex-grow: 1;
+            padding: 40px 48px; /* Ajuste para espaçamento consistente */
+            background-color: #fff; /* Conteúdo em si é branco */
+            border-radius: 12px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.07);
+            margin-top: 20px; /* Espaço do topo */
+            margin-bottom: 20px; /* Espaço para o rodapé */
+            max-width: 900px; /* Adicionado novamente para controlar largura do conteúdo */
+        }
+
+        main.content h2 {
+            margin-bottom: 20px;
+            color: #1a237e;
+            font-size: 2.3em;
+            font-weight: 700;
+            letter-spacing: 0.02em;
             text-align: center;
         }
-        main.content h2 {
-            font-size: 1.8em;
+
+        /* Estilo para o campo de busca melhorado */
+        .search-container {
+            margin-bottom: 30px;
+            position: relative;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.07);
         }
+        .search-input {
+            width: 100%;
+            padding: 12px 15px 12px 40px;
+            border: 1px solid #ced4da;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .search-input:focus {
+            border-color: #3f51b5;
+            box-shadow: 0 0 0 3px rgba(63, 81, 181, 0.25);
+            outline: none;
+        }
+        .search-container .search-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6c757d;
+            font-size: 1.1em;
+            padding-left: 15px;
+        }
+
+        /* Keyframes para animação de entrada dos cards */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .pontos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        .ponto-card {
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            color: #333;
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.5s ease-out forwards;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Stagger da animação */
+        .pontos-grid > .ponto-card:nth-child(1) { animation-delay: 0.05s; }
+        .pontos-grid > .ponto-card:nth-child(2) { animation-delay: 0.1s; }
+        .pontos-grid > .ponto-card:nth-child(3) { animation-delay: 0.15s; }
+        .pontos-grid > .ponto-card:nth-child(4) { animation-delay: 0.2s; }
+        /* Adicione mais seções para mais cards */
+        .pontos-grid > .ponto-card:nth-child(5) { animation-delay: 0.25s; }
+        .pontos-grid > .ponto-card:nth-child(6) { animation-delay: 0.3s; }
+        .pontos-grid > .ponto-card:nth-child(7) { animation-delay: 0.35s; }
+        .pontos-grid > .ponto-card:nth-child(8) { animation-delay: 0.4s; }
+
+
+        .ponto-card:hover {
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+            transform: translateY(-4px);
+        }
+
         .ponto-card h3 {
-            font-size: 1.15em;
+            color: #3f51b5;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 1.25em;
         }
-        .ponto-card p, .info-line {
+
+        .ponto-card p {
+            margin-bottom: 10px;
+            font-size: 0.95em;
+            line-height: 1.5;
+            color: #555;
+        }
+        .ponto-card p.card-description {
+            min-height: 50px;
+        }
+
+        .info-line {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
             font-size: 0.9em;
+            color: #454545;
         }
+        .info-line i {
+            color: #3f51b5;
+            margin-right: 8px;
+            width: 16px;
+            text-align: center;
+        }
+
         .action-link {
-            font-size: 0.9em;
+            display: inline-block;
+            color: #3f51b5;
+            font-weight: 600;
+            text-decoration: none;
+            transition: color 0.3s ease, transform 0.2s ease;
+            margin-top: auto;
+            padding-top: 10px;
+            font-size: 0.95em;
+            align-self: flex-start;
         }
-    }
-  </style>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        .action-link:hover {
+            color: #1a237e;
+            transform: translateX(3px);
+        }
+        .action-link i {
+            margin-left: 5px;
+            transition: transform 0.2s ease;
+        }
+        .action-link:hover i {
+            transform: translateX(2px);
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px 20px;
+            font-size: 0.9em;
+            color: #555;
+            background-color: #dde3ee;
+            border-top: 1px solid #c5cde0;
+            width: 100%;
+            /* Remove margin-top, pois o footer será separado pelo page-wrapper */
+        }
+
+        /* Responsividade */
+        @media (max-width: 900px) {
+            body {
+                padding: 0;
+            }
+            .page-wrapper {
+                flex-direction: column;
+                gap: 20px;
+                padding-right: 0;
+                padding-bottom: 0;
+            }
+            .menu-container {
+                width: 100%;
+                border-radius: 0;
+                padding: 20px 15px;
+                position: static;
+                height: auto;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            }
+            .menu-header {
+                margin-bottom: 20px;
+            }
+            .menu-header h1 {
+                font-size: 1.8em;
+            }
+            .menu-header p {
+                font-size: 1.1em;
+            }
+            .menu-list {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px;
+            }
+            .menu-item {
+                margin-bottom: 0;
+            }
+            .menu-item a {
+                padding: 10px 12px;
+                font-size: 0.95em;
+            }
+            .menu-icon {
+                margin-right: 10px;
+                font-size: 1.2em;
+            }
+            main.content {
+                margin: 0 15px; /* Adiciona uma margem lateral em mobile para o conteúdo */
+                padding: 25px 20px;
+                border-radius: 10px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            }
+            main.content h2 {
+                font-size: 1.8em;
+            }
+            .user-menu-container {
+                top: 20px;
+                right: 20px;
+            }
+            .user-top-right {
+                width: 40px;
+                height: 40px;
+            }
+            .user-top-right svg {
+                width: 20px;
+                height: 20px;
+            }
+            .dropdown-menu {
+                min-width: 180px;
+                padding: 12px;
+            }
+            .dropdown-menu h3 {
+                font-size: 1em;
+                margin-bottom: 8px;
+                padding-bottom: 6px;
+            }
+            .dropdown-menu ul li a {
+                font-size: 0.9em;
+                padding: 6px 8px;
+                white-space: nowrap;
+            }
+            .dropdown-menu .logout-button {
+                padding: 8px 12px;
+                font-size: 0.95em;
+            }
+            .search-container {
+                padding: 15px;
+            }
+            .search-container .search-icon {
+                padding-left: 10px;
+            }
+            .ponto-card p.card-description {
+                min-height: auto;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .pontos-grid {
+                grid-template-columns: 1fr;
+            }
+            .box:last-child {
+                margin-bottom: 0;
+            }
+            main.content {
+                margin: 0 10px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .menu-container { /* Ajustes para o menu em telas bem pequenas */
+                flex-direction: column;
+                align-items: center;
+                padding-top: 70px;
+            }
+            .menu-header {
+                margin-bottom: 15px;
+                text-align: center;
+            }
+            .menu-list {
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
+            }
+            .menu-item {
+                margin-bottom: 8px;
+                width: 80%; /* Para que os itens do menu não ocupem 100% da largura em telas pequenas */
+            }
+            .menu-item a {
+                text-align: center;
+                justify-content: center; /* Centraliza ícone e texto em mobile */
+            }
+            main.content h2 {
+                font-size: 1.8em;
+            }
+            .ponto-card h3 {
+                font-size: 1.15em;
+            }
+            .ponto-card p, .info-line {
+                font-size: 0.9em;
+            }
+            .action-link {
+                font-size: 0.9em;
+            }
+        }
+    </style>
 </head>
 <body>
 
-  <a href="login.html" class="user-top-right" title="Área do Usuário" aria-label="Área do Usuário">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-      <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
-    </svg>
-  </a>
-
-  <nav class="sidebar" role="navigation" aria-label="Menu principal">
-    <h1>EcoTech BH</h1>
-    <ul>
-      <li><a href="index.html" tabindex="0">Início</a></li>
-      <li><a href="sobre.html" tabindex="0">Sobre o Projeto</a></li>
-      <li><a href="guia.html" tabindex="0">Guia de Descarte</a></li>
-      <li><a href="doacoes.html" tabindex="0">Doações</a></li>
-      <li><a href="pontos.html" tabindex="0" aria-current="page">Pontos de Descarte</a></li>
-    </ul>
-  </nav>
-
-  <main class="content" role="main">
-    <h2>Pontos de Descarte em Belo Horizonte</h2>
-
-    <div class="search-container">
-        <i class="fas fa-search search-icon"></i>
-        <input type="text" id="filtroBusca" class="search-input" onkeyup="filtrarCards()" placeholder="Buscar por nome, endereço ou tipo...">
+    <div class="user-menu-container">
+        <div class="user-top-right" id="userIcon" title="Área do Usuário" aria-label="Área do Usuário" tabindex="0" role="button">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+            </svg>
+        </div>
+        <div class="dropdown-menu" id="userDropdown">
+            <h3>Opções do Usuário</h3>
+            <ul>
+                <li><a href="meu-perfil.html">Meu Perfil (em breve)</a></li>
+                <li><a href="minhas-doacoes.html">Minhas Doações (em breve)</a></li>
+            </ul>
+            <a href="login.html" class="logout-button">Sair da conta</a>
+        </div>
     </div>
 
-    <div class="pontos-grid">
-      <section class="ponto-card">
-        <h3 class="card-title">MG Recicla</h3>
-        <p class="card-description">Coleta e compra lixo eletrônico residencial e comercial, faz descaracterização dos materiais.</p>
-        <div class="card-details">
-            <p class="info-line card-contact"><i class="fas fa-phone-alt"></i>(31) 3565-5294 / (31) 97104-7254</p>
-            <p class="info-line card-address"><i class="fas fa-map-marker-alt"></i>Rua Sararé, 47 - Jardimópolis, Belo Horizonte</p>
+    <div class="page-wrapper">
+        <div class="menu-container">
+            <div class="menu-header">
+                <h1>EcoTech</h1>
+                <p>BH</p>
+            </div>
+            <ul class="menu-list">
+                <li class="menu-item">
+                    <a href="index.html">
+                        <i class="fas fa-home menu-icon"></i>
+                        Início
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="sobre.html">
+                        <i class="fas fa-info-circle menu-icon"></i>
+                        Sobre o Projeto
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="guia.html">
+                        <i class="fas fa-book menu-icon"></i>
+                        Guia de Descarte
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="doacoes.html">
+                        <i class="fas fa-hand-holding-heart menu-icon"></i>
+                        Doações
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="pontos.html">
+                        <i class="fas fa-map-marker-alt menu-icon"></i>
+                        Pontos de Descarte
+                    </a>
+                </li>
+            </ul>
         </div>
-        <a href="https://www.google.com/maps/search/?api=1&query=Rua+Sarar%C3%A9%2C+47+-+Jardim%C3%B3polis%2C+Belo+Horizonte" target="_blank" rel="noopener noreferrer" class="action-link">Ver no mapa <i class="fas fa-arrow-right"></i></a>
-      </section>
+        <main class="content" role="main">
+            <h2>Pontos de Descarte em Belo Horizonte</h2>
 
-      <section class="ponto-card">
-        <h3 class="card-title">Reciclagem TC</h3>
-        <p class="card-description">Coleta domiciliar de eletrodomésticos e eletrônicos em Belo Horizonte.</p>
-        <div class="card-details">
-            <p class="info-line card-contact"><i class="fas fa-phone-alt"></i>(31) 3191-6026</p>
-            <p class="info-line card-address"><i class="fas fa-info-circle"></i>Endereço não informado publicamente, funciona via contato para agendamento.</p>
-        </div>
-      </section>
+            <div class="search-container">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" id="filtroBusca" class="search-input" onkeyup="filtrarCards()" placeholder="Buscar por nome, endereço ou tipo...">
+            </div>
 
-      <section class="ponto-card">
-        <h3 class="card-title">Abree</h3>
-        <p class="card-description">Associação Brasileira de Reciclagem de Eletrônicos e Eletrodomésticos. Consulta pontos de coleta por CEP.</p>
-        <div class="card-details">
-            <p class="info-line card-contact"><i class="fas fa-phone-alt"></i>(11) 98991-4558</p>
-            <p class="info-line card-website"><i class="fas fa-globe"></i><a href="https://abree.org.br/" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: none;">abree.org.br</a></p>
-        </div>
-        <a href="https://abree.org.br/" target="_blank" rel="noopener noreferrer" class="action-link">Consultar pontos <i class="fas fa-arrow-right"></i></a>
-      </section>
+            <div class="pontos-grid">
+                <section class="ponto-card">
+                    <h3 class="card-title">MG Recicla</h3>
+                    <p class="card-description">Coleta e compra lixo eletrônico residencial e comercial, faz descaracterização dos materiais.</p>
+                    <div class="card-details">
+                        <p class="info-line card-contact"><i class="fas fa-phone-alt"></i>(31) 3565-5294 / (31) 97104-7254</p>
+                        <p class="info-line card-address"><i class="fas fa-map-marker-alt"></i>Rua Sararé, 47 - Jardimópolis, Belo Horizonte</p>
+                    </div>
+                    <a href="https://www.google.com/maps/search/?api=1&query=Rua+Sarar%C3%A9%2C+47+-+Jardim%C3%B3polis%2C+Belo+Horizonte" target="_blank" rel="noopener noreferrer" class="action-link">Ver no mapa <i class="fas fa-arrow-right"></i></a>
+                </section>
 
-      <section class="ponto-card">
-        <h3 class="card-title">Prodabel</h3>
-        <p class="card-description">Coleta gratuita com agendamento para descarte de eletrônicos em Belo Horizonte.</p>
-        <div class="card-details">
-            <p class="info-line card-contact"><i class="fas fa-phone-alt"></i>(31) 3277-4771</p>
-            <p class="info-line card-address"><i class="fas fa-map-marker-alt"></i>Rua José Clemente Pereira, 440 - Ipiranga, Belo Horizonte</p>
-        </div>
-      </section>
+                <section class="ponto-card">
+                    <h3 class="card-title">Reciclagem TC</h3>
+                    <p class="card-description">Coleta domiciliar de eletrodomésticos e eletrônicos em Belo Horizonte.</p>
+                    <div class="card-details">
+                        <p class="info-line card-contact"><i class="fas fa-phone-alt"></i>(31) 3191-6026</p>
+                        <p class="info-line card-address"><i class="fas fa-info-circle"></i>Endereço não informado publicamente, funciona via contato para agendamento.</p>
+                    </div>
+                </section>
+
+                <section class="ponto-card">
+                    <h3 class="card-title">Abree</h3>
+                    <p class="card-description">Associação Brasileira de Reciclagem de Eletrônicos e Eletrodomésticos. Consulta pontos de coleta por CEP.</p>
+                    <div class="card-details">
+                        <p class="info-line card-contact"><i class="fas fa-phone-alt"></i>(11) 98991-4558</p>
+                        <p class="info-line card-website"><i class="fas fa-globe"></i><a href="https://abree.org.br/" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: none;">abree.org.br</a></p>
+                    </div>
+                    <a href="https://abree.org.br/" target="_blank" rel="noopener noreferrer" class="action-link">Consultar pontos <i class="fas fa-arrow-right"></i></a>
+                </section>
+
+                <section class="ponto-card">
+                    <h3 class="card-title">Prodabel</h3>
+                    <p class="card-description">Coleta gratuita com agendamento para descarte de eletrônicos em Belo Horizonte.</p>
+                    <div class="card-details">
+                        <p class="info-line card-contact"><i class="fas fa-phone-alt"></i>(31) 3277-4771</p>
+                        <p class="info-line card-address"><i class="fas fa-map-marker-alt"></i>Rua José Clemente Pereira, 440 - Ipiranga, Belo Horizonte</p>
+                    </div>
+                </section>
+            </div>
+        </main>
     </div>
-  </main>
+    <footer>
+        <p>© 2025 EcoTech BH - Todos os direitos reservados.</p>
+    </footer>
 
-  <script>
-    function filtrarCards() {
-        const input = document.getElementById('filtroBusca');
-        const filter = input.value.toLowerCase();
-        const cards = document.querySelectorAll('.ponto-card');
-        let visibleCardCount = 0; 
+    <script>
+        // JavaScript para filtrar os cards
+        function filtrarCards() {
+            const input = document.getElementById('filtroBusca');
+            const filter = input.value.toLowerCase();
+            const cards = document.querySelectorAll('.ponto-card');
+            let visibleCardCount = 0;
 
-        cards.forEach((card, index) => {
-            const title = card.querySelector('.card-title') ? card.querySelector('.card-title').textContent.toLowerCase() : '';
-            let textContent = '';
-            card.querySelectorAll('.card-description, .info-line').forEach(p => {
-                textContent += p.textContent.toLowerCase() + ' ';
+            cards.forEach((card, index) => {
+                const title = card.querySelector('.card-title') ? card.querySelector('.card-title').textContent.toLowerCase() : '';
+                let textContent = '';
+                card.querySelectorAll('.card-description, .info-line').forEach(p => {
+                    textContent += p.textContent.toLowerCase() + ' ';
+                });
+
+                if (title.includes(filter) || textContent.includes(filter)) {
+                    card.style.display = "";
+                    card.style.animationDelay = (visibleCardCount * 0.05) + 's';
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(20px)';
+                    void card.offsetWidth; // Trigger reflow for animation
+                    card.style.animationName = 'fadeInUp';
+                    visibleCardCount++;
+                } else {
+                    card.style.display = "none";
+                    card.style.animationName = 'none';
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Lógica para o menu suspenso do usuário
+            const userIcon = document.getElementById('userIcon');
+            const userDropdown = document.getElementById('userDropdown');
+
+            userIcon.addEventListener('click', function(event) {
+                userDropdown.classList.toggle('active');
+                event.stopPropagation();
             });
 
-            if (title.includes(filter) || textContent.includes(filter)) {
-                card.style.display = "";
-                card.style.animationDelay = (visibleCardCount * 0.05) + 's';
-                card.style.opacity = '0'; 
-                card.style.transform = 'translateY(20px)'; 
-                void card.offsetWidth; 
-                card.style.animationName = 'fadeInUp'; 
-                visibleCardCount++;
-            } else {
-                card.style.display = "none";
-                card.style.animationName = 'none'; 
-            }
-        });
-    }
+            document.addEventListener('click', function(event) {
+                if (!userDropdown.contains(event.target) && !userIcon.contains(event.target)) {
+                    userDropdown.classList.remove('active');
+                }
+            });
 
-    document.addEventListener('DOMContentLoaded', () => {
-        // A animação inicial é tratada pelo CSS.
-        // Se quiser forçar a re-animação ao carregar, pode chamar filtrarCards() aqui
-        // com o campo de busca vazio, mas geralmente não é necessário.
-    });
-  </script>
+            document.addEventListener('keydown', function(event) {
+                if (event.key === 'Escape') {
+                    userDropdown.classList.remove('active');
+                }
+            });
+
+            // Lógica para ativar o item correto no menu lateral
+            const menuItems = document.querySelectorAll('.menu-list a');
+            const currentPath = window.location.pathname.split('/').pop();
+
+            menuItems.forEach(item => {
+                const itemHref = item.getAttribute('href');
+                if (itemHref === currentPath) {
+                    item.classList.add('active');
+                } else if (currentPath === '' && itemHref === 'index.html') {
+                    item.classList.add('active');
+                } else {
+                    item.classList.remove('active');
+                }
+            });
+        });
+    </script>
 
 </body>
 </html>

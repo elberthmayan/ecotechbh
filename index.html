@@ -1,319 +1,602 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>EcoTech BH - Sobre o Projeto</title> <style>
-    /* Reset básico */
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>EcoTech BH - Sobre o Projeto</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset básico */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-      background-color: #f9fafb;
-      color: #333;
-      line-height: 1.6;
-    }
+        body {
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: #f0f2f5;
+            color: #333;
+            line-height: 1.6;
+            /* Removendo padding do body, pois o menu agora ocupa a lateral */
+            /* padding: 20px; */
+            /* align-items: flex-start; */
+            /* justify-content: center; */
+        }
 
-    .page-wrapper {
-      display: flex;
-      flex-grow: 1;
-      width: 100%;
-    }
+        /* Ajustes para o page-wrapper para permitir o menu full-height */
+        .page-wrapper {
+            display: flex;
+            flex-grow: 1;
+            width: 100%;
+            /* max-width: 1200px; Removido para o layout full-width do menu */
+            margin: 0; /* Ajustado para 0 */
+            gap: 30px;
+            /* Adiciona padding horizontal para o conteúdo principal */
+            padding-right: 30px; /* Padding no lado direito do conteúdo principal */
+            padding-bottom: 20px; /* Padding na parte de baixo para o rodapé */
+        }
 
-    /* Ícone do usuário com posicionamento ajustado */
-    .user-top-right {
-      position: fixed;
-      top: 30px;    /* AJUSTADO: Movido para dentro */
-      right: 40px;   /* AJUSTADO: Movido para dentro */
-      width: 44px;
-      height: 44px;
-      background-color: #000;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-      transition: background-color 0.3s ease;
-      z-index: 1000;
-      text-decoration: none;
-    }
+        /* Ícone do usuário com posicionamento ajustado */
+        .user-menu-container {
+            position: fixed;
+            top: 30px;
+            right: 40px;
+            z-index: 1000;
+        }
 
-    .user-top-right:hover {
-      background-color: #222;
-    }
+        .user-top-right {
+            width: 44px;
+            height: 44px;
+            background-color: #000;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+        }
 
-    .user-top-right svg {
-      fill: #fff;
-      width: 24px;
-      height: 24px;
-    }
+        .user-top-right:hover {
+            background-color: #222;
+        }
 
-    nav.sidebar {
-      width: 240px;
-      background-color: #e3eaf6;
-      padding: 70px 20px 20px 20px;
-      display: flex;
-      flex-direction: column;
-      border-radius: 0 12px 12px 0;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-      min-height: 100vh;
-      position: sticky;
-      top: 0;
-      flex-shrink: 0;
-    }
+        .user-top-right svg {
+            fill: #fff;
+            width: 24px;
+            height: 24px;
+        }
 
-    nav.sidebar h1 {
-      color: #1a237e;
-      margin-bottom: 25px;
-      font-size: 2em;
-      text-align: center;
-      font-weight: 700;
-      letter-spacing: 1px;
-    }
+        /* Estilos para o menu suspenso - ATUALIZADOS */
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 10px);
+            right: 0;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            min-width: 230px;
+            padding: 15px;
+            display: none;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+            overflow: hidden;
+        }
 
-    nav.sidebar ul {
-      list-style: none;
-    }
+        .dropdown-menu.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
 
-    nav.sidebar ul li {
-      margin-bottom: 18px;
-    }
+        .dropdown-menu h3 {
+            font-size: 1.1em;
+            color: #1a237e;
+            margin-bottom: 10px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #e3eaf6;
+            font-weight: 600;
+        }
 
-    nav.sidebar ul li a {
-      color: #1a237e;
-      font-weight: 600;
-      text-decoration: none;
-      display: block;
-      padding: 10px 14px;
-      border-radius: 8px;
-      font-size: 1.05em;
-      transition: background-color 0.3s ease, color 0.3s ease;
-    }
+        .dropdown-menu ul {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 15px;
+        }
 
-    /* Regra CSS para o destaque do item ativo, hover e focus */
-    nav.sidebar ul li a:hover,
-    nav.sidebar ul li a:focus,
-    nav.sidebar ul li a[aria-current="page"] {
-      background-color: #3f51b5;
-      color: #fff;
-      outline: none;
-    }
+        .dropdown-menu ul li {
+            margin-bottom: 8px;
+        }
 
-    main.content {
-      flex-grow: 1;
-      padding: 40px 48px;
-      background-color: #fff;
-      border-radius: 12px;
-      margin: 20px 30px 20px 20px;
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.07);
-    }
+        .dropdown-menu ul li:last-child {
+            margin-bottom: 0;
+        }
 
-    main.content section {
-      margin-bottom: 35px;
-    }
-    main.content section:last-of-type {
-        margin-bottom: 0;
-    }
+        .dropdown-menu ul li a {
+            display: block;
+            padding: 8px 10px;
+            color: #333;
+            text-decoration: none;
+            font-size: 0.95em;
+            transition: background-color 0.2s ease, color 0.2s ease;
+            border-radius: 4px;
+            white-space: nowrap;
+        }
 
-    main.content h2 {
-      margin-bottom: 20px;
-      color: #1a237e;
-      font-size: 2.1em;
-      font-weight: 700;
-      letter-spacing: 0.02em;
-      padding-bottom: 10px;
-      border-bottom: 2px solid #e3eaf6;
-      display: inline-block;
-    }
+        .dropdown-menu ul li a:hover {
+            background-color: #f0f0f0;
+            color: #1a237e;
+        }
 
-    main.content p {
-      margin-bottom: 20px;
-      font-size: 1.05em;
-      color: #454545;
-    }
-    main.content p:last-child {
-        margin-bottom: 0;
-    }
+        .dropdown-menu .logout-button {
+            display: block;
+            width: 100%;
+            padding: 10px 15px;
+            background-color: #e74c3c;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            transition: background-color 0.2s ease, box-shadow 0.2s ease;
+        }
 
-    .container-das-caixas {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 25px;
-      margin-top: 25px;
-    }
+        .dropdown-menu .logout-button:hover {
+            background-color: #c0392b;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
 
-    .box {
-      border: 1px solid #3f51b5;
-      padding: 25px;
-      border-radius: 10px;
-      text-align: left;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      background-color: #fdfdff;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.04);
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-    }
+        /* --- NOVOS ESTILOS PARA O MENU LATERAL (EcoTech BH) --- */
+        .menu-container {
+            background-color: #fff;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            padding: 30px 20px;
+            width: 280px;
+            box-sizing: border-box;
+            flex-shrink: 0;
 
-    .box p {
-      font-size: 1rem;
-      margin-bottom: 0;
-      line-height: 1.5;
-      color: #333;
-      flex-grow: 1;
-    }
+            /* NOVAS PROPRIEDADES PARA FIXAR E OCUPAR A ALTURA COMPLETA */
+            position: sticky; /* ou 'fixed' se preferir que ele não role com o conteúdo */
+            top: 0;
+            left: 0;
+            height: 100vh; /* Ocupa 100% da altura da viewport */
+            border-radius: 0 10px 10px 0; /* Arredonda apenas os cantos direitos */
+            display: flex; /* Para centralizar o conteúdo verticalmente dentro do menu */
+            flex-direction: column; /* Conteúdo em coluna */
+            align-items: center; /* Centraliza horizontalmente o conteúdo do menu */
+        }
 
-    .box p strong {
-      color: #1a237e;
-      display: block;
-      margin-bottom: 12px;
-      font-weight: bold;
-      font-size: 1.2em;
-    }
+        .menu-header {
+            text-align: center;
+            margin-bottom: 30px;
+            width: 100%; /* Garante que o cabeçalho ocupe a largura total */
+        }
 
-    .box:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    }
+        .menu-header h1 {
+            color: #2c3e50;
+            font-size: 2em;
+            margin: 0;
+            font-weight: 700;
+        }
 
-    footer {
-      text-align: center;
-      padding: 25px 20px;
-      font-size: 0.9em;
-      color: #555;
-      background-color: #dde3ee;
-      border-top: 1px solid #c5cde0;
-      width: 100%;
-    }
+        .menu-header p {
+            color: #4a69bd;
+            font-size: 1.2em;
+            margin-top: 5px;
+            font-weight: 700;
+        }
 
-    @media (max-width: 900px) {
-      .page-wrapper {
-        flex-direction: column;
-      }
-      nav.sidebar {
-        width: 100%;
-        border-radius: 0;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        padding: 20px;
-        flex-direction: column;
-        align-items: center;
-        position: static;
-        min-height: auto;
-        margin-bottom: 0;
-      }
-      nav.sidebar h1 {
-        margin-bottom: 15px;
-        font-size: 1.8em;
-      }
-      nav.sidebar ul {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 10px;
-        width: 100%;
-      }
-      nav.sidebar ul li {
-        margin-bottom: 10px;
-      }
-      nav.sidebar ul li a {
-        font-size: 0.95em;
-        padding: 8px 12px;
-      }
-      main.content {
-        margin: 0;
-        padding: 25px 20px;
-        border-radius: 0;
-        box-shadow: none;
-      }
-      main.content h2 {
-        font-size: 1.8em;
-      }
-      /* Ajuste no posicionamento do ícone do usuário para mobile */
-      .user-top-right {
-        top: 20px;    /* AJUSTADO: Movido para dentro (mobile) */
-        right: 20px;   /* AJUSTADO: Movido para dentro (mobile) */
-        width: 40px;
-        height: 40px;
-      }
-      .user-top-right svg {
-          width: 20px;
-          height: 20px;
-      }
-      .container-das-caixas {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
-      }
-      .box {
-        margin-bottom: 20px;
-      }
-    }
+        .menu-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            width: 100%; /* Ocupa a largura total do menu-container */
+        }
 
-    @media (max-width: 768px) {
-      .container-das-caixas {
-        grid-template-columns: 1fr;
-      }
-      .box:last-child {
-        margin-bottom: 0;
-      }
-    }
-  </style>
+        .menu-item {
+            margin-bottom: 15px;
+        }
+
+        .menu-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .menu-item a {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            text-decoration: none;
+            color: #34495e;
+            font-size: 1.1em;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .menu-item a:hover {
+            background-color: #e6eaf3;
+            color: #4a69bd;
+            transform: translateX(5px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .menu-item a.active {
+            background-color: #2c3e50;
+            color: #fff;
+            font-weight: 700;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transform: none;
+        }
+
+        .menu-item a.active .menu-icon {
+            color: #fff;
+        }
+
+        .menu-icon {
+            margin-right: 15px;
+            font-size: 1.4em;
+            color: #6c7a89;
+            transition: color 0.3s ease;
+        }
+
+        .menu-item a:hover .menu-icon {
+            color: #4a69bd;
+        }
+
+        /* --- FIM DOS NOVOS ESTILOS PARA O MENU LATERAL --- */
+
+
+        main.content {
+            flex-grow: 1;
+            padding: 40px 48px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.07);
+            /* Adiciona margem superior para compensar o menu fixo, se necessário */
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        main.content section {
+            margin-bottom: 35px;
+        }
+        main.content section:last-of-type {
+                margin-bottom: 0;
+        }
+
+        main.content h2 {
+            margin-bottom: 20px;
+            color: #1a237e;
+            font-size: 2.1em;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e3eaf6;
+            display: inline-block;
+        }
+
+        main.content p {
+            margin-bottom: 20px;
+            font-size: 1.05em;
+            color: #454545;
+        }
+        main.content p:last-child {
+                margin-bottom: 0;
+        }
+
+        .container-das-caixas {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-top: 25px;
+        }
+
+        .box {
+            border: 1px solid #c5cde0;
+            padding: 25px;
+            border-radius: 10px;
+            text-align: left;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background-color: #fdfdff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .box p {
+            font-size: 1rem;
+            margin-bottom: 0;
+            line-height: 1.5;
+            color: #333;
+            flex-grow: 1;
+        }
+
+        .box p strong {
+            color: #2c3e50;
+            display: block;
+            margin-bottom: 12px;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .box:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px 20px;
+            font-size: 0.9em;
+            color: #555;
+            background-color: #dde3ee;
+            border-top: 1px solid #c5cde0;
+            width: 100%;
+            /* Remove margin-top, pois o footer será separado pelo page-wrapper */
+            /* margin-top: 30px; */
+            /* Adiciona o menu-container de volta ao fluxo para que o footer não o sobreponha */
+            /* No layout full height, o footer precisará estar FORA do page-wrapper ou ser handled de forma diferente */
+            /* Para o seu caso, o footer está abaixo do page-wrapper, o que é o comportamento padrão */
+        }
+
+        @media (max-width: 900px) {
+            body {
+                padding: 0; /* Remove padding do body para mobile */
+            }
+            .page-wrapper {
+                flex-direction: column;
+                gap: 20px;
+                padding-right: 0; /* Remove padding da direita em mobile */
+                padding-bottom: 0; /* Remove padding de baixo em mobile */
+            }
+            .menu-container {
+                width: 100%;
+                border-radius: 0; /* Remove border-radius nas laterais para ocupar toda a largura */
+                padding: 20px 15px;
+                position: static; /* Volta a ser estático em mobile para rolar com o conteúdo */
+                height: auto; /* Altura automática em mobile */
+                box-shadow: 0 2px 8px rgba(0,0,0,0.1); /* Sombra mais discreta */
+            }
+            .menu-header {
+                margin-bottom: 20px;
+            }
+            .menu-header h1 {
+                font-size: 1.8em;
+            }
+            .menu-header p {
+                font-size: 1.1em;
+            }
+            .menu-list {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px;
+            }
+            .menu-item {
+                margin-bottom: 0;
+            }
+            .menu-item a {
+                padding: 10px 12px;
+                font-size: 0.95em;
+            }
+            .menu-icon {
+                margin-right: 10px;
+                font-size: 1.2em;
+            }
+            main.content {
+                margin: 0 15px; /* Adiciona uma margem lateral em mobile para o conteúdo */
+                padding: 25px 20px;
+                border-radius: 10px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            }
+            main.content h2 {
+                font-size: 1.8em;
+            }
+            /* Ajuste no posicionamento do ícone do usuário para mobile */
+            .user-menu-container {
+                top: 20px;
+                right: 20px;
+            }
+            .user-top-right {
+                width: 40px;
+                height: 40px;
+            }
+            .user-top-right svg {
+                width: 20px;
+                height: 20px;
+            }
+            .dropdown-menu {
+                min-width: 180px;
+                padding: 12px;
+            }
+            .dropdown-menu h3 {
+                font-size: 1em;
+                margin-bottom: 8px;
+                padding-bottom: 6px;
+            }
+            .dropdown-menu ul li a {
+                font-size: 0.9em;
+                padding: 6px 8px;
+                white-space: nowrap;
+            }
+            .dropdown-menu .logout-button {
+                padding: 8px 12px;
+                font-size: 0.95em;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container-das-caixas {
+                grid-template-columns: 1fr;
+            }
+            .box:last-child {
+                margin-bottom: 0;
+            }
+            main.content {
+                margin: 0 10px; /* Reduz a margem lateral em telas menores */
+            }
+        }
+    </style>
 </head>
 <body>
 
-  <a href="login.html" class="user-top-right" title="Área do Usuário" aria-label="Área do Usuário">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-      <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
-    </svg>
-  </a>
-
-  <div class="page-wrapper">
-    <nav class="sidebar" role="navigation" aria-label="Menu principal">
-      <h1>EcoTech BH</h1>
-      <ul>
-        <li><a href="index.html" aria-current="page">Início</a></li> <li><a href="sobre.html">Sobre o Projeto</a></li> <li><a href="guia.html">Guia de Descarte</a></li>
-        <li><a href="doacoes.html">Doações</a></li>
-        <li><a href="pontos.html">Pontos de Descarte</a></li>
-      </ul>
-    </nav>
-
-    <main class="content" role="main">
-      <section>
-        <h2>Seja Bem Vindo!!</h2>
-      </section>
-
-      <section>
-        <p>
-          A EcoTech BH é um projeto criado para transformar a maneira como Belo Horizonte lida com o descarte de equipamentos eletrônicos. Aqui, você encontra informações e soluções para descartar seus aparelhos de forma consciente e responsável, ajudando a preservar o meio ambiente e a construir um futuro mais sustentável para toda a nossa BH.
-        </p>
-        <p>
-          Nossa empresa é baseada no Conceito dos 3R's:
-        </p>
-
-        <div class="container-das-caixas">
-          <section class="box">
-            <p><strong>➖ Reduzir:</strong> Buscamos incentivar o uso consciente, priorizando o conserto ou upgrade dos equipamentos ao invés de comprar novos sem necessidade.</p>
-          </section>
-          <section class="box">
-            <p><strong>🔄 Reutilizar:</strong> Quando os dispositivos ainda funcionam, damos uma nova vida a eles, contribuindo para o reaproveitamento e ajudando quem precisa.</p>
-          </section>
-          <section class="box">
-            <p><strong>♻️ Reciclar:</strong> Quando não tem mais jeito, descartamos o lixo eletrônico de forma correta, para proteger o meio ambiente e a saúde de todo mundo.</p>
-          </section>
+    <div class="user-menu-container">
+        <div class="user-top-right" id="userIcon" title="Área do Usuário" aria-label="Área do Usuário" tabindex="0" role="button">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+            </svg>
         </div>
-      </section>
-    </main>
-  </div>
-  <footer>
-    <p>© 2025 EcoTech BH - Todos os direitos reservados.</p>
-  </footer>
+        <div class="dropdown-menu" id="userDropdown">
+            <h3>Opções do Usuário</h3>
+            <ul>
+                <li><a href="meu-perfil.html">Meu Perfil (em breve)</a></li>
+                <li><a href="minhas-doacoes.html">Minhas Doações (em breve)</a></li>
+            </ul>
+            <a href="login.html" class="logout-button">Sair da conta</a>
+        </div>
+    </div>
+
+    <div class="page-wrapper">
+        <div class="menu-container">
+            <div class="menu-header">
+                <h1>EcoTech</h1>
+                <p>BH</p>
+            </div>
+            <ul class="menu-list">
+                <li class="menu-item">
+                    <a href="index.html">
+                        <i class="fas fa-home menu-icon"></i>
+                        Início
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="sobre.html">
+                        <i class="fas fa-info-circle menu-icon"></i>
+                        Sobre o Projeto
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="guia.html">
+                        <i class="fas fa-book menu-icon"></i>
+                        Guia de Descarte
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="doacoes.html">
+                        <i class="fas fa-hand-holding-heart menu-icon"></i>
+                        Doações
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="pontos.html">
+                        <i class="fas fa-map-marker-alt menu-icon"></i>
+                        Pontos de Descarte
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <main class="content" role="main">
+            <section>
+                <h2>Seja Bem Vindo!!</h2>
+            </section>
+
+            <section>
+                <p>
+                    A EcoTech BH é um projeto criado para transformar a maneira como Belo Horizonte lida com o descarte de equipamentos eletrônicos. Aqui, você encontra informações e soluções para descartar seus aparelhos de forma consciente e responsável, ajudando a preservar o meio ambiente e a construir um futuro mais sustentável para toda a nossa BH.
+                </p>
+                <p>
+                    Nossa empresa é baseada no Conceito dos 3R's:
+                </p>
+
+                <div class="container-das-caixas">
+                    <section class="box">
+                        <p><strong>➖ Reduzir:</strong> Buscamos incentivar o uso consciente, priorizando o conserto ou upgrade dos equipamentos ao invés de comprar novos sem necessidade.</p>
+                    </section>
+                    <section class="box">
+                        <p><strong>🔄 Reutilizar:</strong> Quando os dispositivos ainda funcionam, damos uma nova vida a eles, contribuindo para o reaproveitamento e ajudando quem precisa.</p>
+                    </section>
+                    <section class="box">
+                        <p><strong>♻️ Reciclar:</strong> Quando não tem mais jeito, descartamos o lixo eletrônico de forma correta, para proteger o meio ambiente e a saúde de todo mundo.</p>
+                    </section>
+                </div>
+            </section>
+        </main>
+    </div>
+    <footer>
+        <p>© 2025 EcoTech BH - Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const userIcon = document.getElementById('userIcon');
+            const userDropdown = document.getElementById('userDropdown');
+
+            userIcon.addEventListener('click', function(event) {
+                userDropdown.classList.toggle('active');
+                event.stopPropagation(); // Impede que o clique se propague para o document
+            });
+
+            // Fecha o menu se clicar fora dele
+            document.addEventListener('click', function(event) {
+                if (!userDropdown.contains(event.target) && !userIcon.contains(event.target)) {
+                    userDropdown.classList.remove('active');
+                }
+            });
+
+            // Fecha o menu com a tecla ESC
+            document.addEventListener('keydown', function(event) {
+                if (event.key === 'Escape') {
+                    userDropdown.classList.remove('active');
+                }
+            });
+
+            // Adiciona a lógica para o item ativo do menu lateral
+            const menuItems = document.querySelectorAll('.menu-list a');
+            // Obtém apenas o nome do arquivo da URL atual (ex: "sobre.html")
+            const currentPath = window.location.pathname.split('/').pop();
+
+            menuItems.forEach(item => {
+                const itemHref = item.getAttribute('href');
+                // Compara o nome do arquivo atual com o href do item do menu
+                if (itemHref === currentPath) {
+                    item.classList.add('active');
+                } else if (currentPath === '' && itemHref === 'index.html') {
+                    // Trata o caso em que a página inicial pode ser acessada sem "index.html" no URL
+                    item.classList.add('active');
+                } else {
+                    item.classList.remove('active'); // Remove a classe 'active' de outros itens
+                }
+            });
+
+            // Ajusta o item 'Sobre o Projeto' para ser o ativo inicial se não houver outro
+            // Isso garante que ele comece ativo se a página for "sobre.html"
+            const sobreLink = document.querySelector('.menu-item a[href="sobre.html"]');
+            if (currentPath === 'sobre.html' || currentPath === '') { // Adicionei '' para o caso de ser a raiz
+                 if (sobreLink) {
+                     // Remove 'active' de todos os outros primeiro
+                     menuItems.forEach(item => item.classList.remove('active'));
+                     sobreLink.classList.add('active');
+                 }
+            } else {
+                 // Certifica-se de que o item "Sobre o Projeto" não está ativo se for outra página
+                 if (sobreLink) {
+                     sobreLink.classList.remove('active');
+                 }
+            }
+            // A lógica acima garante que 'sobre.html' está ativo quando na página 'sobre.html'
+            // A lógica de ativação que já existia foi um pouco ajustada para lidar com a raiz ('')
+        });
+    </script>
 
 </body>
 </html>

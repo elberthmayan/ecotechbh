@@ -1,632 +1,868 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Guia completo da EcoTech BH para o descarte correto de lixo eletrônico, incluindo celulares, computadores, baterias, eletrodomésticos e mais.">
-  <title>EcoTech BH - Guia de Descarte Detalhado</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <style>
-    /* Variáveis Globais */
-    :root {
-      --primary-font: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      
-      --text-color-body: #333;
-      --text-color-paragraphs: #454545;
-      --text-color-strong: #2d3748;
-      --text-color-list-strong: #000;
-      --text-color-footer: #555;
-      
-      --color-primary: #1a237e; /* Títulos, links sidebar */
-      --color-secondary: #3f51b5; /* Hover links, bullets, ícones de seção */
-      --color-text-on-secondary: #fff;
-      
-      --bg-body: #f9fafb;
-      --bg-sidebar: #e3eaf6; /* Usado também no header do acordeão */
-      --bg-sidebar-hover: #d1d9e6; /* Hover para header do acordeão */
-      --bg-content: #fff;
-      --bg-footer: #dde3ee;
-      --bg-icon-user: #000;
-      --bg-icon-user-hover: #222;
-      --color-icon-user: #fff;
-      --bg-article-guide: #fdfdff;
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Guia completo da EcoTech BH para o descarte correto de lixo eletrônico, incluindo celulares, computadores, baterias, eletrodomésticos e mais.">
+    <title>EcoTech BH - Guia de Descarte Detalhado</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Variáveis Globais */
+        :root {
+            --primary-font: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            
+            --text-color-body: #333;
+            --text-color-paragraphs: #454545;
+            --text-color-strong: #2d3748;
+            --text-color-list-strong: #000;
+            --text-color-footer: #555;
+            
+            --color-primary: #1a237e; /* Títulos, links sidebar */
+            --color-secondary: #3f51b5; /* Hover links, bullets, ícones de seção */
+            --color-text-on-secondary: #fff;
+            
+            --bg-body: #f9fafb;
+            --bg-sidebar: #f5f8ff; /* Levemente ajustado para um tom mais claro, como na imagem */
+            --bg-sidebar-hover: #d1d9e6; /* Hover para header do acordeão e talvez itens da sidebar */
+            --bg-content: #fff;
+            --bg-footer: #dde3ee;
+            --bg-icon-user: #000;
+            --bg-icon-user-hover: #222;
+            --color-icon-user: #fff;
+            --bg-article-guide: #fdfdff;
 
-      --border-color-light: #e3eaf6; 
-      --border-color-medium: #c5cde0; /* Borda para itens do acordeão */
-      --border-color-footer: #c5cde0;
-      
-      --shadow-light: rgba(0, 0, 0, 0.08);
-      --shadow-medium: rgba(0, 0, 0, 0.07);
-      --shadow-dark: rgba(0, 0, 0, 0.2);
-      --shadow-mobile-sidebar: rgba(0,0,0,0.1);
-      --shadow-accordion: rgba(0,0,0,0.05);
-
-
-      --border-radius-main: 12px;
-      --border-radius-links: 8px;
-      --border-radius-icon-user: 10px;
-
-      --line-height-base: 1.6;
-      --line-height-content-text: 1.7; 
-    }
-
-    /* Reset básico */
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: var(--primary-font);
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-      background-color: var(--bg-body); 
-      color: var(--text-color-body);
-      line-height: var(--line-height-base); 
-    }
-
-    .page-wrapper {
-      display: flex;
-      flex-grow: 1; 
-      width: 100%;
-    }
-
-    .user-top-right {
-      position: fixed;
-      top: 12px;
-      right: 12px;
-      width: 44px;
-      height: 44px;
-      background-color: var(--bg-icon-user);
-      border-radius: var(--border-radius-icon-user);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      box-shadow: 0 2px 6px var(--shadow-dark);
-      transition: background-color 0.3s ease;
-      z-index: 1000;
-      text-decoration: none;
-      font-size: 24px; 
-      color: var(--color-icon-user); 
-      line-height: 1; 
-      text-align: center; 
-      user-select: none; 
-    }
-
-    .user-top-right:hover {
-      background-color: var(--bg-icon-user-hover);
-    }
-
-    .user-top-right svg {
-      width: 24px;  
-      height: 24px; 
-      transform: translate(0.5px, 0.5px); 
-      fill: var(--color-icon-user);
-    }
-
-    nav.sidebar {
-      width: 240px;
-      background-color: var(--bg-sidebar); 
-      padding: 70px 20px 20px 20px; 
-      display: flex;
-      flex-direction: column;
-      border-radius: 0 var(--border-radius-main) var(--border-radius-main) 0; 
-      box-shadow: 0 4px 12px var(--shadow-light); 
-      min-height: 100vh; 
-      position: sticky;
-      top: 0;
-      flex-shrink: 0; 
-    }
-
-    nav.sidebar h1 {
-      color: var(--color-primary);
-      margin-bottom: 25px;
-      font-size: 2em;
-      text-align: center;
-      font-weight: 700;
-      letter-spacing: 1px;
-    }
-
-    nav.sidebar ul {
-      list-style: none;
-    }
-
-    nav.sidebar ul li {
-      margin-bottom: 18px;
-    }
-
-    nav.sidebar ul li a {
-      color: var(--color-primary);
-      font-weight: 600;
-      text-decoration: none;
-      display: block;
-      padding: 10px 14px;
-      border-radius: var(--border-radius-links);
-      font-size: 1.05em;
-      transition: background-color 0.3s ease, color 0.3s ease;
-    }
-
-    nav.sidebar ul li a:hover,
-    nav.sidebar ul li a:focus,
-    nav.sidebar ul li a[aria-current="page"] { 
-      background-color: var(--color-secondary);
-      color: var(--color-text-on-secondary);
-      outline: none;
-    }
-    
-    main.content {
-      flex-grow: 1; 
-      padding: 40px 48px; 
-      background-color: var(--bg-content); 
-      border-radius: var(--border-radius-main); 
-      margin: 20px auto; 
-      max-width: 960px;  
-      width: 100%; 
-      box-shadow: 0 6px 18px var(--shadow-medium); 
-    }
-
-    main.content section { 
-      margin-bottom: 45px;
-    }
-    main.content section:last-of-type { 
-      margin-bottom: 20px;
-    }
-
-    main.content h2 {
-      margin-bottom: 25px; 
-      color: var(--color-primary); 
-      font-size: 2.1em; 
-      font-weight: 700;
-      letter-spacing: 0.02em;
-      padding-bottom: 10px; 
-      border-bottom: 2px solid var(--border-color-light); 
-      display: inline-block; 
-    }
-    
-    main.content #guia-por-tipo h2 {
-        display: block;
-        text-align: center;
-        margin-bottom: 30px;
-        border-bottom: none;
-    }
-
-    main.content p,
-    main.content > section > ul {
-      margin-bottom: 20px;
-      font-size: 1.05em; 
-      color: var(--text-color-paragraphs); 
-      line-height: var(--line-height-content-text); 
-    }
-
-    main.content > section > ul {
-      list-style: none; 
-      padding-left: 0;
-    }
-
-    main.content > section > ul li {
-      padding-left: 30px; 
-      position: relative;
-      margin-bottom: 12px; 
-    }
-
-    main.content > section > ul li::before { 
-      content: '➔'; 
-      position: absolute;
-      left: 0;
-      top: -1px; 
-      color: var(--color-secondary); 
-      font-size: 1.2em;
-      font-weight: bold;
-    }
-
-    main.content strong {
-      font-weight: 600; 
-      color: var(--text-color-strong);   
-    }
-
-    /* Estilos para Acordeão */
-    .accordion-item {
-      background-color: var(--bg-article-guide);
-      border: 1px solid var(--border-color-medium);
-      border-radius: var(--border-radius-links);
-      margin-bottom: 15px;
-      box-shadow: 0 1px 3px var(--shadow-accordion);
-      overflow: hidden; /* Para conter bordas arredondadas do header */
-    }
-
-    .accordion-header {
-      background-color: var(--bg-sidebar);
-      padding: 15px 20px;
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      transition: background-color 0.2s ease;
-      color: var(--color-primary);
-      font-size: 1.3em; /* Ajustado para caber melhor */
-      font-weight: 600;
-      margin: 0; /* Remove margin do h3 */
-      border-bottom: 1px solid var(--border-color-medium); /* Borda sutil se o conteúdo estiver fechado */
-    }
-    .accordion-header[aria-expanded="true"] {
-        border-bottom-color: transparent; /* Remove borda quando aberto */
-    }
+            --border-color-light: #e3eaf6; 
+            --border-color-medium: #c5cde0; /* Borda para itens do acordeão */
+            --border-color-footer: #c5cde0;
+            
+            --shadow-light: rgba(0, 0, 0, 0.08);
+            --shadow-medium: rgba(0, 0, 0, 0.07);
+            --shadow-dark: rgba(0, 0, 0, 0.2);
+            --shadow-mobile-sidebar: rgba(0,0,0,0.1);
+            --shadow-accordion: rgba(0,0,0,0.05);
 
 
-    .accordion-header:hover,
-    .accordion-header:focus {
-      background-color: var(--bg-sidebar-hover);
-      outline: 2px solid transparent; /* Outline para foco */
-      outline-offset: 2px;
-    }
-     .accordion-header:focus-visible { /* Estilo de foco mais visível */
-        outline: 2px solid var(--color-secondary);
-     }
+            --border-radius-main: 12px;
+            --border-radius-links: 8px;
+            --border-radius-icon-user: 10px;
+
+            --line-height-base: 1.6;
+            --line-height-content-text: 1.7; 
+        }
+
+        /* Reset básico */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--primary-font);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: var(--bg-body); 
+            color: var(--text-color-body);
+            line-height: var(--line-height-base); 
+        }
+
+        .page-wrapper {
+            display: flex;
+            flex-grow: 1; 
+            width: 100%;
+        }
+
+        /* Ícone do usuário e menu suspenso - ATUALIZADO */
+        .user-menu-container {
+            position: fixed;
+            top: 30px;
+            right: 40px;
+            z-index: 1000;
+        }
+
+        .user-top-right {
+            width: 44px;
+            height: 44px;
+            background-color: var(--bg-icon-user);
+            border-radius: var(--border-radius-icon-user);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 6px var(--shadow-dark);
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+            font-size: 24px; 
+            color: var(--color-icon-user); 
+            line-height: 1; 
+            text-align: center; 
+            user-select: none; 
+        }
+
+        .user-top-right:hover {
+            background-color: var(--bg-icon-user-hover);
+        }
+
+        .user-top-right svg {
+            width: 24px;  
+            height: 24px; 
+            transform: translate(0.5px, 0.5px); 
+            fill: var(--color-icon-user);
+        }
+
+        /* Estilos para o menu suspenso */
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 10px);
+            right: 0;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            min-width: 230px;
+            padding: 15px;
+            display: none;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+            overflow: hidden;
+        }
+
+        .dropdown-menu.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .dropdown-menu h3 {
+            font-size: 1.1em;
+            color: var(--color-primary);
+            margin-bottom: 10px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border-color-light);
+            font-weight: 600;
+        }
+
+        .dropdown-menu ul {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 15px;
+        }
+
+        .dropdown-menu ul li {
+            margin-bottom: 8px;
+        }
+
+        .dropdown-menu ul li:last-child {
+            margin-bottom: 0;
+        }
+
+        .dropdown-menu ul li a {
+            display: block;
+            padding: 8px 10px;
+            color: var(--text-color-body);
+            text-decoration: none;
+            font-size: 0.95em;
+            transition: background-color 0.2s ease, color 0.2s ease;
+            border-radius: 4px;
+            white-space: nowrap;
+        }
+
+        .dropdown-menu ul li a:hover {
+            background-color: #f0f0f0;
+            color: var(--color-primary);
+        }
+
+        .dropdown-menu .logout-button {
+            display: block;
+            width: 100%;
+            padding: 10px 15px;
+            background-color: #e74c3c;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            transition: background-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .dropdown-menu .logout-button:hover {
+            background-color: #c0392b;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
 
 
-    .accordion-header .title-icon { /* Ícone do tipo de equipamento */
-      margin-right: 10px;
-      color: var(--color-secondary);
-      font-size: 1em; /* Relativo ao header */
-      width: 20px;
-      text-align: center;
-    }
-    .accordion-header .accordion-title-text {
-        flex-grow: 1; /* Permite que o texto ocupe o espaço */
-    }
+        .menu-container {
+            background-color: #fff;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            padding: 30px 20px;
+            width: 280px;
+            box-sizing: border-box;
+            flex-shrink: 0;
 
-    .accordion-header .accordion-icon { /* Chevron */
-      font-size: 0.9em;
-      transition: transform 0.3s ease-in-out;
-      color: var(--color-secondary);
-    }
+            /* NOVAS PROPRIEDADES PARA FIXAR E OCUPAR A ALTURA COMPLETA */
+            position: sticky; /* ou 'fixed' se preferir que ele não role com o conteúdo */
+            top: 0;
+            left: 0;
+            height: 100vh; /* Ocupa 100% da altura da viewport */
+            border-radius: 0 10px 10px 0; /* Arredonda apenas os cantos direitos */
+            display: flex; /* Para centralizar o conteúdo verticalmente dentro do menu */
+            flex-direction: column; /* Conteúdo em coluna */
+            align-items: center; /* Centraliza horizontalmente o conteúdo do menu */
+        }
 
-    .accordion-header[aria-expanded="true"] .accordion-icon {
-      transform: rotate(180deg);
-    }
+        .menu-header {
+            text-align: center;
+            margin-bottom: 30px;
+            width: 100%; /* Garante que o cabeçalho ocupe a largura total */
+        }
 
-    .accordion-content {
-      padding: 20px;
-      /* display: none; é controlado pelo JS e style inline */
-      border-top: 1px solid var(--border-color-medium); /* Linha separadora quando aberto */
-      background-color: var(--bg-article-guide); /* Garante fundo se diferente do body */
-    }
+        .menu-header h1 {
+            color: #2c3e50;
+            font-size: 2em;
+            margin: 0;
+            font-weight: 700;
+        }
 
-    .accordion-content ul {
-      list-style: disc; 
-      padding-left: 25px;
-      margin-bottom: 0;
-      font-size: 1em;
-      color: var(--text-color-paragraphs);
-      line-height: var(--line-height-content-text);
-    }
+        .menu-header p {
+            color: #4a69bd;
+            font-size: 1.2em;
+            margin-top: 5px;
+            font-weight: 700;
+        }
 
-    .accordion-content ul li {
-      padding-left: 0px;
-      margin-bottom: 10px;
-      position: static;
-    }
-    .accordion-content ul li::before {
-      content: ''; 
-    }
-    
-    .accordion-content ul li strong {
-        color: var(--text-color-list-strong);
-    }
+        .menu-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            width: 100%; /* Ocupa a largura total do menu-container */
+        }
 
-    .accordion-content ul ul {
-        list-style: circle;
-        margin-top: 8px;
-        padding-left: 20px;
-    }
-    /* Fim dos estilos para Acordeão */
+        .menu-item {
+            margin-bottom: 15px;
+        }
+
+        .menu-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .menu-item a {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            text-decoration: none;
+            color: #34495e;
+            font-size: 1.1em;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .menu-item a:hover {
+            background-color: #e6eaf3;
+            color: #4a69bd;
+            transform: translateX(5px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .menu-item a.active {
+            background-color: #2c3e50;
+            color: #fff;
+            font-weight: 700;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transform: none;
+        }
+
+        .menu-item a.active .menu-icon {
+            color: #fff;
+        }
+
+        .menu-icon {
+            margin-right: 15px;
+            font-size: 1.4em;
+            color: #6c7a89;
+            transition: color 0.3s ease;
+        }
+
+        .menu-item a:hover .menu-icon {
+            color: #4a69bd;
+        }
+
+        /* --- FIM DOS NOVOS ESTILOS PARA O MENU LATERAL --- */
+            
+        main.content {
+            flex-grow: 1; 
+            padding: 40px 48px; 
+            background-color: var(--bg-content); 
+            border-radius: var(--border-radius-main); 
+            margin: 20px auto; 
+            max-width: 960px;  
+            width: 100%; 
+            box-shadow: 0 6px 18px var(--shadow-medium); 
+        }
+
+        main.content section { 
+            margin-bottom: 45px;
+        }
+        main.content section:last-of-type { 
+            margin-bottom: 20px;
+        }
+
+        main.content h2 {
+            margin-bottom: 25px; 
+            color: var(--color-primary); 
+            font-size: 2.1em; 
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            padding-bottom: 10px; 
+            border-bottom: 2px solid var(--border-color-light); 
+            display: inline-block; 
+        }
+        
+        main.content #guia-por-tipo h2 {
+            display: block;
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: none;
+        }
+
+        main.content p,
+        main.content > section > ul {
+            margin-bottom: 20px;
+            font-size: 1.05em; 
+            color: var(--text-color-paragraphs); 
+            line-height: var(--line-height-content-text); 
+        }
+
+        main.content > section > ul {
+            list-style: none; 
+            padding-left: 0;
+        }
+
+        main.content > section > ul li {
+            padding-left: 30px; 
+            position: relative;
+            margin-bottom: 12px; 
+        }
+
+        main.content > section > ul li::before { 
+            content: '➔'; 
+            position: absolute;
+            left: 0;
+            top: -1px; 
+            color: var(--color-secondary); 
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        main.content strong {
+            font-weight: 600; 
+            color: var(--text-color-strong);  
+        }
+
+        /* Estilos para Acordeão */
+        .accordion-item {
+            background-color: var(--bg-article-guide);
+            border: 1px solid var(--border-color-medium);
+            border-radius: var(--border-radius-links);
+            margin-bottom: 15px;
+            box-shadow: 0 1px 3px var(--shadow-accordion);
+            overflow: hidden; /* Para conter bordas arredondadas do header */
+        }
+
+        .accordion-header {
+            background-color: var(--bg-sidebar);
+            padding: 15px 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.2s ease;
+            color: var(--color-primary);
+            font-size: 1.3em; /* Ajustado para caber melhor */
+            font-weight: 600;
+            margin: 0; /* Remove margin do h3 */
+            border-bottom: 1px solid var(--border-color-medium); /* Borda sutil se o conteúdo estiver fechado */
+        }
+        .accordion-header[aria-expanded="true"] {
+            border-bottom-color: transparent; /* Remove borda quando aberto */
+        }
 
 
-    /* Estilo para Dicas Gerais */
-    #dicas-gerais ul {
-        list-style: none;
-        padding-left: 0;
-    }
-    #dicas-gerais ul li {
-        padding-left: 35px; 
-        position: relative;
-        margin-bottom: 12px;
-        font-size: 1.05em;
-        color: var(--text-color-paragraphs);
-        line-height: var(--line-height-content-text);
-    }
-    #dicas-gerais ul li::before {
-        font-family: "Font Awesome 5 Free"; 
-        content: '\f0eb'; /* Ícone de lâmpada */
-        font-weight: 900; 
-        position: absolute;
-        left: 0;
-        top: 0px;
-        color: var(--color-secondary);
-        font-size: 1.3em;
-    }
-    /* Fim dos estilos para nova estrutura */
+        .accordion-header:hover,
+        .accordion-header:focus {
+            background-color: var(--bg-sidebar-hover);
+            outline: 2px solid transparent; /* Outline para foco */
+            outline-offset: 2px;
+        }
+         .accordion-header:focus-visible { /* Estilo de foco mais visível */
+            outline: 2px solid var(--color-secondary);
+        }
 
-    footer {
-      text-align: center;
-      padding: 25px 20px; 
-      font-size: 0.9em;
-      color: var(--text-color-footer); 
-      background-color: var(--bg-footer); 
-      border-top: 1px solid var(--border-color-footer); 
-      width: 100%; 
-    }
 
-    @media (max-width: 900px) {
-      .page-wrapper { 
-        flex-direction: column;
-      }
-      nav.sidebar {
-        width: 100%; 
-        border-radius: 0; 
-        box-shadow: 0 2px 8px var(--shadow-mobile-sidebar); 
-        padding: 20px; 
-        flex-direction: column; 
-        align-items: center; 
-        position: static; 
-        min-height: auto;
-        margin-bottom: 0; 
-      }
-      nav.sidebar h1 {
-        margin-bottom: 15px; 
-        font-size: 1.8em;
-      }
-      nav.sidebar ul {
-        display: flex; 
-        flex-wrap: wrap; 
-        justify-content: center; 
-        gap: 10px; 
-        width: 100%;
-      }
-      nav.sidebar ul li {
-        margin-bottom: 10px; 
-      }
-      nav.sidebar ul li a {
-        font-size: 0.95em;
-        padding: 8px 12px;
-      }
-      main.content {
-        margin: 0; 
-        padding: 25px 20px; 
-        border-radius: 0; 
-        box-shadow: none; 
-        max-width: none; 
-      }
-      main.content h2 {
-        font-size: 1.8em; 
-      }
-      .accordion-header {
-        font-size: 1.15em; /* Menor no mobile */
-        padding: 12px 15px;
-      }
-       .accordion-content {
-        padding: 15px;
-      }
-      .user-top-right { 
-        top: 8px;
-        right: 8px;
-        width: 40px;
-        height: 40px;
-      }
-      .user-top-right svg { 
-        width: 20px; 
-        height: 20px;
-      }
-    }
-  </style>
+        .accordion-header .title-icon { /* Ícone do tipo de equipamento */
+            margin-right: 10px;
+            color: var(--color-secondary);
+            font-size: 1em; /* Relativo ao header */
+            width: 20px;
+            text-align: center;
+        }
+        .accordion-header .accordion-title-text {
+            flex-grow: 1; /* Permite que o texto ocupe o espaço */
+        }
+
+        .accordion-header .accordion-icon { /* Chevron */
+            font-size: 0.9em;
+            transition: transform 0.3s ease-in-out;
+            color: var(--color-secondary);
+        }
+
+        .accordion-header[aria-expanded="true"] .accordion-icon {
+            transform: rotate(180deg);
+        }
+
+        .accordion-content {
+            padding: 20px;
+            /* display: none; é controlado pelo JS e style inline */
+            border-top: 1px solid var(--border-color-medium); /* Linha separadora quando aberto */
+            background-color: var(--bg-article-guide); /* Garante fundo se diferente do body */
+        }
+
+        .accordion-content ul {
+            list-style: disc; 
+            padding-left: 25px;
+            margin-bottom: 0;
+            font-size: 1em;
+            color: var(--text-color-paragraphs);
+            line-height: var(--line-height-content-text);
+        }
+
+        .accordion-content ul li {
+            padding-left: 0px;
+            margin-bottom: 10px;
+            position: static;
+        }
+        .accordion-content ul li::before {
+            content: ''; 
+        }
+        
+        .accordion-content ul li strong {
+            color: var(--text-color-list-strong);
+        }
+
+        .accordion-content ul ul {
+            list-style: circle;
+            margin-top: 8px;
+            padding-left: 20px;
+        }
+        /* Fim dos estilos para Acordeão */
+
+
+        /* Estilo para Dicas Gerais */
+        #dicas-gerais ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        #dicas-gerais ul li {
+            padding-left: 35px; 
+            position: relative;
+            margin-bottom: 12px;
+            font-size: 1.05em;
+            color: var(--text-color-paragraphs);
+            line-height: var(--line-height-content-text);
+        }
+        #dicas-gerais ul li::before {
+            font-family: "Font Awesome 5 Free"; 
+            content: '\f0eb'; /* Ícone de lâmpada */
+            font-weight: 900; 
+            position: absolute;
+            left: 0;
+            top: 0px;
+            color: var(--color-secondary);
+            font-size: 1.3em;
+        }
+        /* Fim dos estilos para nova estrutura */
+
+        footer {
+            text-align: center;
+            padding: 25px 20px; 
+            font-size: 0.9em;
+            color: var(--text-color-footer); 
+            background-color: var(--bg-footer); 
+            border-top: 1px solid var(--border-color-footer); 
+            width: 100%; 
+        }
+
+        @media (max-width: 900px) {
+            .page-wrapper { 
+                flex-direction: column;
+            }
+            .menu-container { /* Renomeei nav.sidebar para .menu-container para corresponder ao novo HTML */
+                width: 100%; 
+                border-radius: 0; 
+                box-shadow: 0 2px 8px var(--shadow-mobile-sidebar); 
+                padding: 20px; 
+                flex-direction: column; 
+                align-items: center; 
+                position: static; 
+                min-height: auto;
+                margin-bottom: 0; 
+            }
+            .menu-header { /* Renomeei nav.sidebar h1 para .menu-header h1 */
+                margin-bottom: 15px; 
+                font-size: 1.8em;
+            }
+            .menu-header p { /* Adicionei o ajuste para o p dentro do menu-header */
+                font-size: 1.1em;
+                margin-top: 3px;
+            }
+            .menu-list { /* Renomeei nav.sidebar ul para .menu-list */
+                display: flex; 
+                flex-wrap: wrap; 
+                justify-content: center; 
+                gap: 10px; 
+                width: 100%;
+            }
+            .menu-item { /* Renomeei nav.sidebar ul li para .menu-item */
+                margin-bottom: 10px; 
+            }
+            .menu-item a { /* Renomeei nav.sidebar ul li a para .menu-item a */
+                font-size: 0.95em;
+                padding: 8px 12px;
+            }
+            .menu-icon { /* Renomeei nav.sidebar ul li a i para .menu-icon */
+                font-size: 1.2em;
+                margin-right: 10px;
+            }
+            main.content {
+                margin: 0; 
+                padding: 25px 20px; 
+                border-radius: 0; 
+                box-shadow: none; 
+                max-width: none; 
+            }
+            main.content h2 {
+                font-size: 1.8em; 
+            }
+            .accordion-header {
+                font-size: 1.15em; /* Menor no mobile */
+                padding: 12px 15px;
+            }
+            .accordion-content {
+                padding: 15px;
+            }
+            /* Ajuste no posicionamento do ícone do usuário para mobile */
+            .user-menu-container { 
+                top: 20px; /* Ajustado para mobile */
+                right: 20px; /* Ajustado para mobile */
+            }
+            .user-top-right { 
+                top: auto; /* Deixa o container controlar */
+                right: auto; /* Deixa o container controlar */
+                width: 40px;
+                height: 40px;
+            }
+            .user-top-right svg { 
+                width: 20px; 
+                height: 20px;
+            }
+
+            /* Ajustes para o menu suspenso em telas menores */
+            .dropdown-menu {
+                min-width: 180px;
+                padding: 12px;
+            }
+            .dropdown-menu h3 {
+                font-size: 1em;
+                margin-bottom: 8px;
+                padding-bottom: 6px;
+            }
+            .dropdown-menu ul li a {
+                font-size: 0.9em;
+                padding: 6px 8px;
+                white-space: nowrap;
+            }
+            .dropdown-menu .logout-button {
+                padding: 8px 12px;
+                font-size: 0.95em;
+            }
+        }
+    </style>
 </head>
 <body>
 
-  <a href="login.html" class="user-top-right" title="Área do Usuário" aria-label="Área do Usuário" tabindex="0">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false">
-      <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
-    </svg>
-  </a>
-
-  <div class="page-wrapper">
-    <nav class="sidebar" role="navigation" aria-label="Menu principal">
-      <h1>EcoTech BH</h1>
-      <ul>
-        <li><a href="index.html">Início</a></li>
-        <li><a href="sobre.html">Sobre o Projeto</a></li>
-        <li><a href="guia.html" aria-current="page">Guia de Descarte</a></li>
-        <li><a href="doacoes.html">Doações</a></li>
-        <li><a href="pontos.html">Pontos de Descarte</a></li>
-      </ul>
-    </nav>
-
-    <main class="content" role="main">
-      <section id="introducao-guia">
-        <h2>Guia Completo de Descarte EcoTech BH</h2>
-        <p>O descarte consciente do seu lixo eletrônico é um passo fundamental para a preservação do meio ambiente e para a saúde de todos. Na EcoTech BH, queremos te ajudar a fazer isso da maneira correta. Explore nosso guia e descubra como descartar diferentes tipos de equipamentos de forma segura e responsável.</p>
-      </section>
-
-      <section id="o-que-e-lixo-eletronico">
-        <h2>O que é lixo eletrônico?</h2>
-        <p>Lixo eletrônico, também conhecido como e-lixo ou Resíduo de Equipamento Elétrico e Eletrônico (REEE), é todo dispositivo que depende de corrente elétrica ou campos eletromagnéticos para funcionar e que foi descartado por seu proprietário. Isso inclui desde grandes eletrodomésticos até pequenos dispositivos e seus componentes. Celulares, computadores, televisores, impressoras, geladeiras, cabos, carregadores, baterias, placas-mãe, chips e controles remotos são exemplos comuns, mesmo que não funcionem mais.</p>
-      </section>
-
-      <section id="por-que-descartar-corretamente">
-        <h2>Por que descartar corretamente?</h2>
-        <p>O descarte inadequado de lixo eletrônico representa sérios riscos. Muitos equipamentos contêm metais pesados (como chumbo, mercúrio, cádmio) e outras substâncias tóxicas que, se liberadas no meio ambiente, podem contaminar o solo, a água subterrânea e até o ar (em caso de queima). Essa contaminação afeta ecossistemas e pode causar graves problemas de saúde pública.</p>
-        <p>Por outro lado, o descarte correto permite a reciclagem de materiais valiosos presentes nos eletrônicos, como ouro, prata, cobre e plásticos. Isso reduz a necessidade de extrair novos recursos naturais, economiza energia e diminui a emissão de gases de efeito estufa. Em Belo Horizonte, como em todo o Brasil, esse cuidado está alinhado com a Política Nacional de Resíduos Sólidos (Lei nº 12.305/2010) e a Política Nacional do Meio Ambiente (Lei nº 6.938/81), que estabelecem responsabilidades compartilhadas para a gestão adequada desses resíduos.</p>
-      </section>
-
-      <section id="guia-por-tipo">
-        <h2>Como Descartar por Tipo de Equipamento</h2>
-
-        <article class="accordion-item">
-          <h3 class="accordion-header" id="header-celulares" aria-expanded="false" aria-controls="content-celulares" tabindex="0">
-            <span class="accordion-title-text"><i class="fas fa-mobile-alt title-icon"></i>Celulares e Tablets</span>
-            <span class="accordion-icon fas fa-chevron-down"></span>
-          </h3>
-          <div class="accordion-content" id="content-celulares" role="region" aria-labelledby="header-celulares" style="display: none;">
+    <div class="user-menu-container">
+        <div class="user-top-right" id="userIcon" title="Área do Usuário" aria-label="Área do Usuário" tabindex="0" role="button">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+            </svg>
+        </div>
+        <div class="dropdown-menu" id="userDropdown">
+            <h3>Opções do Usuário</h3>
             <ul>
-              <li><strong>Faça backup dos seus dados:</strong> Salve fotos, vídeos, contatos e outros arquivos importantes na nuvem (Google Drive, iCloud, etc.) ou em um computador.</li>
-              <li><strong>Remova chips e cartões de memória:</strong> Não se esqueça de retirar o chip da operadora (SIM card) e qualquer cartão de memória MicroSD.</li>
-              <li><strong>Restaure para as configurações de fábrica:</strong> Este passo é crucial para apagar suas informações pessoais.
-                  <ul>
-                      <li>No Android: Geralmente em Configurações > Sistema > Opções de redefinição > Apagar todos os dados (redefinição para configuração original).</li>
-                      <li>No iOS (iPhone/iPad): Ajustes > Geral > Transferir ou Redefinir [Dispositivo] > Apagar Conteúdo e Ajustes.</li>
-                  </ul>
-              </li>
-              <li><strong>Onde descartar:</strong>
-                  <ul>
-                      <li>Se ainda funciona e está em bom estado, considere doar! Veja nossa página de <a href="doacoes.html">Doações</a>.</li>
-                      <li>Procure pontos de coleta específicos para celulares em lojas de operadoras ou varejistas de eletrônicos.</li>
-                      <li>Consulte os <a href="pontos.html">Pontos de Descarte</a> da EcoTech BH.</li>
-                  </ul>
-              </li>
+                <li><a href="meu-perfil.html">Meu Perfil (em breve)</a></li>
+                <li><a href="minhas-doacoes.html">Minhas Doações (em breve)</a></li>
             </ul>
-          </div>
-        </article>
+            <a href="login.html" class="logout-button">Sair da conta</a>
+        </div>
+    </div>
 
-        <article class="accordion-item">
-          <h3 class="accordion-header" id="header-computadores" aria-expanded="false" aria-controls="content-computadores" tabindex="0">
-            <span class="accordion-title-text"><i class="fas fa-laptop title-icon"></i>Computadores, Notebooks e Periféricos</span>
-            <span class="accordion-icon fas fa-chevron-down"></span>
-          </h3>
-          <div class="accordion-content" id="content-computadores" role="region" aria-labelledby="header-computadores" style="display: none;">
-            <ul>
-              <li><strong>Backup completo:</strong> Salve todos os seus arquivos pessoais, documentos, fotos e programas importantes em um HD externo ou serviço de nuvem.</li>
-              <li><strong>Apague seus dados do HD/SSD:</strong> Para maior segurança, especialmente se o computador for para reuso ou reciclagem não especializada, considere usar softwares de "limpeza de disco" (data wiping) que sobrescrevem os dados, dificultando a recuperação. A simples formatação pode não ser suficiente para dados muito sensíveis.</li>
-              <li><strong>Desconecte periféricos:</strong> Mouses, teclados, webcams, impressoras e monitores também são lixo eletrônico.</li>
-              <li><strong>Opções de descarte:</strong>
-                  <ul>
-                      <li>Equipamentos funcionais podem ser doados. Visite nossa seção de <a href="doacoes.html">Doações</a>.</li>
-                      <li>Leve o equipamento completo e seus periféricos a um dos <a href="pontos.html">Pontos de Descarte</a> adequados.</li>
-                  </ul>
-              </li>
-            </ul>
-          </div>
-        </article>
-
-        <article class="accordion-item">
-          <h3 class="accordion-header" id="header-pilhas" aria-expanded="false" aria-controls="content-pilhas" tabindex="0">
-            <span class="accordion-title-text"><i class="fas fa-battery-full title-icon"></i>Pilhas e Baterias</span>
-            <span class="accordion-icon fas fa-chevron-down"></span>
-          </h3>
-          <div class="accordion-content" id="content-pilhas" role="region" aria-labelledby="header-pilhas" style="display: none;">
-            <ul>
-              <li><strong>Riscos específicos:</strong> Pilhas e baterias contêm produtos químicos corrosivos e metais pesados. Vazamentos podem contaminar o ambiente e são perigosos ao toque.</li>
-              <li><strong>Separe do lixo comum:</strong> Nunca descarte pilhas e baterias no lixo doméstico indiferenciado.</li>
-              <li><strong>Encontre coletores específicos ("Papa-Pilhas"):</strong> Muitos supermercados, farmácias e lojas de eletrônicos possuem coletores dedicados. Alguns <a href="pontos.html">Pontos de Descarte</a> também os aceitam.</li>
-              <li><strong>Baterias de eletrônicos (celulares, notebooks):</strong> Se forem removíveis, trate-as como outras baterias. Caso contrário, o aparelho completo deve ser levado a um ponto de coleta de eletrônicos. Não tente remover baterias não projetadas para substituição pelo usuário, pois isso pode ser perigoso.</li>
-              <li><strong>Proteja os polos:</strong> Para baterias de lítio (comuns em notebooks, câmeras), é uma boa prática isolar os contatos/polos com fita isolante antes do descarte para evitar curtos-circuitos.</li>
-            </ul>
-          </div>
-        </article>
-
-        <article class="accordion-item">
-          <h3 class="accordion-header" id="header-cabos" aria-expanded="false" aria-controls="content-cabos" tabindex="0">
-            <span class="accordion-title-text"><i class="fas fa-plug title-icon"></i>Cabos, Carregadores e Fontes</span>
-            <span class="accordion-icon fas fa-chevron-down"></span>
-          </h3>
-          <div class="accordion-content" id="content-cabos" role="region" aria-labelledby="header-cabos" style="display: none;">
-            <ul>
-                <li><strong>Reúna os itens:</strong> Junte todos os cabos (USB, HDMI, de força, de rede), carregadores de celular, fontes de notebook e outros adaptadores de energia que não utiliza mais.</li>
-                <li><strong>Verifique a possibilidade de doação:</strong> Cabos e carregadores em bom estado de funcionamento podem ser muito úteis para outras pessoas, escolas ou instituições.</li>
-                <li><strong>Pontos de coleta:</strong> Geralmente são aceitos nos mesmos <a href="pontos.html">Pontos de Descarte</a> que recebem outros tipos de lixo eletrônico. Verifique com o ponto de coleta se eles têm alguma restrição.</li>
-                <li><strong>Evite o lixo comum:</strong> Mesmo sendo itens menores, eles contêm plásticos, cobre e outros metais que devem ser reciclados e não devem ir para aterros sanitários.</li>
-            </ul>
-          </div>
-        </article>
-
-        <article class="accordion-item">
-          <h3 class="accordion-header" id="header-eletrodomesticos" aria-expanded="false" aria-controls="content-eletrodomesticos" tabindex="0">
-            <span class="accordion-title-text"><i class="fas fa-tv title-icon"></i>Eletrodomésticos e Equipamentos de Som/Vídeo</span>
-            <span class="accordion-icon fas fa-chevron-down"></span>
-          </h3>
-          <div class="accordion-content" id="content-eletrodomesticos" role="region" aria-labelledby="header-eletrodomesticos" style="display: none;">
-            <ul>
-                <li><strong>Linha Branca (geladeiras, freezers, fogões, máquinas de lavar, micro-ondas):</strong>
-                    <ul>
-                        <li>Verifique se o fabricante possui um programa de logística reversa ou de coleta.</li>
-                        <li>Consulte a prefeitura de Belo Horizonte sobre serviços de coleta de itens volumosos ou ecopontos que aceitam esses equipamentos.</li>
-                        <li>Alguns <a href="pontos.html">Pontos de Descarte</a> de maior porte podem aceitar. Confirme antes de levar.</li>
-                        <li>Para geladeiras e freezers antigos, cuidado especial com os gases refrigerantes, que devem ser manuseados por profissionais.</li>
-                    </ul>
+    <div class="page-wrapper">
+        <div class="menu-container">
+            <div class="menu-header">
+                <h1>EcoTech</h1>
+                <p>BH</p>
+            </div>
+            <ul class="menu-list">
+                <li class="menu-item">
+                    <a href="index.html">
+                        <i class="fas fa-home menu-icon"></i>
+                        Início
+                    </a>
                 </li>
-                <li><strong>Linha Marrom (TVs, aparelhos de som, DVD/Blu-ray players):</strong>
-                    <ul>
-                        <li>Em SmartTVs, saia de todas as suas contas (Netflix, YouTube, etc.) e, se possível, restaure para as configurações de fábrica.</li>
-                        <li>Consulte os <a href="pontos.html">Pontos de Descarte</a> para verificar a aceitação desses itens.</li>
-                        <li>Monitores de tubo (CRT) requerem cuidado especial devido ao chumbo.</li>
-                    </ul>
+                <li class="menu-item">
+                    <a href="sobre.html">
+                        <i class="fas fa-info-circle menu-icon"></i>
+                        Sobre o Projeto
+                    </a>
                 </li>
-                <li><strong>Pequenos Eletroportáteis (liquidificadores, batedeiras, ferros de passar, secadores de cabelo, aspiradores de pó, furadeiras):</strong>
-                    <ul>
-                        <li>Geralmente podem ser levados aos <a href="pontos.html">Pontos de Descarte</a> que aceitam lixo eletrônico em geral.</li>
-                        <li>Certifique-se de que estejam limpos (ex: sem restos de alimentos em liquidificadores).</li>
-                    </ul>
+                <li class="menu-item">
+                    <a href="guia.html">
+                        <i class="fas fa-book menu-icon"></i>
+                        Guia de Descarte
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="doacoes.html">
+                        <i class="fas fa-hand-holding-heart menu-icon"></i>
+                        Doações
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="pontos.html">
+                        <i class="fas fa-map-marker-alt menu-icon"></i>
+                        Pontos de Descarte
+                    </a>
                 </li>
             </ul>
-          </div>
-        </article>
-      </section>
+        </div>
+        <main class="content" role="main">
+            <section id="introducao-guia">
+                <h2>Guia Completo de Descarte EcoTech BH</h2>
+                <p>O descarte consciente do seu lixo eletrônico é um passo fundamental para a preservação do meio ambiente e para a saúde de todos. Na EcoTech BH, queremos te ajudar a fazer isso da maneira correta. Explore nosso guia e descubra como descartar diferentes tipos de equipamentos de forma segura e responsável.</p>
+            </section>
 
-      <section id="dicas-gerais">
-        <h2>Dicas Gerais Importantes</h2>
-        <ul>
-            <li><strong>Privacidade em primeiro lugar:</strong> Antes de doar ou descartar qualquer dispositivo que armazene dados, certifique-se de que todas as suas informações pessoais foram devidamente apagadas.</li>
-            <li><strong>Não desmonte equipamentos por conta própria:</strong> Especialmente aqueles com baterias internas, tubos de imagem (CRTs) ou componentes que podem conter substâncias perigosas. Deixe isso para os profissionais.</li>
-            <li><strong>Procure por informações do fabricante:</strong> Muitas vezes, o manual do produto ou o site do fabricante oferece orientações sobre o descarte adequado.</li>
-            <li><strong>Reduza e Reutilize antes de Reciclar:</strong> Pense se o equipamento pode ser consertado ou útil para outra pessoa. A doação (veja nossa página <a href="doacoes.html">Doações</a>) é sempre uma ótima alternativa para itens funcionais.</li>
-            <li><strong>Em caso de dúvida:</strong> Se não tiver certeza sobre como ou onde descartar um item específico, entre em contato com a EcoTech BH ou consulte os <a href="pontos.html">Pontos de Descarte</a> para orientação.</li>
-        </ul>
-      </section>
-    </main>
-  </div>
-  <footer>
-    <p>© 2025 EcoTech BH - Todos os direitos reservados.</p>
-  </footer>
+            <section id="o-que-e-lixo-eletronico">
+                <h2>O que é lixo eletrônico?</h2>
+                <p>Lixo eletrônico, também conhecido como e-lixo ou Resíduo de Equipamento Elétrico e Eletrônico (REEE), é todo dispositivo que depende de corrente elétrica ou campos eletromagnéticos para funcionar e que foi descartado por seu proprietário. Isso inclui desde grandes eletrodomésticos até pequenos dispositivos e seus componentes. Celulares, computadores, televisores, impressoras, geladeiras, cabos, carregadores, baterias, placas-mãe, chips e controles remotos são exemplos comuns, mesmo que não funcionem mais.</p>
+            </section>
+
+            <section id="por-que-descartar-corretamente">
+                <h2>Por que descartar corretamente?</h2>
+                <p>O descarte inadequado de lixo eletrônico representa sérios riscos. Muitos equipamentos contêm metais pesados (como chumbo, mercúrio, cádmio) e outras substâncias tóxicas que, se liberadas no meio ambiente, podem contaminar o solo, a água subterrânea e até o ar (em caso de queima). Essa contaminação afeta ecossistemas e pode causar graves problemas de saúde pública.</p>
+                <p>Por outro lado, o descarte correto permite a reciclagem de materiais valiosos presentes nos eletrônicos, como ouro, prata, cobre e plásticos. Isso reduz a necessidade de extrair novos recursos naturais, economiza energia e diminui a emissão de gases de efeito estufa. Em Belo Horizonte, como em todo o Brasil, esse cuidado está alinhado com a Política Nacional de Resíduos Sólidos (Lei nº 12.305/2010) e a Política Nacional do Meio Ambiente (Lei nº 6.938/81), que estabelecem responsabilidades compartilhadas para a gestão adequada desses resíduos.</p>
+            </section>
+
+            <section id="guia-por-tipo">
+                <h2>Como Descartar por Tipo de Equipamento</h2>
+
+                <article class="accordion-item">
+                    <h3 class="accordion-header" id="header-celulares" aria-expanded="false" aria-controls="content-celulares" tabindex="0">
+                        <span class="accordion-title-text"><i class="fas fa-mobile-alt title-icon"></i>Celulares e Tablets</span>
+                        <span class="accordion-icon fas fa-chevron-down"></span>
+                    </h3>
+                    <div class="accordion-content" id="content-celulares" role="region" aria-labelledby="header-celulares" style="display: none;">
+                        <ul>
+                            <li><strong>Faça backup dos seus dados:</strong> Salve fotos, vídeos, contatos e outros arquivos importantes na nuvem (Google Drive, iCloud, etc.) ou em um computador.</li>
+                            <li><strong>Remova chips e cartões de memória:</strong> Não se esqueça de retirar o chip da operadora (SIM card) e qualquer cartão de memória MicroSD.</li>
+                            <li><strong>Restaure para as configurações de fábrica:</strong> Este passo é crucial para apagar suas informações pessoais.
+                                <ul>
+                                    <li>No Android: Geralmente em Configurações > Sistema > Opções de redefinição > Apagar todos os dados (redefinição para configuração original).</li>
+                                    <li>No iOS (iPhone/iPad): Ajustes > Geral > Transferir ou Redefinir [Dispositivo] > Apagar Conteúdo e Ajustes.</li>
+                                </ul>
+                            </li>
+                            <li><strong>Onde descartar:</strong>
+                                <ul>
+                                    <li>Se ainda funciona e está em bom estado, considere doar! Veja nossa página de <a href="doacoes.html">Doações</a>.</li>
+                                    <li>Procure pontos de coleta específicos para celulares em lojas de operadoras ou varejistas de eletrônicos.</li>
+                                    <li>Consulte os <a href="pontos.html">Pontos de Descarte</a> da EcoTech BH.</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="accordion-item">
+                    <h3 class="accordion-header" id="header-computadores" aria-expanded="false" aria-controls="content-computadores" tabindex="0">
+                        <span class="accordion-title-text"><i class="fas fa-laptop title-icon"></i>Computadores, Notebooks e Periféricos</span>
+                        <span class="accordion-icon fas fa-chevron-down"></span>
+                    </h3>
+                    <div class="accordion-content" id="content-computadores" role="region" aria-labelledby="header-computadores" style="display: none;">
+                        <ul>
+                            <li><strong>Backup completo:</strong> Salve todos os seus arquivos pessoais, documentos, fotos e programas importantes em um HD externo ou serviço de nuvem.</li>
+                            <li><strong>Apague seus dados do HD/SSD:</strong> Para maior segurança, especialmente se o computador for para reuso ou reciclagem não especializada, considere usar softwares de "limpeza de disco" (data wiping) que sobrescrevem os dados, dificultando a recuperação. A simples formatação pode não ser suficiente para dados muito sensíveis.</li>
+                            <li><strong>Desconecte periféricos:</strong> Mouses, teclados, webcams, impressoras e monitores também são lixo eletrônico.</li>
+                            <li><strong>Opções de descarte:</strong>
+                                <ul>
+                                    <li>Equipamentos funcionais podem ser doados. Visite nossa seção de <a href="doacoes.html">Doações</a>.</li>
+                                    <li>Leve o equipamento completo e seus periféricos a um dos <a href="pontos.html">Pontos de Descarte</a> adequados.</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="accordion-item">
+                    <h3 class="accordion-header" id="header-pilhas" aria-expanded="false" aria-controls="content-pilhas" tabindex="0">
+                        <span class="accordion-title-text"><i class="fas fa-battery-full title-icon"></i>Pilhas e Baterias</span>
+                        <span class="accordion-icon fas fa-chevron-down"></span>
+                    </h3>
+                    <div class="accordion-content" id="content-pilhas" role="region" aria-labelledby="header-pilhas" style="display: none;">
+                        <ul>
+                            <li><strong>Riscos específicos:</strong> Pilhas e baterias contêm produtos químicos corrosivos e metais pesados. Vazamentos podem contaminar o ambiente e são perigosos ao toque.</li>
+                            <li><strong>Separe do lixo comum:</strong> Nunca descarte pilhas e baterias no lixo doméstico indiferenciado.</li>
+                            <li><strong>Encontre coletores específicos ("Papa-Pilhas"):</strong> Muitos supermercados, farmácias e lojas de eletrônicos possuem coletores dedicados. Alguns <a href="pontos.html">Pontos de Descarte</a> também os aceitam.</li>
+                            <li><strong>Baterias de eletrônicos (celulares, notebooks):</strong> Se forem removíveis, trate-as como outras baterias. Caso contrário, o aparelho completo deve ser levado a um ponto de coleta de eletrônicos. Não tente remover baterias não projetadas para substituição pelo usuário, pois isso pode ser perigoso.</li>
+                            <li><strong>Proteja os polos:</strong> Para baterias de lítio (comuns em notebooks, câmeras), é uma boa prática isolar os contatos/polos com fita isolante antes do descarte para evitar curtos-circuitos.</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="accordion-item">
+                    <h3 class="accordion-header" id="header-cabos" aria-expanded="false" aria-controls="content-cabos" tabindex="0">
+                        <span class="accordion-title-text"><i class="fas fa-plug title-icon"></i>Cabos, Carregadores e Fontes</span>
+                        <span class="accordion-icon fas fa-chevron-down"></span>
+                    </h3>
+                    <div class="accordion-content" id="content-cabos" role="region" aria-labelledby="header-cabos" style="display: none;">
+                        <ul>
+                            <li><strong>Reúna os itens:</strong> Junte todos os cabos (USB, HDMI, de força, de rede), carregadores de celular, fontes de notebook e outros adaptadores de energia que não utiliza mais.</li>
+                            <li><strong>Verifique a possibilidade de doação:</strong> Cabos e carregadores em bom estado de funcionamento podem ser muito úteis para outras pessoas, escolas ou instituições.</li>
+                            <li><strong>Pontos de coleta:</strong> Geralmente são aceitos nos mesmos <a href="pontos.html">Pontos de Descarte</a> que recebem outros tipos de lixo eletrônico. Verifique com o ponto de coleta se eles têm alguma restrição.</li>
+                            <li><strong>Evite o lixo comum:</strong> Mesmo sendo itens menores, eles contêm plásticos, cobre e outros metais que devem ser reciclados e não devem ir para aterros sanitários.</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="accordion-item">
+                    <h3 class="accordion-header" id="header-eletrodomesticos" aria-expanded="false" aria-controls="content-eletrodomesticos" tabindex="0">
+                        <span class="accordion-title-text"><i class="fas fa-tv title-icon"></i>Eletrodomésticos e Equipamentos de Som/Vídeo</span>
+                        <span class="accordion-icon fas fa-chevron-down"></span>
+                    </h3>
+                    <div class="accordion-content" id="content-eletrodomesticos" role="region" aria-labelledby="header-eletrodomesticos" style="display: none;">
+                        <ul>
+                            <li><strong>Linha Branca (geladeiras, freezers, fogões, máquinas de lavar, micro-ondas):</strong>
+                                <ul>
+                                    <li>Verifique se o fabricante possui um programa de logística reversa ou de coleta.</li>
+                                    <li>Consulte a prefeitura de Belo Horizonte sobre serviços de coleta de itens volumosos ou ecopontos que aceitam esses equipamentos.</li>
+                                    <li>Alguns <a href="pontos.html">Pontos de Descarte</a> de maior porte podem aceitar. Confirme antes de levar.</li>
+                                    <li>Para geladeiras e freezers antigos, cuidado especial com os gases refrigerantes, que devem ser manuseados por profissionais.</li>
+                                </ul>
+                            </li>
+                            <li><strong>Linha Marrom (TVs, aparelhos de som, DVD/Blu-ray players):</strong>
+                                <ul>
+                                    <li>Em SmartTVs, saia de todas as suas contas (Netflix, YouTube, etc.) e, se possível, restaure para as configurações de fábrica.</li>
+                                    <li>Consulte os <a href="pontos.html">Pontos de Descarte</a> para verificar a aceitação desses itens.</li>
+                                    <li>Monitores de tubo (CRT) requerem cuidado especial devido ao chumbo.</li>
+                                </ul>
+                            </li>
+                            <li><strong>Pequenos Eletroportáteis (liquidificadores, batedeiras, ferros de passar, secadores de cabelo, aspiradores de pó, furadeiras):</strong>
+                                <ul>
+                                    <li>Geralmente podem ser levados aos <a href="pontos.html">Pontos de Descarte</a> que aceitam lixo eletrônico em geral.</li>
+                                    <li>Certifique-se de que estejam limpos (ex: sem restos de alimentos em liquidificadores).</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </article>
+            </section>
+
+            <section id="dicas-gerais">
+                <h2>Dicas Gerais Importantes</h2>
+                <ul>
+                    <li><strong>Privacidade em primeiro lugar:</strong> Antes de doar ou descartar qualquer dispositivo que armazene dados, certifique-se de que todas as suas informações pessoais foram devidamente apagadas.</li>
+                    <li><strong>Não desmonte equipamentos por conta própria:</strong> Especialmente aqueles com baterias internas, tubos de imagem (CRTs) ou componentes que podem conter substâncias perigosas. Deixe isso para os profissionais.</li>
+                    <li><strong>Procure por informações do fabricante:</strong> Muitas vezes, o manual do produto ou o site do fabricante oferece orientações sobre o descarte adequado.</li>
+                    <li><strong>Reduza e Reutilize antes de Reciclar:</strong> Pense se o equipamento pode ser consertado ou útil para outra pessoa. A doação (veja nossa página <a href="doacoes.html">Doações</a>) é sempre uma ótima alternativa para itens funcionais.</li>
+                    <li><strong>Em caso de dúvida:</strong> Se não tiver certeza sobre como ou onde descartar um item específico, entre em contato com a EcoTech BH ou consulte os <a href="pontos.html">Pontos de Descarte</a> para orientação.</li>
+                </ul>
+            </section>
+        </main>
+    </div>
+    <footer>
+        <p>© 2025 EcoTech BH - Todos os direitos reservados.</p>
+    </footer>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const accordionHeaders = document.querySelectorAll('.accordion-header');
+    document.addEventListener('DOMContentLoaded', function () {
+        const accordionHeaders = document.querySelectorAll('.accordion-header');
 
-    accordionHeaders.forEach(header => {
-      // Initialize with content hidden, as set by inline style
-      // const content = document.getElementById(header.getAttribute('aria-controls'));
-      // content.style.display = 'none'; // Already done by inline style
-      // header.setAttribute('aria-expanded', 'false'); // Already set in HTML
+        accordionHeaders.forEach(header => {
+            header.addEventListener('click', function () {
+                toggleAccordionItem(this);
+            });
 
-      header.addEventListener('click', function () {
-        toggleAccordionItem(this);
-      });
+            header.addEventListener('keydown', function (event) {
+                if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    toggleAccordionItem(this);
+                }
+            });
+        });
 
-      header.addEventListener('keydown', function (event) {
-        if (event.key === 'Enter' || event.key === ' ') {
-          event.preventDefault(); // Prevent page scroll on Space
-          toggleAccordionItem(this);
+        function toggleAccordionItem(headerElement) {
+            const contentId = headerElement.getAttribute('aria-controls');
+            const content = document.getElementById(contentId);
+            const isExpanded = headerElement.getAttribute('aria-expanded') === 'true';
+
+            // Toggle the current item
+            headerElement.setAttribute('aria-expanded', !isExpanded);
+            if (isExpanded) {
+                content.style.display = 'none';
+            } else {
+                content.style.display = 'block';
+            }
         }
-      });
+
+        // NOVO: JavaScript para o menu suspenso do usuário
+        const userIcon = document.getElementById('userIcon');
+        const userDropdown = document.getElementById('userDropdown');
+
+        userIcon.addEventListener('click', function(event) {
+            userDropdown.classList.toggle('active');
+            event.stopPropagation(); // Impede que o clique se propague para o documento e feche imediatamente
+        });
+
+        // Fecha o menu se clicar fora dele
+        document.addEventListener('click', function(event) {
+            if (!userDropdown.contains(event.target) && !userIcon.contains(event.target)) {
+                userDropdown.classList.remove('active');
+            }
+        });
+
+        // Fecha o menu com a tecla ESC
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                userDropdown.classList.remove('active');
+            }
+        });
+
+        // Lógica para ativar o item correto no menu lateral
+        const menuItems = document.querySelectorAll('.menu-list a');
+        const currentPath = window.location.pathname.split('/').pop();
+
+        menuItems.forEach(item => {
+            const itemHref = item.getAttribute('href');
+            if (itemHref === currentPath) {
+                item.classList.add('active');
+            } else if (currentPath === '' && itemHref === 'index.html') {
+                item.classList.add('active');
+            } else {
+                item.classList.remove('active');
+            }
+        });
     });
-
-    function toggleAccordionItem(headerElement) {
-        const contentId = headerElement.getAttribute('aria-controls');
-        const content = document.getElementById(contentId);
-        const isExpanded = headerElement.getAttribute('aria-expanded') === 'true';
-
-        // Toggle the current item
-        headerElement.setAttribute('aria-expanded', !isExpanded);
-        if (isExpanded) {
-            // Collapse content
-            content.style.display = 'none';
-        } else {
-            // Expand content
-            content.style.display = 'block';
-        }
-    }
-  });
 </script>
 
 </body>
