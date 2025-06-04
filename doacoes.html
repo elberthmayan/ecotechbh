@@ -16,6 +16,7 @@
     --text-color-address: #454545;
     --color-primary: #2c3e50; /* Azul escuro do logo */
     --color-secondary: #4a69bd; /* Azul claro do logo/hover */
+    --color-secondary-rgb-tuple: 74, 105, 189; /* Corresponde a #4a69bd */
     --color-tertiary: #34495e;
     --color-text-on-active: #fff;
     --bg-body: #f0f2f5;
@@ -48,15 +49,15 @@
     --line-height-content-text: 1.7;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
-body { 
-    font-family: var(--primary-font); 
-    display: flex; 
-    flex-direction: column; 
-    min-height: 100vh; 
-    background-color: var(--bg-body); 
-    color: var(--text-color-body); 
-    line-height: var(--line-height-base); 
-    visibility: hidden; 
+body {
+    font-family: var(--primary-font);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: var(--bg-body);
+    color: var(--text-color-body);
+    line-height: var(--line-height-base);
+    visibility: hidden;
 }
 .page-wrapper { display: flex; flex-grow: 1; width: 100%; margin: 0; gap: 30px; padding-right: 30px; padding-bottom: 20px; }
 .user-menu-container { position: fixed; top: 30px; right: 40px; z-index: 1000; }
@@ -89,56 +90,96 @@ body {
 .menu-item a:hover .menu-icon { color: var(--color-secondary); }
 
 /* Estilos do Conteúdo Principal e Formulário */
-main.content { 
-    flex-grow: 1; 
-    padding: 40px 48px; 
-    background-color: var(--bg-content); 
-    border-radius: var(--border-radius-main); 
-    margin-top: 20px; 
-    margin-bottom: 20px; 
-    box-shadow: 0 6px 18px var(--shadow-medium); 
+main.content {
+    flex-grow: 1;
+    padding: 40px 48px;
+    background-color: var(--bg-content);
+    border-radius: var(--border-radius-main);
+    margin-top: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 6px 18px var(--shadow-medium);
     max-width: 960px; /* Padronizado com index.html */
     width: 100%; /* Ocupa a largura disponível até o max-width */
     margin-left: auto; /* Centraliza o conteúdo */
     margin-right: auto; /* Centraliza o conteúdo */
 }
-main.content h2 { 
+main.content h2 {
     margin-bottom: 25px; color: var(--color-primary, #1a237e); font-size: 2.3em;
     font-weight: 700; letter-spacing: 0.02em; padding-bottom: 10px;
     border-bottom: 2px solid var(--border-color-light, #e3eaf6); display: inline-block;
 }
-main.content p { margin-bottom: 20px; font-size: 1.1em; color: var(--text-color-paragraphs); line-height: var(--line-height-content-text); }
+/* Parágrafo introdutório da seção de doações */
+main.content > p {
+    margin-bottom: 30px; /* Aumentar espaço antes do formulário */
+    font-size: 1.1em;
+    color: var(--text-color-paragraphs);
+    line-height: var(--line-height-content-text);
+}
 main.content ul { padding-left: 24px; list-style-type: disc; margin-bottom: 22px; font-size: 1.1em; color: var(--text-color-paragraphs); line-height: var(--line-height-content-text); }
 main.content ul li { margin-bottom: 12px; }
 
-form { display: flex; flex-direction: column; gap: 20px; }
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 22px; /* Leve aumento no espaçamento entre os campos */
+}
 label { font-weight: 600; color: var(--color-primary, #1a237e); margin-bottom: 8px; display: block; font-size: 1.05em; }
 input[type="text"], input[type="number"], input[type="date"], textarea, select {
     padding: 12px 15px; font-size: 1em; border: 1px solid #ced4da; border-radius: var(--border-radius-links, 8px);
     resize: vertical; transition: border-color 0.3s ease, box-shadow 0.3s ease; width: 100%; box-sizing: border-box;
 }
-input[type="date"] { min-height: calc(1em + 24px + 2px); }
+input[type="date"] { min-height: calc(1em + 24px + 2px); } /* (1em font-size + 12px*2 padding + 1px*2 border) */
+
 input[type="text"]:focus, input[type="number"]:focus, input[type="date"]:focus, textarea:focus, select:focus {
-    border-color: var(--color-secondary, #3f51b5); box-shadow: 0 0 0 3px rgba(63, 81, 181, 0.2); outline: none;
+    border-color: var(--color-secondary); /* Usa a cor secundária definida nas variáveis */
+    box-shadow: 0 0 0 3px rgba(var(--color-secondary-rgb-tuple), 0.25); /* Usa a tupla RGB da cor secundária para opacidade */
+    outline: none;
 }
 input.error, textarea.error, input[type="date"].error { border-color: #d32f2f !important; }
 textarea { min-height: 80px; }
-fieldset { border: 1px solid var(--border-color-light, #e0e0e0); padding: 20px; border-radius: var(--border-radius-main, 10px); margin-top: 10px; margin-bottom: 10px; }
-legend { font-weight: 700; color: var(--color-primary, #1a237e); padding: 0 10px; font-size: 1.15em; background-color: var(--bg-content, #fff); margin-left: -5px; }
+
+/* Melhorar o espaçamento e destaque do fieldset de coleta */
+fieldset {
+    border: 1px solid var(--border-color-light, #e0e0e0);
+    padding: 20px 25px;
+    border-radius: var(--border-radius-main, 10px);
+    margin-top: 15px;
+    margin-bottom: 25px;
+    background-color: #f9fafd; /* Um fundo muito sutil para destacar a área */
+}
+legend {
+    font-weight: 700;
+    color: var(--color-primary, #1a237e);
+    padding: 0 10px;
+    font-size: 1.15em;
+    background-color: var(--bg-content, #fff); /* Mantém o fundo do conteúdo para "flutuar" sobre a borda */
+    margin-left: 5px;
+}
+
 .radio-group { display: flex; gap: 24px; align-items: center; }
 .radio-group input[type="radio"] { margin-right: 8px; cursor: pointer; }
 .radio-group label { display: flex; align-items: center; font-weight: normal; color: var(--text-color-body, #333); margin-bottom: 0; }
 #endereco-container > div { margin-bottom: 15px; }
 #endereco-container > div:last-child { margin-bottom: 0; }
+
 button[type="submit"] {
     background-color: var(--color-secondary, #3f51b5); color: var(--color-text-on-active, #fff); border: none; padding: 14px 0;
-    font-size: 1.2em; font-weight: 700; border-radius: var(--border-radius-button, 12px);
-    cursor: pointer; transition: background-color 0.3s ease; width: 100%;
+    font-size: 1.2em; font-weight: 700; border-radius: var(--border-radius-button, 6px); /* Ajustado para var(--border-radius-button) */
+    cursor: pointer; transition: background-color 0.3s ease, color 0.3s ease, transform 0.1s ease; width: 100%;
 }
-button[type="submit"]:hover, button[type="submit"]:focus { background-color: var(--bg-cta-button-hover, #303f9f); outline: none; }
+button[type="submit"]:hover, button[type="submit"]:focus {
+    background-color: var(--bg-cta-button-hover, #303f9f);
+    outline: none;
+    transform: translateY(-1px); /* Efeito sutil no hover/focus */
+}
+/* Adicionar um espaço extra acima do botão de submit */
+form > button[type="submit"] {
+    margin-top: 10px;
+}
+
 .form-message {
     padding: 15px; margin-bottom: 25px; border-radius: var(--border-radius-main, 10px); font-size: 1em;
-    font-weight: 500; display: none; align-items: center; 
+    font-weight: 500; display: none; align-items: center;
 }
 .form-message i { margin-right: 10px; font-size: 1.2em; }
 .form-message.error { background-color: #ffebee; color: #c62828; border: 1px solid #c62828; display: flex; }
@@ -181,13 +222,13 @@ footer { width: 100%; text-align: center; padding: 25px 20px; font-size: 0.9em; 
     .dropdown-menu .logout-button { padding: 8px 12px; font-size: 0.95em; }
 }
 @media (max-width: 768px) {
-    main.content { margin: 0 10px; } 
+    main.content { margin: 0 10px; }
 }
 @media (max-width: 600px) {
     .menu-list { flex-direction: column; align-items: center; width: 100%; }
     .menu-item { margin-bottom: 8px; width: 80%; }
     .menu-item a { text-align: center; justify-content: center; }
-    main.content h2 { font-size: 1.9em; } 
+    main.content h2 { font-size: 1.9em; }
     .custom-modal-box { padding: 20px 25px; max-width: calc(100% - 30px); }
     .custom-modal-buttons { flex-direction: column; gap: 10px; }
     .custom-modal-buttons button { width: 100%; }
@@ -276,11 +317,11 @@ footer { width: 100%; text-align: center; padding: 25px 20px; font-size: 0.9em; 
                     <legend>Precisa que busque?</legend>
                     <div class="radio-group">
                         <label>
-                            <input type="radio" name="coleta" value="sim" required /> 
+                            <input type="radio" name="coleta" value="sim" required />
                             Sim
                         </label>
                         <label>
-                            <input type="radio" name="coleta" value="nao" required /> 
+                            <input type="radio" name="coleta" value="nao" required />
                             Não
                         </label>
                     </div>
@@ -303,16 +344,13 @@ footer { width: 100%; text-align: center; padding: 25px 20px; font-size: 0.9em; 
                         <label for="numero-casa">Número</label>
                         <input type="text" id="numero-casa" name="numero-casa" placeholder="Ex: 123">
                     </div>
-                    <div>
-                        <label for="complemento">Complemento (opcional)</label>
-                        <input type="text" id="complemento" name="complemento" 
-                    <div>
-                        <label for="bairro">Bairro</label>
-                        <input type="text" id="bairro" name="bairro" 
-                    </div>
-                </div>
+                    <div> <label for="complemento">Complemento (opcional)</label>
+                        <input type="text" id="complemento" name="complemento" />
+                    </div> <div> <label for="bairro">Bairro</label>
+                        <input type="text" id="bairro" name="bairro" />
+                    </div> </div>
 
-                <button type="submit">Enviar Pedido de Doação</button>
+                <button type="submit" id="submitDonationButton">Enviar Pedido de Doação</button>
             </form>
         </main>
     </div>
@@ -391,25 +429,25 @@ function showCustomConfirm(message) {
 }
 
 // Lógica principal da aplicação
-document.addEventListener('DOMContentLoaded', async function() { 
+document.addEventListener('DOMContentLoaded', async function() {
     const estaLogado = sessionStorage.getItem('usuarioLogadoEcoTechBH') === 'true';
     const currentPath = window.location.pathname.split('/').pop() || 'index.html';
 
     if (currentPath === 'doacoes.html' && !estaLogado) {
-        document.body.style.visibility = 'hidden'; 
+        document.body.style.visibility = 'hidden';
         sessionStorage.setItem('redirectAfterLogin', 'doacoes.html');
         await showCustomAlert("Para acessar a página de Doações, é necessário realizar o login.");
         window.location.href = 'login.html';
-        return; 
+        return;
     }
-    
+
     document.body.style.visibility = 'visible';
 
 
     const userIcon = document.getElementById('userIcon');
     const userDropdown = document.getElementById('userDropdown');
-    const logoutButton = document.getElementById('logoutButton'); 
-    const doacoesMenuLink = document.getElementById('doacoesMenuLink'); 
+    const logoutButton = document.getElementById('logoutButton');
+    const doacoesMenuLink = document.getElementById('doacoesMenuLink');
 
     if (userIcon && userDropdown) {
         userIcon.title = "Opções do Usuário";
@@ -451,15 +489,15 @@ document.addEventListener('DOMContentLoaded', async function() {
     if (doacoesMenuLink) {
         doacoesMenuLink.addEventListener('click', async function(event) {
             const isLoggedIn = sessionStorage.getItem('usuarioLogadoEcoTechBH') === 'true';
-            if (!isLoggedIn && currentPath !== 'doacoes.html') { 
-                event.preventDefault(); 
+            if (!isLoggedIn && currentPath !== 'doacoes.html') {
+                event.preventDefault();
                 sessionStorage.setItem('redirectAfterLogin', 'doacoes.html');
                 await showCustomAlert("Para realizar esta Ação é necessário realizar o login.");
                 window.location.href = 'login.html';
             }
         });
     }
-    
+
     if (currentPath === 'doacoes.html' && estaLogado) {
         const donationForm = document.getElementById('donationForm');
         const coletaRadios = document.querySelectorAll('input[name="coleta"]');
@@ -468,9 +506,10 @@ document.addEventListener('DOMContentLoaded', async function() {
         const cepInput = document.getElementById('cep');
         const ruaInput = document.getElementById('rua');
         const numeroCasaInput = document.getElementById('numero-casa');
-        const complementoInput = document.getElementById('complemento'); 
+        const complementoInput = document.getElementById('complemento');
         const bairroInput = document.getElementById('bairro');
         const formFeedbackMessage = document.getElementById('form-feedback-message');
+        const submitButton = document.getElementById('submitDonationButton'); // Pega o botão de submit
 
         const requiredAddressFields = [dataColetaInput, cepInput, ruaInput, numeroCasaInput, bairroInput];
         const allAddressFields = [dataColetaInput, cepInput, ruaInput, numeroCasaInput, complementoInput, bairroInput];
@@ -478,7 +517,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         if(dataColetaInput) {
             const today = new Date();
             const year = today.getFullYear();
-            const month = String(today.getMonth() + 1).padStart(2, '0'); 
+            const month = String(today.getMonth() + 1).padStart(2, '0');
             const day = String(today.getDate()).padStart(2, '0');
             dataColetaInput.setAttribute('min', `${year}-${month}-${day}`);
         }
@@ -494,17 +533,23 @@ document.addEventListener('DOMContentLoaded', async function() {
             if (!formFeedbackMessage) return;
             const iconClass = type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle';
             formFeedbackMessage.innerHTML = `<i class="fas ${iconClass}"></i> <span>${message}</span>`;
-            formFeedbackMessage.className = `form-message ${type}`; 
+            formFeedbackMessage.className = `form-message ${type}`;
+            formFeedbackMessage.style.display = 'flex'; // Garantir que fica visível
         }
 
         function hideFeedback() {
             if (formFeedbackMessage) {
-                 formFeedbackMessage.className = 'form-message'; 
-                 formFeedbackMessage.style.display = 'none'; 
+                 formFeedbackMessage.className = 'form-message';
+                 formFeedbackMessage.style.display = 'none';
             }
         }
-        
+
         if (coletaRadios.length > 0 && enderecoContainer) {
+            // Define texto inicial do botão se existir e nenhum radio estiver marcado
+            if (submitButton && !document.querySelector('input[name="coleta"]:checked')) {
+                submitButton.textContent = 'Enviar Pedido de Doação'; // Texto padrão
+            }
+
             coletaRadios.forEach(radio => {
                 radio.addEventListener('change', () => {
                     hideFeedback();
@@ -512,7 +557,8 @@ document.addEventListener('DOMContentLoaded', async function() {
                     if (radio.value === 'sim' && radio.checked) {
                         enderecoContainer.style.display = 'block';
                         requiredAddressFields.forEach(field => field && field.setAttribute('required', 'required'));
-                    } else {
+                        if (submitButton) submitButton.textContent = 'Enviar';
+                    } else if (radio.value === 'nao' && radio.checked) {
                         enderecoContainer.style.display = 'none';
                         allAddressFields.forEach(field => {
                             if (field) {
@@ -521,6 +567,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                                 field.classList.remove('error');
                             }
                         });
+                        if (submitButton) submitButton.textContent = 'Enviar';
                     }
                 });
             });
@@ -537,7 +584,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
                 const tipoItem = document.getElementById('tipo-item');
                 if (!tipoItem || !tipoItem.value.trim()) { isValid = false; errorMessages.push("O campo 'Item para doação' é obrigatório."); tipoItem && tipoItem.classList.add('error'); }
-                
+
                 const descricao = document.getElementById('descricao');
                 if (!descricao || !descricao.value.trim()) { isValid = false; errorMessages.push("O campo 'Descrição do item' é obrigatório."); descricao && descricao.classList.add('error'); }
 
@@ -545,13 +592,13 @@ document.addEventListener('DOMContentLoaded', async function() {
                 if (!quantidade || !quantidade.value.trim() || parseInt(quantidade.value, 10) < 1) { isValid = false; errorMessages.push("O campo 'Quantidade' deve ser um número igual ou maior que 1."); quantidade && quantidade.classList.add('error');}
 
                 const coletaSelecionada = document.querySelector('input[name="coleta"]:checked');
-                if (!coletaSelecionada) { isValid = false; errorMessages.push("Por favor, selecione se precisa que o item seja buscado."); } 
+                if (!coletaSelecionada) { isValid = false; errorMessages.push("Por favor, selecione se precisa que o item seja buscado."); }
                 else if (coletaSelecionada.value === 'sim') {
                     if (dataColetaInput && !dataColetaInput.value.trim()) { isValid = false; errorMessages.push("O campo 'Data para coleta' é obrigatório."); dataColetaInput.classList.add('error'); }
                     else if (dataColetaInput) {
-                        const dataSelecionadaUTC = new Date(dataColetaInput.value + "T00:00:00Z"); 
+                        const dataSelecionadaUTC = new Date(dataColetaInput.value + "T00:00:00Z");
                         const hoje = new Date();
-                        hoje.setUTCHours(0,0,0,0); 
+                        hoje.setUTCHours(0,0,0,0);
                         if (dataSelecionadaUTC < hoje) { isValid = false; errorMessages.push("A 'Data para coleta' não pode ser no passado."); dataColetaInput.classList.add('error');}
                     }
                     if (cepInput && !cepInput.value.trim()) { isValid = false; errorMessages.push("O campo 'CEP' é obrigatório."); cepInput.classList.add('error'); }
@@ -584,12 +631,16 @@ document.addEventListener('DOMContentLoaded', async function() {
                             field.classList.remove('error');
                         }
                     });
+                    // Resetar texto do botão e desmarcar radios
+                    if (submitButton) {
+                        submitButton.textContent = 'Enviar Pedido de Doação';
+                    }
                     coletaRadios.forEach(radio => {
                         radio.checked = false;
                     });
                 } else {
                     showFeedback('Por favor, corrija os erros no formulário:\n- ' + errorMessages.join('\n- '), 'error');
-                    const firstErrorField = donationForm.querySelector('.error, input[name="coleta"]:invalid'); 
+                    const firstErrorField = donationForm.querySelector('.error, input[name="coleta"]:invalid');
                     if (firstErrorField) {
                         firstErrorField.focus();
                     }
