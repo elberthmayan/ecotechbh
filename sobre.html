@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Guia completo da EcoTech BH para o descarte correto de lixo eletrônico, incluindo celulares, computadores, baterias, eletrodomésticos e mais.">
-    <title>EcoTech BH - Guia de Descarte Detalhado</title>
+    <meta name="description" content="Conheça a EcoTech BH: nossa história, missão, visão e como trabalhamos para um descarte de lixo eletrônico mais sustentável em Belo Horizonte.">
+    <title>Conheça a EcoTech BH - Sobre Nós</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
@@ -32,19 +32,23 @@
     --bg-icon-user: #000;
     --bg-icon-user-hover: #222;
     --color-icon-user: #fff;
-    --bg-article-guide: #fdfdff;
+    --bg-article-guide: #fdfdff; /* Usado no acordeão do guia, mantido para consistência */
+    --bg-map-placeholder: #e9e9e9; /* Para o placeholder do mapa da pág Sobre */
+    --bg-cta-button: var(--color-secondary); /* Para botões CTA da pág Sobre */
+    --bg-cta-button-hover: #303f9f; /* Hover para botões CTA da pág Sobre */
     
     --border-color-light: #e3eaf6;
     --border-color-medium: #c5cde0;
     --border-color-footer: #c5cde0;
-    --border-color-h3: var(--color-secondary);
+    --border-color-h3: var(--color-secondary); /* Usado nos H3 da pág Sobre */
+    --border-color-map-placeholder: #ccc; /* Para o placeholder do mapa da pág Sobre */
     
     --shadow-light: rgba(0, 0, 0, 0.05);
     --shadow-medium: rgba(0, 0, 0, 0.07);
     --shadow-strong: rgba(0, 0, 0, 0.1);
     --shadow-dark: rgba(0, 0, 0, 0.2);
     --shadow-sidebar-mobile: rgba(0,0,0,0.1);
-    --shadow-accordion: rgba(0,0,0,0.05);
+    --shadow-accordion: rgba(0,0,0,0.05); /* Usado no acordeão do guia */
 
     --border-radius-main: 12px;
     --border-radius-links: 8px;
@@ -96,38 +100,138 @@ body {
 .menu-item a:hover .menu-icon { color: var(--color-secondary); }
 
 main.content { flex-grow: 1; padding: 40px 48px; background-color: var(--bg-content); border-radius: var(--border-radius-main); margin-top: 20px; margin-bottom: 20px; box-shadow: 0 6px 18px var(--shadow-medium); max-width: 960px; width: 100%; margin-left: auto; margin-right: auto; }
-main.content section { margin-bottom: 45px; }
-main.content section:last-of-type { margin-bottom: 20px; }
+main.content section { margin-bottom: 40px; } /* Espaçamento padrão para seções da pág Sobre */
+main.content section:last-of-type { margin-bottom: 10px; } /* Menor margem para a última seção da pág Sobre */
 
-main.content h2 {
+/* Estilos de Títulos H2 e H3 para a página SOBRE */
+main.content h2 { /* Título principal da página (Conheça a EcoTech BH) */
+    margin-bottom: 35px;
     color: var(--color-primary);
-    font-size: 2.1em;
+    font-size: 2.4em; /* Usando o tamanho do H2 da pág Sobre */
     font-weight: 700;
     letter-spacing: 0.02em;
-    margin-bottom: 25px; 
+    text-align: center;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--border-color-light);
 }
-main.content #introducao-guia h2 {
-    display: block; 
-    padding-left: 15px; 
-    padding-bottom: 10px; 
-    border-left: 5px solid var(--color-primary); 
-    border-bottom: none; 
-    margin-bottom: 30px; 
+/* Removendo estilos específicos de H2 do GUIA que não se aplicam aqui */
+/* main.content #introducao-guia h2, main.content #guia-por-tipo h2 ... */
+
+main.content h3 { /* Títulos das subseções (Nossa Missão, etc.) da pág Sobre */
+    margin-top: 30px;
+    margin-bottom: 15px;
+    color: var(--color-tertiary); /* Cor dos H3 da pág Sobre */
+    font-size: 1.6em;
+    font-weight: 600;
+    border-left: 4px solid var(--border-color-h3);
+    padding-left: 12px;
+    display: flex; 
+    align-items: center;
 }
-main.content #guia-por-tipo h2 { 
-    display: block; text-align: center; margin-bottom: 30px; border-bottom: none; padding-bottom: 0; 
+main.content h3 i.fas { /* Ícones nos títulos h3 da pág Sobre */
+    margin-right: 10px;
+    font-size: 0.9em; 
+    color: var(--border-color-h3); 
 }
-main.content p, main.content > section > ul:not(.accordion-content ul) {
-    margin-bottom: 20px; font-size: 1.05em; color: var(--text-color-paragraphs); line-height: var(--line-height-content-text);
+main.content section:first-of-type h3 { /* Remove margem superior do primeiro H3 da pág Sobre */
+    margin-top: 0;
 }
-main.content > section > ul:not(.accordion-content ul) { list-style: none; padding-left: 0; }
-main.content > section > ul:not(.accordion-content ul) li { padding-left: 30px; position: relative; margin-bottom: 12px; }
-main.content > section > ul:not(.accordion-content ul) li::before {
-    content: '➔'; position: absolute; left: 0; top: -1px; color: var(--color-secondary); font-size: 1.2em; font-weight: bold;
+
+/* Estilos de Parágrafos e Listas para a página SOBRE */
+main.content p,
+main.content ul:not(.accordion-content ul):not(#dicas-gerais ul) { /* Adaptado para não conflitar com estilos de lista do GUIA se presentes */
+    margin-bottom: 22px; /* Espaçamento de parágrafos da pág Sobre */
+    font-size: 1.1em;    /* Tamanho de fonte de parágrafos da pág Sobre */
+    color: var(--text-color-paragraphs); /* Cor de parágrafos da pág Sobre */
+    line-height: var(--line-height-content-text);
 }
+main.content ul:not(.accordion-content ul):not(#dicas-gerais ul) { /* Para listas da pág Sobre */
+    padding-left: 24px;
+    list-style-type: disc; 
+}
+main.content ul:not(.accordion-content ul):not(#dicas-gerais ul) li { /* Para itens de lista da pág Sobre */
+    margin-bottom: 12px;
+    padding-left: 0; /* Reset do padding-left do guia */
+    position: static; /* Reset da position do guia */
+}
+main.content ul:not(.accordion-content ul):not(#dicas-gerais ul) li::before {
+    content: none; /* Remove o '➔' do guia */
+}
+
 main.content strong { font-weight: 600; color: var(--text-color-strong); }
 
-/* Estilos para Acordeão */
+/* Estilos para Endereço e Mapa (página SOBRE) */
+main.content address {
+    font-style: normal;
+    color: var(--text-color-address);
+    line-height: var(--line-height-content-text);
+    margin-bottom: 22px; /* Consistência com parágrafos */
+}
+main.content address i.fas {
+    margin-right: 8px;
+    color: var(--color-secondary);
+    width: 20px; 
+    text-align: center;
+}
+main.content address a {
+    color: var(--color-secondary);
+    text-decoration: none;
+}
+main.content address a:hover {
+    text-decoration: underline;
+}
+.map-placeholder {
+    margin-top: 20px;
+    width: 100%;
+    min-height: 250px; 
+    background-color: var(--bg-map-placeholder);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border: 1px solid var(--border-color-map-placeholder);
+    border-radius: var(--border-radius-links);
+    padding: 20px;
+    font-size: 0.95em;
+    color: #666;
+}
+.map-placeholder iframe { /* Para o iframe do mapa */
+    width: 100%; /* CSS controla a largura para responsividade */
+    height: 350px; /* CSS controla a altura padrão */
+    border: none; /* Assegura que não haja borda pelo CSS */
+    border-radius: var(--border-radius-links); 
+}
+
+/* Estilos para Call to Action (página SOBRE) */
+.call-to-action-final {
+    text-align: center;
+    margin-top: 30px;
+    padding-top: 30px;
+    border-top: 1px solid var(--border-color-light);
+}
+.call-to-action-final p {
+    font-size: 1.15em;
+    margin-bottom: 20px;
+    color: var(--text-color-paragraphs); /* Garante cor consistente */
+}
+.btn-cta {
+    display: inline-block;
+    background-color: var(--bg-cta-button);
+    color: var(--color-text-on-secondary); /* Garante cor do texto no botão */
+    padding: 12px 25px;
+    border-radius: var(--border-radius-button);
+    text-decoration: none;
+    font-weight: 600;
+    margin: 5px 10px;
+    transition: background-color 0.3s ease;
+    font-size: 1.05em;
+}
+.btn-cta:hover {
+    background-color: var(--bg-cta-button-hover);
+}
+
+
+/* Estilos para Acordeão (da página GUIA - mantidos para não quebrar se existirem) */
 .accordion-item { background-color: var(--bg-article-guide); border: 1px solid var(--border-color-medium); border-radius: var(--border-radius-links); margin-bottom: 15px; box-shadow: 0 1px 3px var(--shadow-accordion); overflow: hidden; }
 .accordion-header { background-color: var(--bg-sidebar); padding: 15px 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: background-color 0.2s ease; color: var(--color-primary); font-size: 1.3em; font-weight: 600; margin: 0; border-bottom: 1px solid var(--border-color-medium); }
 .accordion-header[aria-expanded="true"] { border-bottom-color: transparent; }
@@ -144,12 +248,12 @@ main.content strong { font-weight: 600; color: var(--text-color-strong); }
 .accordion-content ul li strong { color: var(--text-color-list-strong); }
 .accordion-content ul ul { list-style: circle; margin-top: 8px; padding-left: 20px; }
 
-/* Estilo para Dicas Gerais */
+/* Estilo para Dicas Gerais (da página GUIA - mantidos para não quebrar se existirem) */
 #dicas-gerais ul { list-style: none; padding-left: 0; }
 #dicas-gerais ul li { padding-left: 35px; position: relative; margin-bottom: 12px; font-size: 1.05em; color: var(--text-color-paragraphs); line-height: var(--line-height-content-text); }
 #dicas-gerais ul li::before { font-family: "Font Awesome 5 Free"; content: '\f0eb'; font-weight: 900; position: absolute; left: 0; top: 0px; color: var(--color-secondary); font-size: 1.3em; }
 
-/* Estilos para Modais Personalizados */
+/* Estilos para Modais Personalizados (do JS original) */
 .custom-modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.6); display: none; align-items: center; justify-content: center; z-index: 2000; padding: 15px; }
 .custom-modal-box { background-color: var(--bg-content, #fff); padding: 30px 35px; border-radius: var(--border-radius-main, 12px); box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15); text-align: center; width: auto; max-width: 420px; min-width: 300px; animation: fadeInModal 0.3s ease-out; }
 @keyframes fadeInModal { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
@@ -177,9 +281,9 @@ footer { width: 100%; text-align: center; padding: 25px 20px; font-size: 0.9em; 
     .menu-icon { margin-right: 10px; font-size: 1.2em; }
     main.content { margin: 20px 0 0 0; padding: 25px 20px; max-width: none; border-radius: 0; box-shadow: none; }
     main.content h2 { font-size: 1.8em; } 
-    main.content #introducao-guia h2 { padding-left: 10px; border-left-width: 4px; } 
-    .accordion-header { font-size: 1.15em; padding: 12px 15px; }
-    .accordion-content { padding: 15px; }
+    /* main.content #introducao-guia h2 { padding-left: 10px; border-left-width: 4px; } */ /* Estilo específico do Guia */
+    .accordion-header { font-size: 1.15em; padding: 12px 15px; } /* Estilo do Guia */
+    .accordion-content { padding: 15px; } /* Estilo do Guia */
     .user-menu-container { top: 20px; right: 20px; }
     .user-top-right { width: 40px; height: 40px; }
     .user-top-right svg { width: 20px; height: 20px; }
@@ -187,6 +291,8 @@ footer { width: 100%; text-align: center; padding: 25px 20px; font-size: 0.9em; 
     .dropdown-menu h3 { font-size: 1em; margin-bottom: 8px; padding-bottom: 6px; }
     .dropdown-menu ul li a { font-size: 0.9em; padding: 6px 8px; white-space: nowrap; }
     .dropdown-menu .logout-button { padding: 8px 12px; font-size: 0.95em; }
+    main.content h3 { font-size: 1.4em; } /* Ajuste para H3 da pág Sobre em mobile */
+     .call-to-action-final .btn-cta { display: block; margin: 10px auto; width: fit-content; } /* Estilo pág Sobre */
 }
 @media (max-width: 600px) {
     .menu-container { flex-direction: column; align-items: center; padding-top: 15px; }
@@ -227,151 +333,75 @@ footer { width: 100%; text-align: center; padding: 25px 20px; font-size: 0.9em; 
             </div>
             <ul class="menu-list">
                 <li class="menu-item"><a href="index.html"><i class="fas fa-home menu-icon"></i>Início</a></li>
-                <li class="menu-item"><a href="sobre.html"><i class="fas fa-info-circle menu-icon"></i>Sobre o Projeto</a></li>
+                <li class="menu-item"><a href="sobre.html" class="active"><i class="fas fa-info-circle menu-icon"></i>Sobre o Projeto</a></li>
                 <li class="menu-item"><a href="guia.html" id="guiaMenuLink"><i class="fas fa-book menu-icon"></i>Guia de Descarte</a></li>
                 <li class="menu-item"><a href="doacoes.html" id="doacoesMenuLink"><i class="fas fa-hand-holding-heart menu-icon"></i>Doações</a></li>
                 <li class="menu-item"><a href="pontos.html"><i class="fas fa-map-marker-alt menu-icon"></i>Pontos de Descarte</a></li>
             </ul>
         </div>
         <main class="content" role="main">
-            <section id="introducao-guia">
-                <h2>Guia Completo de Descarte EcoTech BH</h2>
-                <p>O descarte consciente do seu lixo eletrônico é um passo fundamental para a preservação do meio ambiente e para a saúde de todos. Na EcoTech BH, queremos te ajudar a fazer isso da maneira correta. Explore nosso guia e descubra como descartar diferentes tipos de equipamentos de forma segura e responsável.</p>
+            <h2>Conheça a EcoTech BH</h2>
+
+            <section id="nossa-historia">
+                <h3><i class="fas fa-book-open"></i> Nossa História</h3>
+                <p>A EcoTech BH nasceu da crescente preocupação com o destino do lixo eletrônico em Belo Horizonte. Percebemos que, enquanto a tecnologia avança rapidamente, muitos cidadãos ainda têm dúvidas sobre como descartar seus aparelhos antigos de forma segura e ecológica. Motivados a fazer a diferença, criamos uma plataforma para conectar quem precisa descartar com as soluções corretas, promovendo a conscientização e facilitando o acesso à reciclagem e ao reuso na nossa cidade.</p>
             </section>
 
-            <section id="o-que-e-lixo-eletronico">
-                <h2>O que é lixo eletrônico?</h2>
-                <p>Lixo eletrônico, também conhecido como e-lixo ou Resíduo de Equipamento Elétrico e Eletrônico (REEE), é todo dispositivo que depende de corrente elétrica ou campos eletromagnéticos para funcionar e que foi descartado por seu proprietário. Isso inclui desde grandes eletrodomésticos até pequenos dispositivos e seus componentes. Celulares, computadores, televisores, impressoras, geladeiras, cabos, carregadores, baterias, placas-mãe, chips e controles remotos são exemplos comuns, mesmo que não funcionem mais.</p>
+            <section id="missao">
+                <h3><i class="fas fa-bullseye"></i> Nossa Missão</h3>
+                <p>Na EcoTech BH, nossa missão é transformar a maneira como Belo Horizonte lida com o descarte de equipamentos eletrônicos. Buscamos ativamente incentivar hábitos mais conscientes e responsáveis, tornando o processo de recuperação e reaproveitamento desses aparelhos simples, acessível e transparente para todos. Tudo isso com um olhar firme na sustentabilidade e na inovação, para um futuro mais verde em nossa comunidade.</p>
             </section>
 
-            <section id="por-que-descartar-corretamente">
-                <h2>Por que descartar corretamente?</h2>
-                <p>O descarte inadequado de lixo eletrônico representa sérios riscos. Muitos equipamentos contêm metais pesados (como chumbo, mercúrio, cádmio) e outras substâncias tóxicas que, se liberadas no meio ambiente, podem contaminar o solo, a água subterrânea e até o ar (em caso de queima). Essa contaminação afeta ecossistemas e pode causar graves problemas de saúde pública.</p>
-                <p>Por outro lado, o descarte correto permite a reciclagem de materiais valiosos presentes nos eletrônicos, como ouro, prata, cobre e plásticos. Isso reduz a necessidade de extrair novos recursos naturais, economiza energia e diminui a emissão de gases de efeito estufa. Em Belo Horizonte, como em todo o Brasil, esse cuidado está alinhado com a Política Nacional de Resíduos Sólidos (Lei nº 12.305/2010) e a Política Nacional do Meio Ambiente (Lei nº 6.938/81), que estabelecem responsabilidades compartilhadas para a gestão adequada desses resíduos.</p>
+            <section id="visao">
+                <h3><i class="fas fa-eye"></i> Nossa Visão</h3>
+                <p>Visualizamos uma Belo Horizonte mais limpa, onde o lixo eletrônico não é mais um problema, mas sim uma valiosa oportunidade. Sonhamos com uma cidade onde a cultura da reciclagem e do reaproveitamento de eletrônicos esteja integrada ao cotidiano dos cidadãos e das empresas, impulsionada por soluções inteligentes, eficientes e ao alcance de todos.</p>
             </section>
 
-            <section id="guia-por-tipo">
-                <h2>Como Descartar por Tipo de Equipamento</h2>
-
-                <article class="accordion-item">
-                    <h3 class="accordion-header" id="header-celulares" aria-expanded="false" aria-controls="content-celulares" tabindex="0">
-                        <span class="accordion-title-text"><i class="fas fa-mobile-alt title-icon"></i>Celulares e Tablets</span>
-                        <span class="accordion-icon fas fa-chevron-down"></span>
-                    </h3>
-                    <div class="accordion-content" id="content-celulares" role="region" aria-labelledby="header-celulares">
-                        <ul>
-                            <li><strong>Faça backup dos seus dados:</strong> Salve fotos, vídeos, contatos e outros arquivos importantes na nuvem (Google Drive, iCloud, etc.) ou em um computador.</li>
-                            <li><strong>Remova chips e cartões de memória:</strong> Não se esqueça de retirar o chip da operadora (SIM card) e qualquer cartão de memória MicroSD.</li>
-                            <li><strong>Restaure para as configurações de fábrica:</strong> Este passo é crucial para apagar suas informações pessoais.
-                                <ul>
-                                    <li>No Android: Geralmente em Configurações > Sistema > Opções de redefinição > Apagar todos os dados (redefinição para configuração original).</li>
-                                    <li>No iOS (iPhone/iPad): Ajustes > Geral > Transferir ou Redefinir [Dispositivo] > Apagar Conteúdo e Ajustes.</li>
-                                </ul>
-                            </li>
-                            <li><strong>Onde descartar:</strong>
-                                <ul>
-                                    <li>Se ainda funciona e está em bom estado, considere doar! Veja nossa página de <a href="doacoes.html">Doações</a>.</li>
-                                    <li>Procure pontos de coleta específicos para celulares em lojas de operadoras ou varejistas de eletrônicos.</li>
-                                    <li>Consulte os <a href="pontos.html">Pontos de Descarte</a> da EcoTech BH.</li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                </article>
-
-                <article class="accordion-item">
-                    <h3 class="accordion-header" id="header-computadores" aria-expanded="false" aria-controls="content-computadores" tabindex="0">
-                        <span class="accordion-title-text"><i class="fas fa-laptop title-icon"></i>Computadores, Notebooks e Periféricos</span>
-                        <span class="accordion-icon fas fa-chevron-down"></span>
-                    </h3>
-                    <div class="accordion-content" id="content-computadores" role="region" aria-labelledby="header-computadores">
-                        <ul>
-                            <li><strong>Backup completo:</strong> Salve todos os seus arquivos pessoais, documentos, fotos e programas importantes em um HD externo ou serviço de nuvem.</li>
-                            <li><strong>Apague seus dados do HD/SSD:</strong> Para maior segurança, especialmente se o computador for para reuso ou reciclagem não especializada, considere usar softwares de "limpeza de disco" (data wiping) que sobrescrevem os dados, dificultando a recuperação. A simples formatação pode não ser suficiente para dados muito sensíveis.</li>
-                            <li><strong>Desconecte periféricos:</strong> Mouses, teclados, webcams, impressoras e monitores também são lixo eletrônico.</li>
-                            <li><strong>Opções de descarte:</strong>
-                                <ul>
-                                    <li>Equipamentos funcionais podem ser doados. Visite nossa seção de <a href="doacoes.html">Doações</a>.</li>
-                                    <li>Leve o equipamento completo e seus periféricos a um dos <a href="pontos.html">Pontos de Descarte</a> adequados.</li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                </article>
-
-                <article class="accordion-item">
-                    <h3 class="accordion-header" id="header-pilhas" aria-expanded="false" aria-controls="content-pilhas" tabindex="0">
-                        <span class="accordion-title-text"><i class="fas fa-battery-full title-icon"></i>Pilhas e Baterias</span>
-                        <span class="accordion-icon fas fa-chevron-down"></span>
-                    </h3>
-                    <div class="accordion-content" id="content-pilhas" role="region" aria-labelledby="header-pilhas">
-                        <ul>
-                            <li><strong>Riscos específicos:</strong> Pilhas e baterias contêm produtos químicos corrosivos e metais pesados. Vazamentos podem contaminar o ambiente e são perigosos ao toque.</li>
-                            <li><strong>Separe do lixo comum:</strong> Nunca descarte pilhas e baterias no lixo doméstico indiferenciado.</li>
-                            <li><strong>Encontre coletores específicos ("Papa-Pilhas"):</strong> Muitos supermercados, farmácias e lojas de eletrônicos possuem coletores dedicados. Alguns <a href="pontos.html">Pontos de Descarte</a> também os aceitam.</li>
-                            <li><strong>Baterias de eletrônicos (celulares, notebooks):</strong> Se forem removíveis, trate-as como outras baterias. Caso contrário, o aparelho completo deve ser levado a um ponto de coleta de eletrônicos. Não tente remover baterias não projetadas para substituição pelo usuário, pois isso pode ser perigoso.</li>
-                            <li><strong>Proteja os polos:</strong> Para baterias de lítio (comuns em notebooks, câmeras), é uma boa prática isolar os contatos/polos com fita isolante antes do descarte para evitar curtos-circuitos.</li>
-                        </ul>
-                    </div>
-                </article>
-
-                <article class="accordion-item">
-                    <h3 class="accordion-header" id="header-cabos" aria-expanded="false" aria-controls="content-cabos" tabindex="0">
-                        <span class="accordion-title-text"><i class="fas fa-plug title-icon"></i>Cabos, Carregadores e Fontes</span>
-                        <span class="accordion-icon fas fa-chevron-down"></span>
-                    </h3>
-                    <div class="accordion-content" id="content-cabos" role="region" aria-labelledby="header-cabos">
-                        <ul>
-                            <li><strong>Reúna os itens:</strong> Junte todos os cabos (USB, HDMI, de força, de rede), carregadores de celular, fontes de notebook e outros adaptadores de energia que não utiliza mais.</li>
-                            <li><strong>Verifique a possibilidade de doação:</strong> Cabos e carregadores em bom estado de funcionamento podem ser muito úteis para outras pessoas, escolas ou instituições.</li>
-                            <li><strong>Pontos de coleta:</strong> Geralmente são aceitos nos mesmos <a href="pontos.html">Pontos de Descarte</a> que recebem outros tipos de lixo eletrônico. Verifique com o ponto de coleta se eles têm alguma restrição.</li>
-                            <li><strong>Evite o lixo comum:</strong> Mesmo sendo itens menores, eles contêm plásticos, cobre e outros metais que devem ser reciclados e não devem ir para aterros sanitários.</li>
-                        </ul>
-                    </div>
-                </article>
-
-                <article class="accordion-item">
-                    <h3 class="accordion-header" id="header-eletrodomesticos" aria-expanded="false" aria-controls="content-eletrodomesticos" tabindex="0">
-                        <span class="accordion-title-text"><i class="fas fa-tv title-icon"></i>Eletrodomésticos e Equipamentos de Som/Vídeo</span>
-                        <span class="accordion-icon fas fa-chevron-down"></span>
-                    </h3>
-                    <div class="accordion-content" id="content-eletrodomesticos" role="region" aria-labelledby="header-eletrodomesticos">
-                        <ul>
-                            <li><strong>Linha Branca (geladeiras, freezers, fogões, máquinas de lavar, micro-ondas):</strong>
-                                <ul>
-                                    <li>Verifique se o fabricante possui um programa de logística reversa ou de coleta.</li>
-                                    <li>Consulte a prefeitura de Belo Horizonte sobre serviços de coleta de itens volumosos ou ecopontos que aceitam esses equipamentos.</li>
-                                    <li>Alguns <a href="pontos.html">Pontos de Descarte</a> de maior porte podem aceitar. Confirme antes de levar.</li>
-                                    <li>Para geladeiras e freezers antigos, cuidado especial com os gases refrigerantes, que devem ser manuseados por profissionais.</li>
-                                </ul>
-                            </li>
-                            <li><strong>Linha Marrom (TVs, aparelhos de som, DVD/Blu-ray players):</strong>
-                                <ul>
-                                    <li>Em SmartTVs, saia de todas as suas contas (Netflix, YouTube, etc.) e, se possível, restaure para as configurações de fábrica.</li>
-                                    <li>Consulte os <a href="pontos.html">Pontos de Descarte</a> para verificar a aceitação desses itens.</li>
-                                    <li>Monitores de tubo (CRT) requerem cuidado especial devido ao chumbo.</li>
-                                </ul>
-                            </li>
-                            <li><strong>Pequenos Eletroportáteis (liquidificadores, batedeiras, ferros de passar, secadores de cabelo, aspiradores de pó, furadeiras):</strong>
-                                <ul>
-                                    <li>Geralmente podem ser levados aos <a href="pontos.html">Pontos de Descarte</a> que aceitam lixo eletrônico em geral.</li>
-                                    <li>Certifique-se de que estejam limpos (ex: sem restos de alimentos em liquidificadores).</li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                </article>
-            </section>
-
-            <section id="dicas-gerais">
-                <h2>Dicas Gerais Importantes</h2>
+            <section id="objetivos">
+                <h3><i class="fas fa-tasks"></i> Nossos Objetivos</h3>
                 <ul>
-                    <li><strong>Privacidade em primeiro lugar:</strong> Antes de doar ou descartar qualquer dispositivo que armazene dados, certifique-se de que todas as suas informações pessoais foram devidamente apagadas.</li>
-                    <li><strong>Não desmonte equipamentos por conta própria:</strong> Especialmente aqueles com baterias internas, tubos de imagem (CRTs) ou componentes que podem conter substâncias perigosas. Deixe isso para os profissionais.</li>
-                    <li><strong>Procure por informações do fabricante:</strong> Muitas vezes, o manual do produto ou o site do fabricante oferece orientações sobre o descarte adequado.</li>
-                    <li><strong>Reduza e Reutilize antes de Reciclar:</strong> Pense se o equipamento pode ser consertado ou útil para outra pessoa. A doação (veja nossa página <a href="doacoes.html">Doações</a>) é sempre uma ótima alternativa para itens funcionais.</li>
-                    <li><strong>Em caso de dúvida:</strong> Se não tiver certeza sobre como ou onde descartar um item específico, entre em contato com a EcoTech BH ou consulte os <a href="pontos.html">Pontos de Descarte</a> para orientação.</li>
+                    <li>Educar e engajar a população de Belo Horizonte sobre os impactos ambientais do descarte incorreto de lixo eletrônico e a importância crítica de práticas sustentáveis.</li>
+                    <li>Simplificar e democratizar o acesso ao descarte correto, oferecendo informações claras, ferramentas úteis e conexões com pontos de coleta e programas de reciclagem.</li>
+                    <li>Promover a economia circular, incentivando o conserto, a doação e a reutilização de equipamentos eletrônicos, prolongando sua vida útil e reduzindo o desperdício.</li>
+                    <li>Fomentar parcerias e colaborações que fortaleçam a cadeia de reciclagem de eletrônicos na cidade, contribuindo para um ecossistema local mais robusto e sustentável.</li>
                 </ul>
+            </section>
+
+            <section id="como-funciona">
+                <h3><i class="fas fa-cogs"></i> Como Funciona?</h3>
+                <p>A EcoTech BH simplifica o descarte consciente do seu lixo eletrônico em Belo Horizonte através de alguns passos chave:</p>
+                <ul>
+                    <li><strong>Informe-se:</strong> Utilize nosso <a href="guia.html">Guia de Descarte</a> para entender como preparar seus itens.</li>
+                    <li><strong>Doe ou Descarte:</strong> Se seus equipamentos ainda funcionam, considere <a href="doacoes.html">fazer uma doação</a>. Para itens que não funcionam mais, encontre <a href="pontos.html">Pontos de Descarte</a> parceiros.</li>
+                    <li><strong>Triagem e Destino Certo:</strong> Os materiais coletados são encaminhados para triagem, onde o que pode ser reutilizado é separado, e o restante segue para processos de reciclagem seguros e ambientalmente adequados.</li>
+                </ul>
+                <p>Nosso objetivo é garantir que cada componente seja tratado da melhor forma possível, minimizando o impacto ambiental e maximizando o reaproveitamento de recursos.</p>
+            </section>
+
+            <section id="importancia">
+                <h3><i class="fas fa-leaf"></i> A Importância do Nosso Trabalho para BH</h3>
+                <p>Cuidar dos resíduos eletrônicos é cuidar do futuro de Belo Horizonte. Ao promover o descarte correto, a EcoTech BH contribui ativamente para a preservação do nosso meio ambiente, evitando a contaminação do solo e da água por substâncias tóxicas. Além disso, fomentamos a economia circular, reduzimos o desperdício de recursos naturais valiosos e apoiamos o desenvolvimento social através da doação de equipamentos funcionais. Junte-se a nós para construir uma BH mais sustentável e consciente!</p>
+            </section>
+
+            <section id="contato-localizacao">
+                <h3><i class="fas fa-map-marker-alt"></i> Contato e Localização</h3>
+                <p>Visite-nos ou entre em contato! Estamos à disposição para ajudar Belo Horizonte a gerenciar seu lixo eletrônico de forma mais eficaz.</p>
+                <address>
+                    <i class="fas fa-location-dot"></i> <strong>Endereço:</strong> R. Padre Pedro Pinto, 1500 - Venda Nova, Belo Horizonte - MG.<br>
+                    (Terceiro andar do shopping UAI).<br><br>
+                    <i class="fas fa-envelope"></i> <strong>E-mail:</strong> <a href="mailto:contato@ecotechbh.com.br">ecotech@gmail.com.br</a><br>
+                    <i class="fas fa-phone"></i> <strong>Telefone:</strong> (31) 9111-1111
+                </address>
+                <div class="map-placeholder">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3753.651684169981!2d-43.96552162388825!3d-19.81236033465773!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xa68fc1e692224d%3A0xb55510d6781060f2!2sUai%20Shopping%20O%20Ponto!5e0!3m2!1spt-BR!2sbr!4v1749044420056!5m2!1spt-BR!2sbr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </section>
+
+            <section class="call-to-action-final">
+                <p><strong>Faça parte da solução para um descarte eletrônico mais consciente em Belo Horizonte!</strong></p>
+                <a href="guia.html" class="btn-cta">Consulte o Guia de Descarte</a>
+                <a href="doacoes.html" class="btn-cta">Doe seus Eletrônicos</a>
+                <a href="pontos.html" class="btn-cta">Encontre Pontos de Coleta</a>
             </section>
         </main>
     </div>
@@ -455,7 +485,10 @@ document.addEventListener('DOMContentLoaded', async function() {
     const userDropdown = document.getElementById('userDropdown');
     const logoutButton = document.getElementById('logoutButton');
     const doacoesMenuLink = document.getElementById('doacoesMenuLink');
-    const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+    // Para este arquivo combinado, vamos assumir que o nome dele seria 'sobre.html' ou algo que o JS identifique como tal.
+    // Para fins de demonstração direta do menu ativo, a classe 'active' foi adicionada manualmente ao HTML.
+    // A lógica original de currentPath pode ser mantida se o arquivo for nomeado corretamente.
+    const currentPath = window.location.pathname.split('/').pop() || 'index.html'; 
 
     // Lógica do Menu do Usuário
     if (userIcon && userDropdown) {
@@ -487,15 +520,39 @@ document.addEventListener('DOMContentLoaded', async function() {
     }
 
     // Lógica para ativar o item correto no menu lateral
+    // A classe 'active' foi adicionada manualmente ao link 'Sobre o Projeto' neste HTML combinado.
+    // A lógica abaixo é a original e funcionaria se currentPath fosse 'sobre.html'.
     const menuItems = document.querySelectorAll('.menu-list a');
+    let foundActive = false;
     menuItems.forEach(item => {
-        const itemHref = item.getAttribute('href');
-        if (itemHref === currentPath || (currentPath === 'index.html' && itemHref === '') || (currentPath === '' && itemHref === 'index.html')) {
-             item.classList.add('active');
-        } else {
-            item.classList.remove('active');
+        // Verifica se o item já tem a classe 'active' (adicionada manualmente)
+        if (item.classList.contains('active')) {
+            foundActive = true;
         }
     });
+    // Se nenhuma classe 'active' foi adicionada manualmente E o currentPath não é a raiz (index.html), aplica a lógica original
+    // Isso evita que 'Início' seja marcado como ativo se 'Sobre' já estiver ativo.
+    if (!foundActive) {
+        menuItems.forEach(item => {
+            const itemHref = item.getAttribute('href');
+            if (itemHref === currentPath || (currentPath === 'index.html' && (itemHref === '' || itemHref === 'index.html'))) {
+                item.classList.add('active');
+            } else {
+                item.classList.remove('active');
+            }
+        });
+    } else { // Se 'Sobre' (ou outro) foi ativado manualmente, garante que 'Início' não fique ativo erroneamente
+        menuItems.forEach(item => {
+            const itemHref = item.getAttribute('href');
+            if (itemHref === 'index.html' && !item.classList.contains('active') && currentPath !== 'index.html' && currentPath !== '') {
+                // Se 'Início' não é o link ativo manualmente E não estamos na página inicial, ele não deve ser ativo.
+                // Esta condição é um pouco redundante com a lógica de 'foundActive' mas reforça.
+            } else if (!item.classList.contains('active')) { // Se não for o item ativo manualmente, remove a classe active
+                 item.classList.remove('active');
+            }
+        });
+    }
+
 
     // Lógica de proteção para o link "Doações" no menu
     if (doacoesMenuLink) {
@@ -510,8 +567,8 @@ document.addEventListener('DOMContentLoaded', async function() {
         });
     }
     
-    // Lógica específica para a página GUIA.HTML (Acordeão)
-    if (currentPath === 'guia.html') {
+    // Lógica específica para a página GUIA.HTML (Acordeão) - não se aplica aqui, mas mantida do script original
+    if (currentPath === 'guia.html') { // Este bloco não será executado pois o conteúdo não é do guia
         const accordionHeaders = document.querySelectorAll('.accordion-header');
         accordionHeaders.forEach(header => {
             header.addEventListener('click', function () {
@@ -544,7 +601,6 @@ document.addEventListener('DOMContentLoaded', async function() {
         }
     });
     
-    // Torna o corpo da página visível, pois não há proteção de rota no carregamento para guia.html
     document.body.style.visibility = 'visible';
 });
 </script>
