@@ -31,7 +31,7 @@
     --bg-icon-user: #000;
     --bg-icon-user-hover: #222;
     --color-icon-user: #fff;
-    --bg-article-guide: #fdfdff; /* Usado também para os cards */
+    --bg-article-guide: #fdfdff;
     
     --border-color-light: #e3eaf6;
     --border-color-medium: #c5cde0;
@@ -43,6 +43,7 @@
     --shadow-strong: rgba(0, 0, 0, 0.1);
     --shadow-dark: rgba(0, 0, 0, 0.2);
     --shadow-sidebar-mobile: rgba(0,0,0,0.1);
+    --shadow-accordion: rgba(0,0,0,0.05);
 
     --border-radius-main: 12px;
     --border-radius-links: 8px;
@@ -53,18 +54,10 @@
     --line-height-content-text: 1.7;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
-body { 
-    font-family: var(--primary-font); 
-    display: flex; 
-    flex-direction: column; 
-    min-height: 100vh; 
-    background-color: var(--bg-body); 
-    color: var(--text-color-body); 
-    line-height: var(--line-height-base);
-}
+body { font-family: var(--primary-font); display: flex; flex-direction: column; min-height: 100vh; background-color: var(--bg-body); color: var(--text-color-body); line-height: var(--line-height-base); }
 .page-wrapper { display: flex; flex-grow: 1; width: 100%; margin: 0; gap: 30px; padding-right: 30px; padding-bottom: 20px; }
 
-/* Menu Lateral */
+/* Menu Lateral (Estilos Padronizados) */
 .menu-container { background-color: var(--bg-sidebar); box-shadow: 0 4px 15px var(--shadow-strong); padding: 30px 20px; width: 280px; box-sizing: border-box; flex-shrink: 0; position: sticky; top: 0; left: 0; height: 100vh; border-radius: 0 var(--border-radius-links) var(--border-radius-links) 0; display: flex; flex-direction: column; align-items: center; }
 .menu-header { text-align: center; margin-bottom: 30px; width: 100%; }
 .menu-header h1 { color: var(--color-primary); font-size: 2em; margin: 0; font-weight: 700; }
@@ -79,7 +72,7 @@ body {
 .menu-icon { margin-right: 15px; font-size: 1.4em; color: #6c7a89; transition: color 0.3s ease; }
 .menu-item a:hover .menu-icon { color: var(--color-secondary); }
 
-/* Menu Usuário Topo Direito */
+/* Menu Usuário Topo Direito e Dropdown (Estilos Padronizados) */
 .user-menu-container { position: fixed; top: 30px; right: 40px; z-index: 1000; }
 .user-top-right { width: 44px; height: 44px; background-color: var(--bg-icon-user); border-radius: var(--border-radius-icon-user); display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 2px 6px var(--shadow-dark); transition: background-color 0.3s ease; text-decoration: none; }
 .user-top-right svg { fill: var(--color-icon-user); width: 24px; height: 24px; }
@@ -97,42 +90,46 @@ body {
 
 /* Conteúdo Principal */
 main.content { flex-grow: 1; padding: 40px 48px; background-color: var(--bg-content); border-radius: var(--border-radius-main); margin-top: 20px; margin-bottom: 20px; box-shadow: 0 6px 18px var(--shadow-medium); max-width: 900px; margin-left: auto; margin-right: auto; }
-main.content h2 { 
+main.content h2 { /* Estilo para H2 principal da página Pontos (centralizado) */
     margin-bottom: 20px; color: var(--color-primary); font-size: 2.3em; font-weight: 700;
-    letter-spacing: 0.02em; text-align: center; padding-bottom: 10px; 
-    border-bottom: 2px solid var(--border-color-light); 
+    letter-spacing: 0.02em; text-align: center; padding-bottom: 10px; /* Removido border-bottom e display inline-block para centralizar */
+    border-bottom: 2px solid var(--border-color-light); /* Mantendo um sublinhado leve se desejado, ou remover */
 }
 main.content p { margin-bottom: 20px; font-size: 1.05em; color: var(--text-color-paragraphs); line-height: var(--line-height-content-text); }
 
-/* ESTILOS ESPECÍFICOS DA PÁGINA PONTOS DE DESCARTE */
-.search-container { margin-bottom: 30px; position: relative; background-color: var(--bg-article-guide); padding: 20px; border-radius: var(--border-radius-links); box-shadow: 0 2px 5px rgba(0,0,0,0.07); }
-.search-input { width: 100%; padding: 12px 15px 12px 40px; border: 1px solid var(--border-color-medium); border-radius: var(--border-radius-links); font-size: 1em; transition: border-color 0.3s ease, box-shadow 0.3s ease; }
-.search-input:focus { border-color: var(--color-secondary); box-shadow: 0 0 0 3px rgba(74, 105, 189, 0.25); outline: none; }
+/* ESTILOS ESPECÍFICOS DA PÁGINA PONTOS DE DESCARTE (Integrados) */
+.search-container { margin-bottom: 30px; position: relative; background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.07); }
+.search-input { width: 100%; padding: 12px 15px 12px 40px; border: 1px solid #ced4da; border-radius: 8px; font-size: 1em; transition: border-color 0.3s ease, box-shadow 0.3s ease; }
+.search-input:focus { border-color: #3f51b5; box-shadow: 0 0 0 3px rgba(63, 81, 181, 0.25); outline: none; }
 .search-container .search-icon { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: #6c757d; font-size: 1.1em; padding-left: 15px; }
 
 @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
 .pontos-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
-.ponto-card { background-color: var(--bg-article-guide); border-radius: var(--border-radius-main); padding: 20px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); color: var(--text-color-body); transition: box-shadow 0.3s ease, transform 0.3s ease; opacity: 0; transform: translateY(20px); animation: fadeInUp 0.5s ease-out forwards; display: flex; flex-direction: column; }
+.ponto-card { background-color: #ffffff; border-radius: 10px; padding: 20px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); color: #333; transition: box-shadow 0.3s ease, transform 0.3s ease; opacity: 0; transform: translateY(20px); animation: fadeInUp 0.5s ease-out forwards; display: flex; flex-direction: column; }
 .pontos-grid > .ponto-card:nth-child(1) { animation-delay: 0.05s; }
 .pontos-grid > .ponto-card:nth-child(2) { animation-delay: 0.1s; }
 .pontos-grid > .ponto-card:nth-child(3) { animation-delay: 0.15s; }
 .pontos-grid > .ponto-card:nth-child(4) { animation-delay: 0.2s; }
-
+.pontos-grid > .ponto-card:nth-child(5) { animation-delay: 0.25s; }
+.pontos-grid > .ponto-card:nth-child(6) { animation-delay: 0.3s; }
+.pontos-grid > .ponto-card:nth-child(7) { animation-delay: 0.35s; }
+.pontos-grid > .ponto-card:nth-child(8) { animation-delay: 0.4s; }
 .ponto-card:hover { box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12); transform: translateY(-4px); }
-.ponto-card h3 { color: var(--color-secondary); font-weight: 600; margin-bottom: 8px; font-size: 1.25em; }
-.ponto-card p { margin-bottom: 10px; font-size: 0.95em; line-height: 1.5; color: var(--text-color-paragraphs); }
+.ponto-card h3 { color: #3f51b5; /* Pode usar var(--color-secondary) */ font-weight: 600; margin-bottom: 8px; font-size: 1.25em; }
+.ponto-card p { margin-bottom: 10px; font-size: 0.95em; line-height: 1.5; color: #555; }
 .ponto-card p.card-description { min-height: 50px; }
-.info-line { display: flex; align-items: center; margin-bottom: 8px; font-size: 0.9em; color: var(--text-color-address); }
-.info-line i { color: var(--color-secondary); margin-right: 8px; width: 16px; text-align: center; }
-.action-link { display: inline-block; color: var(--color-secondary); font-weight: 600; text-decoration: none; transition: color 0.3s ease, transform 0.2s ease; margin-top: auto; padding-top: 10px; font-size: 0.95em; align-self: flex-start; }
-.action-link:hover { color: var(--color-primary); transform: translateX(3px); }
+.info-line { display: flex; align-items: center; margin-bottom: 8px; font-size: 0.9em; color: #454545; }
+.info-line i { color: #3f51b5; /* Pode usar var(--color-secondary) */ margin-right: 8px; width: 16px; text-align: center; }
+.action-link { display: inline-block; color: #3f51b5; /* Pode usar var(--color-secondary) */ font-weight: 600; text-decoration: none; transition: color 0.3s ease, transform 0.2s ease; margin-top: auto; padding-top: 10px; font-size: 0.95em; align-self: flex-start; }
+.action-link:hover { color: #1a237e; /* Pode usar var(--color-primary) */ transform: translateX(3px); }
 .action-link i { margin-left: 5px; transition: transform 0.2s ease; }
 .action-link:hover i { transform: translateX(2px); }
 
 /* Estilos para Modais Personalizados */
 .custom-modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.6); display: none; align-items: center; justify-content: center; z-index: 2000; padding: 15px; }
 .custom-modal-box { background-color: var(--bg-content, #fff); padding: 30px 35px; border-radius: var(--border-radius-main, 12px); box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15); text-align: center; width: auto; max-width: 420px; min-width: 300px; animation: fadeInModal 0.3s ease-out; }
+/* @keyframes fadeInModal já definido acima para os cards, não precisa repetir */
 .custom-modal-box p { font-size: 1.15em; color: var(--text-color-body, #333); margin-top: 0; margin-bottom: 25px; line-height: 1.6; }
 .custom-modal-buttons { display: flex; justify-content: center; gap: 15px; }
 .custom-modal-buttons button { padding: 12px 25px; border: none; border-radius: var(--border-radius-button, 6px); font-size: 0.95em; font-weight: 600; cursor: pointer; transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease; min-width: 110px; }
@@ -156,7 +153,7 @@ footer { width: 100%; text-align: center; padding: 25px 20px; font-size: 0.9em; 
     .menu-item a { padding: 10px 12px; font-size: 0.95em; }
     .menu-icon { margin-right: 10px; font-size: 1.2em; }
     main.content { margin: 20px 15px 0 15px; padding: 25px 20px; max-width: none; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
-    main.content h2 { font-size: 1.8em; } 
+    main.content h2 { font-size: 1.8em; text-align: center; display: block; border-bottom: none; } /* Ajuste para H2 no mobile */
     .user-menu-container { top: 20px; right: 20px; }
     .user-top-right { width: 40px; height: 40px; }
     .user-top-right svg { width: 20px; height: 20px; }
@@ -169,8 +166,8 @@ footer { width: 100%; text-align: center; padding: 25px 20px; font-size: 0.9em; 
     .ponto-card p.card-description { min-height: auto; }
 }
 @media (max-width: 768px) {
-    main.content { margin: 20px 10px 0 10px; } 
-    .pontos-grid { grid-template-columns: 1fr; } 
+    main.content { margin: 20px 10px 0 10px; }
+    .pontos-grid { grid-template-columns: 1fr; }
 }
 @media (max-width: 600px) {
     .menu-container { flex-direction: column; align-items: center; padding-top: 15px; }
@@ -202,7 +199,7 @@ footer { width: 100%; text-align: center; padding: 25px 20px; font-size: 0.9em; 
                 <li><a href="meu-perfil.html">Meu Perfil (em breve)</a></li>
                 <li><a href="minhas-doacoes.html">Minhas Doações (em breve)</a></li>
             </ul>
-            <a href="#" class="logout-button" id="logoutButton">Sair da conta</a>
+            <a href="login.html" class="logout-button">Sair da conta</a>
         </div>
     </div>
 
@@ -216,60 +213,57 @@ footer { width: 100%; text-align: center; padding: 25px 20px; font-size: 0.9em; 
                 <li class="menu-item"><a href="index.html"><i class="fas fa-home menu-icon"></i>Início</a></li>
                 <li class="menu-item"><a href="sobre.html"><i class="fas fa-info-circle menu-icon"></i>Sobre o Projeto</a></li>
                 <li class="menu-item"><a href="guia.html"><i class="fas fa-book menu-icon"></i>Guia de Descarte</a></li>
-                <li class="menu-item"><a href="doacoes.html" id="doacoesMenuLink"><i class="fas fa-hand-holding-heart menu-icon"></i>Doações</a></li>
-                <li class="menu-item"><a href="pontos.html" id="pontosMenuLink"><i class="fas fa-map-marker-alt menu-icon"></i>Pontos de Descarte</a></li>
+                <li class="menu-item"><a href="doacoes.html"><i class="fas fa-hand-holding-heart menu-icon"></i>Doações</a></li>
+                <li class="menu-item"><a href="pontos.html"><i class="fas fa-map-marker-alt menu-icon"></i>Pontos de Descarte</a></li>
             </ul>
         </div>
         <main class="content" role="main">
             <h2>Pontos de Descarte em Belo Horizonte</h2>
-            <p>Encontre locais próximos para descartar seu lixo eletrônico de forma correta e ajude o meio ambiente. Use a busca para filtrar por nome, endereço ou tipo de material aceito.</p>
 
             <div class="search-container">
                 <i class="fas fa-search search-icon"></i>
-                <input type="text" id="filtroBusca" class="search-input" onkeyup="filtrarCardsGlobais()" placeholder="Buscar por nome, endereço ou tipo...">
+                <input type="text" id="filtroBusca" class="search-input" onkeyup="filtrarCards()" placeholder="Buscar por nome, endereço ou tipo...">
             </div>
 
-            <div class="pontos-grid" id="pontosGrid">
-                 <section class="ponto-card">
+            <div class="pontos-grid">
+                <section class="ponto-card">
                     <h3 class="card-title">MG Recicla</h3>
-                    <p class="card-description">Coleta e compra lixo eletrônico residencial e comercial, faz descaracterização dos materiais. Aceita: Computadores, notebooks, celulares, tablets, cabos, periféricos em geral.</p>
+                    <p class="card-description">Coleta e compra lixo eletrônico residencial e comercial, faz descaracterização dos materiais.</p>
                     <div class="card-details">
                         <p class="info-line card-contact"><i class="fas fa-phone-alt"></i>(31) 3565-5294 / (31) 97104-7254</p>
                         <p class="info-line card-address"><i class="fas fa-map-marker-alt"></i>Rua Sararé, 47 - Jardimópolis, Belo Horizonte</p>
                     </div>
-                    <a href="https://www.google.com/maps/search/?api=1&query=Rua+Sararé,47,Jardimópolis,Belo+Horizonte" target="_blank" rel="noopener noreferrer" class="action-link">Ver no mapa <i class="fas fa-external-link-alt"></i></a>
+                    <a href="https://www.google.com/maps/search/?api=1&query=Rua+Sarar%C3%A9%2C+47+-+Jardim%C3%B3polis%2C+Belo+Horizonte" target="_blank" rel="noopener noreferrer" class="action-link">Ver no mapa <i class="fas fa-arrow-right"></i></a>
                 </section>
 
                 <section class="ponto-card">
                     <h3 class="card-title">Reciclagem TC</h3>
-                    <p class="card-description">Coleta domiciliar de eletrodomésticos e eletrônicos em Belo Horizonte. Aceita: Geladeiras, fogões, máquinas de lavar, micro-ondas, TVs, computadores.</p>
+                    <p class="card-description">Coleta domiciliar de eletrodomésticos e eletrônicos em Belo Horizonte.</p>
                     <div class="card-details">
                         <p class="info-line card-contact"><i class="fas fa-phone-alt"></i>(31) 3191-6026</p>
                         <p class="info-line card-address"><i class="fas fa-info-circle"></i>Endereço não informado publicamente, funciona via contato para agendamento.</p>
                     </div>
-                     <a href="tel:+553131916026" class="action-link">Ligar para agendar <i class="fas fa-phone-alt"></i></a>
                 </section>
 
                 <section class="ponto-card">
-                    <h3 class="card-title">Abree Pontos de Coleta</h3>
-                    <p class="card-description">Associação Brasileira de Reciclagem de Eletrônicos e Eletrodomésticos. Consulte o site para encontrar pontos de coleta parceiros próximos ao seu CEP. Aceita: Diversos tipos de eletrônicos e eletrodomésticos, verifique no site.</p>
+                    <h3 class="card-title">Abree</h3>
+                    <p class="card-description">Associação Brasileira de Reciclagem de Eletrônicos e Eletrodomésticos. Consulta pontos de coleta por CEP.</p>
                     <div class="card-details">
-                        <p class="info-line card-contact"><i class="fas fa-phone-alt"></i>(11) 98991-4558 (WhatsApp)</p>
-                        <p class="info-line card-website"><i class="fas fa-globe"></i><a href="https://abree.org.br/pontos-de-coleta" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: none;">abree.org.br/pontos-de-coleta</a></p>
+                        <p class="info-line card-contact"><i class="fas fa-phone-alt"></i>(11) 98991-4558</p>
+                        <p class="info-line card-website"><i class="fas fa-globe"></i><a href="https://abree.org.br/" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: none;">abree.org.br</a></p>
                     </div>
-                    <a href="https://abree.org.br/pontos-de-coleta" target="_blank" rel="noopener noreferrer" class="action-link">Consultar pontos <i class="fas fa-external-link-alt"></i></a>
+                    <a href="https://abree.org.br/" target="_blank" rel="noopener noreferrer" class="action-link">Consultar pontos <i class="fas fa-arrow-right"></i></a>
                 </section>
 
                 <section class="ponto-card">
-                    <h3 class="card-title">Prodabel - Coleta Agendada</h3>
-                    <p class="card-description">Coleta gratuita com agendamento para descarte de eletrônicos em Belo Horizonte. Aceita: Computadores, monitores, teclados, mouses, impressoras, notebooks e celulares.</p>
+                    <h3 class="card-title">Prodabel</h3>
+                    <p class="card-description">Coleta gratuita com agendamento para descarte de eletrônicos em Belo Horizonte.</p>
                     <div class="card-details">
                         <p class="info-line card-contact"><i class="fas fa-phone-alt"></i>(31) 3277-4771</p>
-                        <p class="info-line card-address"><i class="fas fa-map-marker-alt"></i>Rua José Clemente Pereira, 440 - Ipiranga, Belo Horizonte (Sede para informações, coleta é agendada)</p>
+                        <p class="info-line card-address"><i class="fas fa-map-marker-alt"></i>Rua José Clemente Pereira, 440 - Ipiranga, Belo Horizonte</p>
                     </div>
-                     <a href="tel:+553132774771" class="action-link">Ligar para agendar <i class="fas fa-phone-alt"></i></a>
                 </section>
-            </div>
+                </div>
         </main>
     </div>
 
@@ -297,17 +291,48 @@ footer { width: 100%; text-align: center; padding: 25px 20px; font-size: 0.9em; 
     </footer>
 
 <script>
-// Funções de Modal (showCustomAlert e showCustomConfirm)
+// Função para filtrar os cards (mantida do seu script original)
+function filtrarCards() {
+    const input = document.getElementById('filtroBusca');
+    const filter = input.value.toLowerCase();
+    const cards = document.querySelectorAll('.ponto-card');
+    let visibleCardCount = 0;
+
+    cards.forEach((card, index) => {
+        const title = card.querySelector('.card-title') ? card.querySelector('.card-title').textContent.toLowerCase() : '';
+        let textContent = '';
+        card.querySelectorAll('.card-description, .info-line').forEach(p => {
+            textContent += p.textContent.toLowerCase() + ' ';
+        });
+
+        if (title.includes(filter) || textContent.includes(filter)) {
+            card.style.display = "";
+            // Re-aplica animação para itens que se tornam visíveis
+            card.style.animationDelay = (visibleCardCount * 0.05) + 's';
+            card.style.opacity = '0'; // Reseta para animação
+            card.style.transform = 'translateY(20px)'; // Reseta para animação
+            void card.offsetWidth; // Força reflow para reiniciar a animação
+            card.style.animationName = 'fadeInUp';
+            visibleCardCount++;
+        } else {
+            card.style.display = "none";
+            card.style.animationName = 'none'; // Remove animação de itens escondidos
+        }
+    });
+}
+
 function showCustomAlert(message) {
   return new Promise((resolve) => {
     const overlay = document.getElementById('customAlertOverlay');
     const messageEl = document.getElementById('customAlertMessage');
     const okButton = document.getElementById('customAlertOkButton');
-    if (!overlay || !messageEl || !okButton) { console.error("Elementos do modal de alerta não encontrados."); return resolve(false); }
+
     messageEl.textContent = message;
     overlay.style.display = 'flex';
+
     const newOkButton = okButton.cloneNode(true);
     okButton.parentNode.replaceChild(newOkButton, okButton);
+
     let escapeListener;
     const handleClose = () => {
       overlay.style.display = 'none';
@@ -315,24 +340,29 @@ function showCustomAlert(message) {
       resolve(true);
     };
     newOkButton.addEventListener('click', handleClose);
-    escapeListener = (event) => { if (event.key === 'Escape' && overlay.style.display === 'flex') handleClose(); };
+    escapeListener = (event) => {
+      if (event.key === 'Escape' && overlay.style.display === 'flex') handleClose();
+    };
     document.addEventListener('keydown', escapeListener);
   });
 }
 
+// Função para exibir o modal de CONFIRMAÇÃO personalizado
 function showCustomConfirm(message) {
   return new Promise((resolve) => {
     const overlay = document.getElementById('customConfirmOverlay');
     const messageEl = document.getElementById('customConfirmMessage');
     const okButton = document.getElementById('customConfirmOkButton');
     const cancelButton = document.getElementById('customConfirmCancelButton');
-    if (!overlay || !messageEl || !okButton || !cancelButton) { console.error("Elementos do modal de confirmação não encontrados."); return resolve(false); }
+
     messageEl.textContent = message;
     overlay.style.display = 'flex';
+
     const newOkButton = okButton.cloneNode(true);
     okButton.parentNode.replaceChild(newOkButton, okButton);
     const newCancelButton = cancelButton.cloneNode(true);
     cancelButton.parentNode.replaceChild(newCancelButton, cancelButton);
+
     let escapeListener;
     const handleResolve = (value) => {
       overlay.style.display = 'none';
@@ -341,117 +371,44 @@ function showCustomConfirm(message) {
     };
     newOkButton.addEventListener('click', () => handleResolve(true));
     newCancelButton.addEventListener('click', () => handleResolve(false));
-    escapeListener = (event) => { if (event.key === 'Escape' && overlay.style.display === 'flex') handleResolve(false); };
+    escapeListener = (event) => {
+      if (event.key === 'Escape' && overlay.style.display === 'flex') handleResolve(false);
+    };
     document.addEventListener('keydown', escapeListener);
   });
 }
 
-// Função para filtrar os cards (agora global para ser chamada pelo onkeyup)
-function filtrarCardsGlobais() {
-    const input = document.getElementById('filtroBusca');
-    if (!input) return; 
-    const filter = input.value.toLowerCase();
-    const cardsContainer = document.getElementById('pontosGrid');
-    if (!cardsContainer) return; 
-    const cards = cardsContainer.querySelectorAll('.ponto-card');
-    let visibleCardCount = 0;
-
-    cards.forEach((card) => {
-        const titleElement = card.querySelector('.card-title');
-        const descriptionElement = card.querySelector('.card-description');
-        const addressElement = card.querySelector('.card-address');
-        
-        const title = titleElement ? titleElement.textContent.toLowerCase() : '';
-        const description = descriptionElement ? descriptionElement.textContent.toLowerCase() : '';
-        const address = addressElement ? addressElement.textContent.toLowerCase() : '';
-        
-        const cardText = title + ' ' + description + ' ' + address;
-
-        if (cardText.includes(filter)) {
-            card.style.display = "";
-            card.style.animationDelay = (visibleCardCount * 0.05) + 's';
-            card.style.opacity = '0'; 
-            card.style.transform = 'translateY(20px)'; 
-            void card.offsetWidth; 
-            card.style.animationName = 'fadeInUp';
-            visibleCardCount++;
-        } else {
-            card.style.display = "none";
-            card.style.animationName = 'none'; 
-        }
-    });
-}
-
-
-// Lógica principal da aplicação
-document.addEventListener('DOMContentLoaded', async function() {
+document.addEventListener('DOMContentLoaded', () => {
     const userIcon = document.getElementById('userIcon');
     const userDropdown = document.getElementById('userDropdown');
-    const logoutButton = document.getElementById('logoutButton');
-    const doacoesMenuLink = document.getElementById('doacoesMenuLink');
-    const currentPath = window.location.pathname.split('/').pop() || 'index.html';
 
-    // Lógica do Menu do Usuário
     if (userIcon && userDropdown) {
         userIcon.title = "Opções do Usuário";
         userIcon.setAttribute('aria-label', 'Opções do Usuário');
         userIcon.addEventListener('click', function(event) {
             userDropdown.classList.toggle('active');
-            event.stopPropagation(); 
+            event.stopPropagation();
         });
-        document.addEventListener('click', function(event) {
-            if (userDropdown && userIcon && !userDropdown.contains(event.target) && !userIcon.contains(event.target) && userDropdown.classList.contains('active')) {
-                userDropdown.classList.remove('active');
-            }
-        });
+        const logoutButtonFromDropdown = userDropdown.querySelector('.logout-button');
+        if (logoutButtonFromDropdown) {
+            logoutButtonFromDropdown.addEventListener('click', async function(event) {
+                event.preventDefault();
+                const userChoice = await showCustomConfirm("Você tem certeza que deseja sair?");
+                if (userChoice) {
+                    localStorage.removeItem('usuarioLogadoEcoTechBH');
+                    await showCustomAlert('Redirecionando para login...');
+                    window.location.href = 'login.html';
+                }
+            });
+        }
     }
 
-    // Lógica de Logout
-    if (logoutButton) {
-        logoutButton.addEventListener('click', async function(event) {
-            event.preventDefault();
-            const userChoice = await showCustomConfirm("Você tem certeza que deseja sair?");
-            if (userChoice) {
-                sessionStorage.removeItem('usuarioLogadoEcoTechBH'); 
-                sessionStorage.removeItem('redirectAfterLogin'); 
-                await showCustomAlert('Você saiu da sua conta. Redirecionando para a página de login...');
-                window.location.href = 'login.html';
-            }
-        });
-    }
-
-    // Lógica para ativar o item correto no menu lateral
-    const menuItems = document.querySelectorAll('.menu-list a');
-    menuItems.forEach(item => {
-        const itemHref = item.getAttribute('href');
-        if (itemHref === currentPath || (currentPath === 'index.html' && itemHref === '') || (currentPath === '' && itemHref === 'index.html')) {
-             item.classList.add('active');
-        } else {
-            item.classList.remove('active');
+    document.addEventListener('click', function(event) {
+        if (userDropdown && userIcon && !userDropdown.contains(event.target) && !userIcon.contains(event.target) && userDropdown.classList.contains('active')) {
+            userDropdown.classList.remove('active');
         }
     });
 
-    // Lógica de proteção para o link "Doações" no menu
-    if (doacoesMenuLink) {
-        doacoesMenuLink.addEventListener('click', async function(event) {
-            const isLoggedIn = sessionStorage.getItem('usuarioLogadoEcoTechBH') === 'true'; 
-            if (!isLoggedIn) { 
-                event.preventDefault(); 
-                sessionStorage.setItem('redirectAfterLogin', 'doacoes.html'); 
-                await showCustomAlert("Para realizar esta Ação é necessário realizar o login.");
-                window.location.href = 'login.html';
-            }
-        });
-    }
-    
-    // Lógica específica para a página PONTOS.HTML (Chamada inicial do filtro para animação)
-    if (currentPath === 'pontos.html') {
-      if (typeof filtrarCardsGlobais === 'function' && document.getElementById('filtroBusca')) {
-         filtrarCardsGlobais(); 
-      }
-    }
-
-    // Listener de Escape global para o dropdown do usuário
     document.addEventListener('keydown', function(event) {
         if (event.key === 'Escape') {
             if (userDropdown && userDropdown.classList.contains('active')) {
@@ -460,8 +417,22 @@ document.addEventListener('DOMContentLoaded', async function() {
         }
     });
 
-    // Torna o corpo da página visível, pois não há proteção de rota no carregamento para pontos.html
-    document.body.style.visibility = 'visible';
+    const menuItems = document.querySelectorAll('.menu-list a');
+    const currentPath = window.location.pathname.split('/').pop();
+    menuItems.forEach(item => {
+        const itemHref = item.getAttribute('href');
+        if (itemHref === currentPath) {
+            item.classList.add('active');
+        } else if (currentPath === '' && itemHref === 'index.html') {
+            item.classList.add('active');
+        } else {
+            item.classList.remove('active');
+        }
+    });
+
+    if (document.getElementById('filtroBusca')) {
+      filtrarCards();
+    }
 });
 </script>
 

@@ -4,7 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EcoTech BH - Login</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary-font: 'Roboto', sans-serif;
+            --text-color-body: #333;
+            --text-color-strong: #2c3e50;
+            --color-primary: #2c3e50; 
+            --color-secondary: #4a69bd; 
+            --color-text-on-active: #fff;
+            --bg-content: #fff;
+            --bg-icon-user: #000; 
+            --bg-icon-user-hover: #222; 
+            --color-icon-user: #fff; 
+            --border-color-light: #e3eaf6;
+            --border-color-medium: #c5cde0;
+            --shadow-dark: rgba(0, 0, 0, 0.2); 
+            --border-radius-main: 12px;
+            --border-radius-links: 8px;
+            --border-radius-icon-user: 10px;
+            --border-radius-button: 6px;
+        }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             display: flex;
@@ -13,13 +34,14 @@
             min-height: 100vh;
             margin: 0;
             color: #fff;
-            background-image: url('images/imagemum.jpg'); /* Certifique-se que este caminho está correto */
+            background-color: #333; 
+            background-image: url('images/imagemum.jpg'); 
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center center;
         }
         .login-container {
-            position: relative; /* Adicionado para posicionamento do botão de voltar */
+            position: relative; 
             background-color: rgba(255, 255, 255, 0.1); 
             backdrop-filter: blur(10px); 
             -webkit-backdrop-filter: blur(10px); 
@@ -31,224 +53,150 @@
             max-width: 420px; 
             text-align: center;
         }
-        .login-container h1 {
-            color: #fff; 
-            margin-bottom: 15px;
-            font-size: 2.4em;
-            font-weight: 600; 
+        .login-container h1 { color: #fff; margin-bottom: 15px; font-size: 2.4em; font-weight: 600; }
+        .login-container p#loginGreeting { margin-bottom: 30px; color: #e0e0e0; font-size: 1.1em; }
+        .form-section { width: 100%; }
+        .login-form div, .forgot-password-form div { margin-bottom: 18px; text-align: left; }
+        .login-form label, .forgot-password-form label { display: block; margin-bottom: 6px; font-weight: 500; color: #f0f0f0; font-size: 0.95em; }
+        .login-form input[type="text"], .login-form input[type="password"], .login-form input[type="email"], .forgot-password-form input[type="email"] { 
+            width: 100%; padding: 14px 18px; background-color: rgba(255, 255, 255, 0.15); 
+            border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 25px; 
+            box-sizing: border-box; font-size: 1em; color: #fff; 
         }
-        .login-container p#loginGreeting {
-            margin-bottom: 30px;
-            color: #e0e0e0; 
-            font-size: 1.1em;
+        .login-form input[type="text"]::placeholder, .login-form input[type="password"]::placeholder, .login-form input[type="email"]::placeholder, .forgot-password-form input[type="email"]::placeholder { color: rgba(255, 255, 255, 0.6); }
+        .login-form input[type="text"]:focus, .login-form input[type="password"]:focus, .login-form input[type="email"]:focus, .forgot-password-form input[type="email"]:focus { 
+            border-color: rgba(255, 255, 255, 0.7); background-color: rgba(255, 255, 255, 0.2); 
+            outline: none; box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1); 
         }
-        .form-section {
-            width: 100%;
+        .login-form button, .forgot-password-form button { 
+            width: 100%; padding: 14px; background-color: rgba(255, 255, 255, 0.9); 
+            color: var(--color-primary, #3f51b5); border: none; border-radius: 25px; 
+            font-size: 1.1em; font-weight: 600; cursor: pointer; 
+            transition: background-color 0.3s ease, color 0.3s ease; margin-top: 10px; 
         }
-        .login-form div,
-        .forgot-password-form div {
-            margin-bottom: 18px; 
-            text-align: left;
-        }
-        .login-form label,
-        .forgot-password-form label {
-            display: block;
-            margin-bottom: 6px;
-            font-weight: 500; 
-            color: #f0f0f0; 
-            font-size: 0.95em;
-        }
-        .login-form input[type="text"],
-        .login-form input[type="password"],
-        .login-form input[type="email"], 
-        .forgot-password-form input[type="email"] {
-            width: 100%;
-            padding: 14px 18px; 
-            background-color: rgba(255, 255, 255, 0.15); 
-            border: 1px solid rgba(255, 255, 255, 0.3); 
-            border-radius: 25px; 
-            box-sizing: border-box;
-            font-size: 1em;
-            color: #fff; 
-        }
-        .login-form input[type="text"]::placeholder,
-        .login-form input[type="password"]::placeholder,
-        .login-form input[type="email"]::placeholder,
-        .forgot-password-form input[type="email"]::placeholder {
-            color: rgba(255, 255, 255, 0.6);
-        }
-        .login-form input[type="text"]:focus,
-        .login-form input[type="password"]:focus,
-        .login-form input[type="email"]:focus,
-        .forgot-password-form input[type="email"]:focus {
-            border-color: rgba(255, 255, 255, 0.7); 
-            background-color: rgba(255, 255, 255, 0.2);
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
-        }
-        .login-form button,
-        .forgot-password-form button {
-            width: 100%;
-            padding: 14px; 
-            background-color: rgba(255, 255, 255, 0.9); 
-            color: #3f51b5; 
-            border: none;
-            border-radius: 25px; 
-            font-size: 1.1em;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background-color 0.3s ease, color 0.3s ease;
-            margin-top: 10px; 
-        }
-        .login-form button:hover,
-        .forgot-password-form button:hover {
-            background-color: #fff; 
-            color: #303f9f;
-        }
-        .message-area {
-            margin-top: 15px;
-            font-size: 0.9em;
-            min-height: 1.5em; 
-            line-height: 1.5em;
-            padding: 10px 15px; 
-            border-radius: 6px;       
-            border: 1px solid transparent; 
-            text-align: center; 
-        }
-        .message-area:not(.success):not(:empty) { 
-            color: #842029;          
-            background-color: #f8d7da; 
-            border-color: #f5c2c7;    
-            font-weight: 500;       
-        }
-        .message-area.success:not(:empty) { 
-            color: #0f5132;            
-            background-color: #d1e7dd;  
-            border-color: #badbcc;     
-            font-weight: 500;       
-        }
-        .extra-links {
-            margin-top: 25px; 
-            font-size: 0.9em;
-        }
-        .extra-links a, .extra-links span {
-            color: #f0f0f0; 
-            text-decoration: none;
-            margin: 0 5px;
-        }
-        .extra-links a:hover {
-            text-decoration: underline;
-            color: #fff;
-        }
-        .extra-links span.separator {
-            color: rgba(255, 255, 255, 0.5); 
-        }
-        .back-link {
-            display: block; 
-            margin-top: 20px;
-            color: #f0f0f0;
-            text-decoration: none;
-            font-size: 0.9em;
-        }
-        .back-link:hover {
-            text-decoration: underline;
-            color: #fff;
-        }
+        .login-form button:hover, .forgot-password-form button:hover { background-color: #fff; color: var(--color-secondary, #303f9f); }
         
-        /* Estilo atualizado para o botão de voltar SVG no canto superior */
-        .top-back-button {
-            position: absolute;
-            top: 25px; 
-            left: 25px; 
-            color: #fff; 
-            text-decoration: none;
-            z-index: 10; 
-            padding: 5px;
-            display: inline-flex; 
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%; 
-            transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+        .message-area { 
+            margin-top: 15px; font-size: 0.9em; min-height: 1.5em; line-height: 1.5em; 
+            padding: 10px 15px; border-radius: 6px; border: 1px solid transparent; 
+            text-align: center; display: none; 
         }
-        .top-back-button svg {
-            width: 28px; 
-            height: 28px; 
-            fill: currentColor; 
+        .message-area.error { color: #842029; background-color: #f8d7da; border-color: #f5c2c7; font-weight: 500; display: block; }
+        .message-area.success { color: #0f5132; background-color: #d1e7dd; border-color: #badbcc; font-weight: 500; display: block; }
+
+        .extra-links { margin-top: 25px; font-size: 0.9em; }
+        .extra-links a, .extra-links span { color: #f0f0f0; text-decoration: none; margin: 0 5px; }
+        .extra-links a:hover { text-decoration: underline; color: #fff; }
+        .extra-links span.separator { color: rgba(255, 255, 255, 0.5); }
+        
+        .back-link { display: block; margin-top: 20px; color: #f0f0f0; text-decoration: none; font-size: 0.9em; }
+        .back-link:hover { text-decoration: underline; color: #fff; }
+        
+        .top-back-button { 
+            position: absolute; top: 25px; left: 25px; color: #fff; text-decoration: none; 
+            z-index: 10; padding: 5px; display: inline-flex; align-items: center; justify-content: center; 
+            border-radius: 50%; transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out; 
         }
-        .top-back-button:hover {
-            color: #e0e0e0; 
-            background-color: rgba(255, 255, 255, 0.1); 
+        .top-back-button svg { width: 28px; height: 28px; fill: currentColor; }
+        .top-back-button:hover { color: #e0e0e0; background-color: rgba(255, 255, 255, 0.1); }
+
+        .user-menu-container { position: fixed; top: 30px; right: 40px; z-index: 1000; }
+        .user-top-right { width: 44px; height: 44px; background-color: var(--bg-icon-user); border-radius: var(--border-radius-icon-user); display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 2px 6px var(--shadow-dark); transition: background-color 0.3s ease; text-decoration: none; }
+        .user-top-right svg { fill: var(--color-icon-user); width: 24px; height: 24px; }
+        .user-top-right:hover { background-color: var(--bg-icon-user-hover); }
+        .dropdown-menu { position: absolute; top: calc(100% + 10px); right: 0; background-color: var(--bg-content); border-radius: var(--border-radius-links); box-shadow: 0 4px 12px rgba(0,0,0,0.15); min-width: 230px; padding: 15px; display: none; opacity: 0; transform: translateY(-10px); transition: opacity 0.2s ease-out, transform 0.2s ease-out; overflow: hidden; z-index: 1001; }
+        .dropdown-menu.active { display: block; opacity: 1; transform: translateY(0); }
+        .dropdown-menu h3 { font-size: 1.1em; color: var(--color-primary); margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid var(--border-color-light); font-weight: 600; }
+        .dropdown-menu ul { list-style: none; padding: 0; margin-bottom: 15px; }
+        .dropdown-menu ul li { margin-bottom: 8px; }
+        .dropdown-menu ul li:last-child { margin-bottom: 0; }
+        .dropdown-menu ul li a { display: block; padding: 8px 10px; color: var(--text-color-body); text-decoration: none; font-size: 0.95em; transition: background-color 0.2s ease, color 0.2s ease; border-radius: 4px; white-space: nowrap; }
+        .dropdown-menu ul li a:hover { background-color: #f0f0f0; color: var(--color-primary); }
+        .dropdown-menu .logout-button { display: block; width: 100%; padding: 10px 15px; background-color: #e74c3c; color: var(--color-text-on-active); border: none; border-radius: var(--border-radius-button); font-size: 1em; font-weight: 600; cursor: pointer; text-align: center; text-decoration: none; transition: background-color 0.2s ease, box-shadow 0.2s ease; }
+        .dropdown-menu .logout-button:hover { background-color: #c0392b; box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
+        
+        .custom-modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.6); display: none; align-items: center; justify-content: center; z-index: 2000; padding: 15px; }
+        .custom-modal-box { background-color: var(--bg-content, #fff); padding: 30px 35px; border-radius: var(--border-radius-main, 12px); box-shadow: 0 8px 25px rgba(0,0,0,0.15); text-align: center; width:auto; max-width:420px; min-width:300px; animation:fadeInModalLogin 0.3s ease-out; }
+        @keyframes fadeInModalLogin {from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
+        .custom-modal-box p { font-size:1.15em; color:var(--text-color-body,#333); margin-top:0; margin-bottom:25px; line-height:1.6; }
+        .custom-modal-buttons { display:flex; justify-content:center; gap:15px; }
+        .custom-modal-buttons button { padding:12px 25px; border:none; border-radius:var(--border-radius-button,6px); font-size:0.95em; font-weight:600; cursor:pointer; transition:background-color .2s ease,transform .1s ease,box-shadow .2s ease; min-width:110px; }
+        .custom-modal-buttons button:hover { transform:translateY(-2px); box-shadow:0 4px 8px rgba(0,0,0,0.1); }
+        .btn-modal-ok,.btn-modal-primary { background-color:var(--color-primary,#2c3e50); color:var(--color-text-on-active,#fff); }
+        .btn-modal-ok:hover,.btn-modal-primary:hover { background-color:var(--color-secondary,#4a69bd); }
+        .btn-modal-cancel { background-color:#f0f2f5; color:var(--text-color-strong,#2c3e50); border:1px solid var(--border-color-light,#e3eaf6); }
+        .btn-modal-cancel:hover { background-color:#e6eaf3; border-color:var(--border-color-medium,#c5cde0); }
+        
+        @media (max-width: 900px) { 
+            .user-menu-container{top:20px;right:20px;} .user-top-right{width:40px;height:40px;} .user-top-right svg{width:20px;height:20px;}
+            .dropdown-menu{min-width:180px;padding:12px;} .dropdown-menu h3{font-size:1em;margin-bottom:8px;padding-bottom:6px;}
+            .dropdown-menu ul li a{font-size:.9em;padding:6px 8px;} .dropdown-menu .logout-button{padding:8px 12px;font-size:.95em;}
+        }
+        @media (max-width:600px){
+            .login-container { padding: 25px 30px; }
+            .login-container h1 { font-size: 2em; }
+            .custom-modal-box{padding:20px 25px;max-width:calc(100% - 30px);}
+            .custom-modal-buttons{flex-direction:column;gap:10px;} .custom-modal-buttons button{width:100%;}
         }
     </style>
 </head>
 <body>
+    <div class="user-menu-container" style="display: none;" id="userMenuContainer"> 
+        <div class="user-top-right" id="userIcon" title="Área do Usuário" aria-label="Área do Usuário" tabindex="0" role="button">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+            </svg>
+        </div>
+        <div class="dropdown-menu" id="userDropdown">
+            <h3>Opções do Usuário</h3>
+            <ul>
+                <li><a href="meu-perfil.html">Meu Perfil (em breve)</a></li>
+                <li><a href="minhas-doacoes.html">Minhas Doações (em breve)</a></li>
+            </ul>
+            <a href="#" class="logout-button" id="logoutButtonFromDropdown">Sair da conta</a>
+        </div>
+    </div>
+
     <div class="login-container">
         <h1 id="mainHeading">Login</h1>
         <p id="loginGreeting">Que bom ter você de volta!</p>
-
+        
         <div id="loginFormSection" class="form-section">
-            <form id="simpleLoginForm" class="login-form">
-                <div>
-                    <label for="username">Usuário:</label>
-                    <input type="text" id="username" name="username" placeholder="Digite seu usuário">
-                </div>
-                <div>
-                    <label for="password">Senha:</label>
-                    <input type="password" id="password" name="password" placeholder="Digite sua senha">
-                </div>
+            <form id="simpleLoginForm" class="login-form" novalidate>
+                <div><label for="username">Usuário:</label><input type="text" id="username" name="username" placeholder="Digite seu usuário" required></div>
+                <div><label for="password">Senha:</label><input type="password" id="password" name="password" placeholder="Digite sua senha" required></div>
                 <button type="submit">Entrar</button>
             </form>
-            <div id="loginMessageArea" class="message-area" style="display:none;" aria-live="polite"></div>
+            <div id="loginMessageArea" class="message-area" aria-live="polite"></div>
         </div>
 
         <div id="forgotPasswordSection" class="form-section" style="display:none;">
-            <a href="#" id="topLeftBackFromForgot" class="top-back-button" title="Voltar para o Login" style="display:none;">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                  <path d="M0 0h24v24H0V0z" fill="none"/>
-                  <path d="M19 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H19v-2z"/>
-                </svg>
+            <a href="#" id="topLeftBackFromForgot" class="top-back-button" title="Voltar para o Login">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M19 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H19v-2z"/></svg>
             </a>
             <p style="color: #e0e0e0; margin-bottom: 20px; font-size: 1.05em;">Insira seu e-mail para redefinir a senha.</p> 
-            <form id="forgotPasswordForm" class="forgot-password-form">
-                <div>
-                    <label for="resetEmail">E-mail:</label>
-                    <input type="email" id="resetEmail" name="resetEmail" placeholder="Digite seu e-mail">
-                </div>
+            <form id="forgotPasswordForm" class="forgot-password-form" novalidate>
+                <div><label for="resetEmail">E-mail:</label><input type="email" id="resetEmail" name="resetEmail" placeholder="Digite seu e-mail" required></div>
                 <button type="submit">Enviar</button>
             </form>
-            <div id="forgotPasswordMessageArea" class="message-area" style="display:none;" aria-live="polite"></div>
+            <div id="forgotPasswordMessageArea" class="message-area" aria-live="polite"></div>
             <a href="#" id="backToLoginLink" class="back-link" style="display:none;">Voltar para o Login</a>
         </div>
-        
+
         <div id="createAccountSection" class="form-section" style="display:none;">
-            <a href="#" id="topLeftBackFromCreate" class="top-back-button" title="Voltar para o Login" style="display:none;">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                  <path d="M0 0h24v24H0V0z" fill="none"/>
-                  <path d="M19 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H19v-2z"/>
-                </svg>
+             <a href="#" id="topLeftBackFromCreate" class="top-back-button" title="Voltar para o Login">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M19 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H19v-2z"/></svg>
             </a>
             <p style="color: #e0e0e0; margin-bottom: 20px; font-size: 1.05em;">Preencha os dados abaixo para criar sua conta.</p>
-            <form id="createAccountForm" class="login-form">
-                <div>
-                    <label for="createName">Nome Completo:</label>
-                    <input type="text" id="createName" name="createName" >
-                </div>
-                <div>
-                    <label for="createEmail">E-mail:</label>
-                    <input type="email" id="createEmail" name="createEmail" >
-                </div>
-                <div>
-                    <label for="createPassword">Senha:</label>
-                    <input type="password" id="createPassword" name="createPassword">
-                </div>
-                <div>
-                    <label for="confirmPassword">Confirmar Senha:</label>
-                    <input type="password" id="confirmPassword" name="confirmPassword">
-                </div>
+            <form id="createAccountForm" class="login-form" novalidate>
+                <div><label for="createName">Nome Completo:</label><input type="text" id="createName" name="createName" required></div>
+                <div><label for="createEmail">E-mail:</label><input type="email" id="createEmail" name="createEmail" required></div>
+                <div><label for="createPassword">Senha:</label><input type="password" id="createPassword" name="createPassword" required></div>
+                <div><label for="confirmPassword">Confirmar Senha:</label><input type="password" id="confirmPassword" name="confirmPassword" required></div>
                 <button type="submit">Criar Conta</button>
             </form>
-            <div id="createAccountMessageArea" class="message-area" style="display:none;" aria-live="polite"></div>
-            <a href="#" id="backToLoginFromCreateLink" class="back-link" style="display:block; margin-top: 20px;">Já tem uma conta? Entrar</a>
+            <div id="createAccountMessageArea" class="message-area" aria-live="polite"></div>
+            <a href="#" id="backToLoginFromCreateLink" class="back-link">Já tem uma conta? Entrar</a>
         </div>
 
         <div id="formLinks" class="extra-links">
@@ -258,7 +206,74 @@
         </div>
     </div>
 
+    <div id="customConfirmOverlay" class="custom-modal-overlay">
+      <div id="customConfirmBox" class="custom-modal-box">
+        <p id="customConfirmMessage">Você tem certeza?</p>
+        <div class="custom-modal-buttons">
+          <button id="customConfirmOkButton" class="btn-modal-ok">OK</button>
+          <button id="customConfirmCancelButton" class="btn-modal-cancel">Cancelar</button>
+        </div>
+      </div>
+    </div>
+    <div id="customAlertOverlay" class="custom-modal-overlay">
+      <div id="customAlertBox" class="custom-modal-box">
+        <p id="customAlertMessage">Mensagem de alerta!</p>
+        <div class="custom-modal-buttons">
+          <button id="customAlertOkButton" class="btn-modal-ok">OK</button>
+        </div>
+      </div>
+    </div>
+
     <script>
+    function showCustomAlert(message) {
+      return new Promise((resolve) => {
+        const overlay = document.getElementById('customAlertOverlay');
+        const messageEl = document.getElementById('customAlertMessage');
+        const okButton = document.getElementById('customAlertOkButton');
+        if (!overlay || !messageEl || !okButton) { console.error("Elementos do modal de alerta não encontrados."); return resolve(false); }
+        messageEl.textContent = message;
+        overlay.style.display = 'flex';
+        const newOkButton = okButton.cloneNode(true);
+        okButton.parentNode.replaceChild(newOkButton, okButton);
+        let escapeListener;
+        const handleClose = () => {
+          overlay.style.display = 'none';
+          document.removeEventListener('keydown', escapeListener);
+          resolve(true);
+        };
+        newOkButton.addEventListener('click', handleClose);
+        escapeListener = (event) => { if (event.key === 'Escape' && overlay.style.display === 'flex') handleClose(); };
+        document.addEventListener('keydown', escapeListener);
+      });
+    }
+
+    function showCustomConfirm(message) {
+      return new Promise((resolve) => {
+        const overlay = document.getElementById('customConfirmOverlay');
+        const messageEl = document.getElementById('customConfirmMessage');
+        const okButton = document.getElementById('customConfirmOkButton');
+        const cancelButton = document.getElementById('customConfirmCancelButton');
+        if (!overlay || !messageEl || !okButton || !cancelButton) { console.error("Elementos do modal de confirmação não encontrados."); return resolve(false); }
+        messageEl.textContent = message;
+        overlay.style.display = 'flex';
+        const newOkButton = okButton.cloneNode(true);
+        okButton.parentNode.replaceChild(newOkButton, okButton);
+        const newCancelButton = cancelButton.cloneNode(true);
+        cancelButton.parentNode.replaceChild(newCancelButton, cancelButton);
+        let escapeListener;
+        const handleResolve = (value) => {
+          overlay.style.display = 'none';
+          document.removeEventListener('keydown', escapeListener);
+          resolve(value);
+        };
+        newOkButton.addEventListener('click', () => handleResolve(true));
+        newCancelButton.addEventListener('click', () => handleResolve(false));
+        escapeListener = (event) => { if (event.key === 'Escape' && overlay.style.display === 'flex') handleResolve(false); };
+        document.addEventListener('keydown', escapeListener);
+      });
+    }
+    
+    document.addEventListener('DOMContentLoaded', function() {
         const loginFormSection = document.getElementById('loginFormSection');
         const simpleLoginForm = document.getElementById('simpleLoginForm');
         const loginMessageArea = document.getElementById('loginMessageArea');
@@ -274,168 +289,198 @@
         
         const forgotPasswordLink = document.getElementById('forgotPasswordLink');
         const createAccountLink = document.getElementById('createAccountLink');
-        
         const backToLoginLink = document.getElementById('backToLoginLink'); 
-        const backToLoginFromCreateLink = document.getElementById('backToLoginFromCreateLink');
-
+        const backToLoginFromCreateLink = document.getElementById('backToLoginFromCreateLink'); 
         const topLeftBackFromForgot = document.getElementById('topLeftBackFromForgot');
         const topLeftBackFromCreate = document.getElementById('topLeftBackFromCreate');
-        
-        const formLinks = document.getElementById('formLinks'); 
+
+        const formLinksContainer = document.getElementById('formLinks'); 
         const loginGreeting = document.getElementById('loginGreeting');
-        const mainHeading = document.querySelector('.login-container h1');
+        const mainHeading = document.getElementById('mainHeading'); 
 
-        function showLoginMessage(message, isSuccess = false) {
-            loginMessageArea.textContent = message;
-            loginMessageArea.className = 'message-area' + (isSuccess ? ' success' : '');
-            loginMessageArea.style.display = message ? 'block' : 'none'; 
+        const userMenuContainer = document.getElementById('userMenuContainer');
+        const userIcon = document.getElementById('userIcon');
+        const userDropdown = document.getElementById('userDropdown');
+        const logoutButtonFromDropdown = document.getElementById('logoutButtonFromDropdown');
+
+        function showMessage(areaElement, message, isSuccess = false) {
+            if (!areaElement) return;
+            areaElement.textContent = message;
+            areaElement.className = 'message-area'; 
+            if (message) {
+                areaElement.classList.add(isSuccess ? 'success' : 'error');
+            }
         }
 
-        function showForgotPasswordMessage(message, isSuccess = false) {
-            forgotPasswordMessageArea.textContent = message;
-            forgotPasswordMessageArea.className = 'message-area' + (isSuccess ? ' success' : '');
-            forgotPasswordMessageArea.style.display = message ? 'block' : 'none';
-        }
-
-        function showCreateAccountMessage(message, isSuccess = false) {
-            createAccountMessageArea.textContent = message;
-            createAccountMessageArea.className = 'message-area' + (isSuccess ? ' success' : '');
-            createAccountMessageArea.style.display = message ? 'block' : 'none';
-        }
-
-        function goBackToLoginScreen(event) {
+        function switchToLoginScreen(event) {
             if (event) event.preventDefault();
-
             mainHeading.textContent = 'Login';
+            loginGreeting.textContent = 'Que bom ter você de volta!';
+            loginGreeting.style.display = 'block';
+
             loginFormSection.style.display = 'block';
             forgotPasswordSection.style.display = 'none';
             createAccountSection.style.display = 'none';
             
-            loginGreeting.style.display = 'block';
-            loginGreeting.textContent = 'Que bom ter você de volta!';
-            formLinks.style.display = 'block';
-
+            formLinksContainer.style.display = 'block';
             topLeftBackFromForgot.style.display = 'none';
             topLeftBackFromCreate.style.display = 'none';
-            
-            showLoginMessage('');
-            showForgotPasswordMessage('');
-            showCreateAccountMessage('');
-            simpleLoginForm.reset();
+            if(backToLoginLink) backToLoginLink.style.display = 'none'; 
 
-            backToLoginLink.style.display = 'none';
-            forgotPasswordForm.style.display = 'block'; 
+            showMessage(loginMessageArea, '');
+            showMessage(forgotPasswordMessageArea, '');
+            showMessage(createAccountMessageArea, '');
+            if(simpleLoginForm) simpleLoginForm.reset();
+            if(forgotPasswordForm) forgotPasswordForm.reset();
+            if(createAccountForm) createAccountForm.reset();
         }
 
-        simpleLoginForm.addEventListener('submit', function(event) {
-            event.preventDefault();
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
+        if (simpleLoginForm) {
+            simpleLoginForm.addEventListener('submit', async function(event) {
+                event.preventDefault();
+                const usernameInput = document.getElementById('username');
+                const passwordInput = document.getElementById('password');
+                
+                if (!usernameInput.value.trim() || !passwordInput.value.trim()) {
+                    showMessage(loginMessageArea, 'Por favor, preencha usuário e senha.');
+                    return;
+                }
 
-            if (username.trim() === '' || password.trim() === '') {
-                showLoginMessage('Por favor, preencha usuário e senha.');
-                return;
-            }
-            localStorage.setItem('usuarioLogadoEcoTechBH', 'true'); 
-            showLoginMessage('Login bem-sucedido! Redirecionando...', true);
-            this.querySelector('button[type="submit"]').disabled = true;
-            setTimeout(() => {
-                window.location.href = 'index.html';
-            }, 1500); 
-        });
+                sessionStorage.setItem('usuarioLogadoEcoTechBH', 'true'); // Alterado para sessionStorage
+                showMessage(loginMessageArea, 'Login bem-sucedido! Redirecionando...', true);
+                
+                const submitButton = this.querySelector('button[type="submit"]');
+                if(submitButton) submitButton.disabled = true;
 
-        forgotPasswordLink.addEventListener('click', function(event) {
-            event.preventDefault();
-            mainHeading.textContent = 'Redefinir Senha';
-            loginFormSection.style.display = 'none';
-            forgotPasswordSection.style.display = 'block';
-            createAccountSection.style.display = 'none';
-            
-            loginGreeting.style.display = 'none'; 
-            formLinks.style.display = 'none'; 
-            
-            topLeftBackFromForgot.style.display = 'block'; 
-            topLeftBackFromCreate.style.display = 'none';
+                const redirectTo = sessionStorage.getItem('redirectAfterLogin'); // Alterado para sessionStorage
+                await new Promise(r => setTimeout(r, 1500)); 
 
-            showForgotPasswordMessage(''); 
-            forgotPasswordForm.reset();
-            resetEmailInput.focus(); 
-            backToLoginLink.style.display = 'none'; 
-            forgotPasswordForm.style.display = 'block'; 
-            showLoginMessage('');
-        });
+                if (redirectTo) {
+                    sessionStorage.removeItem('redirectAfterLogin'); // Alterado para sessionStorage
+                    window.location.href = redirectTo; 
+                } else {
+                    window.location.href = 'index.html'; 
+                }
+            });
+        }
 
-        createAccountLink.addEventListener('click', function(event) {
-            event.preventDefault();
-            mainHeading.textContent = 'Criar Conta';
-            loginFormSection.style.display = 'none';
-            forgotPasswordSection.style.display = 'none';
-            createAccountSection.style.display = 'block';
-
-            loginGreeting.style.display = 'none';
-            formLinks.style.display = 'none';
-
-            topLeftBackFromCreate.style.display = 'block'; 
-            topLeftBackFromForgot.style.display = 'none';
-            
-            createAccountForm.reset();
-            showCreateAccountMessage(''); 
-            document.getElementById('createName').focus(); 
-        });
+        if (forgotPasswordLink) {
+            forgotPasswordLink.addEventListener('click', function(event) {
+                event.preventDefault();
+                mainHeading.textContent = 'Redefinir Senha';
+                loginGreeting.style.display = 'none';
+                loginFormSection.style.display = 'none';
+                forgotPasswordSection.style.display = 'block';
+                createAccountSection.style.display = 'none';
+                formLinksContainer.style.display = 'none';
+                topLeftBackFromForgot.style.display = 'inline-flex'; 
+                if(resetEmailInput) resetEmailInput.focus();
+                showMessage(forgotPasswordMessageArea, '');
+            });
+        }
         
-        topLeftBackFromForgot.addEventListener('click', goBackToLoginScreen);
-        topLeftBackFromCreate.addEventListener('click', goBackToLoginScreen);
-        backToLoginLink.addEventListener('click', goBackToLoginScreen); 
-        backToLoginFromCreateLink.addEventListener('click', goBackToLoginScreen);
-
-
-        createAccountForm.addEventListener('submit', function(event) {
-            event.preventDefault();
-            const name = document.getElementById('createName').value.trim();
-            const email = document.getElementById('createEmail').value.trim();
-            const password = document.getElementById('createPassword').value;
-            const confirmPassword = document.getElementById('confirmPassword').value;
-
-            if (name === '' || email === '' || password === '' || confirmPassword === '') {
-                showCreateAccountMessage('Por favor, preencha todos os campos.');
-                return;
-            }
-            function isValidEmail(emailText) {
+        if (forgotPasswordForm) {
+            forgotPasswordForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+                const email = resetEmailInput.value;
                 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                return emailRegex.test(emailText);
-            }
-            if (!isValidEmail(email)) {
-                showCreateAccountMessage('Por favor, insira um e-mail válido.');
-                return;
-            }
-            
-            if (password !== confirmPassword) {
-                showCreateAccountMessage('As senhas não coincidem.');
-                return;
-            }
-            showCreateAccountMessage('Conta criada com sucesso! Você já pode fazer o login.', true);
-            this.querySelector('button[type="submit"]').disabled = true;
-            setTimeout(() => { 
-                goBackToLoginScreen(); 
-                this.querySelector('button[type="submit"]').disabled = false;
-            }, 2500);
-        });
+                if (!email.trim() || !emailRegex.test(email)) {
+                    showMessage(forgotPasswordMessageArea, 'Por favor, insira um e-mail válido.');
+                    return;
+                }
+                showMessage(forgotPasswordMessageArea, 'Se uma conta existir para ' + email + ', um e-mail de redefinição foi enviado.', true);
+                this.style.display = 'none'; 
+                if(backToLoginLink) backToLoginLink.style.display = 'block'; 
+            });
+        }
 
-        forgotPasswordForm.addEventListener('submit', function(event) {
-            event.preventDefault();
-            const email = resetEmailInput.value;
-            function isValidEmail(emailText) {
+        if (createAccountLink) {
+            createAccountLink.addEventListener('click', function(event) {
+                event.preventDefault();
+                mainHeading.textContent = 'Criar Conta';
+                loginGreeting.style.display = 'none';
+                loginFormSection.style.display = 'none';
+                forgotPasswordSection.style.display = 'none';
+                createAccountSection.style.display = 'block';
+                formLinksContainer.style.display = 'none';
+                topLeftBackFromCreate.style.display = 'inline-flex'; 
+                const createNameInput = document.getElementById('createName');
+                if(createNameInput) createNameInput.focus();
+                showMessage(createAccountMessageArea, '');
+            });
+        }
+
+        if (createAccountForm) {
+            createAccountForm.addEventListener('submit', async function(event) {
+                event.preventDefault();
+                const name = document.getElementById('createName').value.trim();
+                const email = document.getElementById('createEmail').value.trim();
+                const password = document.getElementById('createPassword').value;
+                const confirmPassword = document.getElementById('confirmPassword').value;
                 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                return emailRegex.test(emailText);
+
+                if (!name || !email || !password || !confirmPassword) {
+                    showMessage(createAccountMessageArea, 'Por favor, preencha todos os campos.'); return;
+                }
+                if (!emailRegex.test(email)) {
+                    showMessage(createAccountMessageArea, 'Por favor, insira um e-mail válido.'); return;
+                }
+                if (password !== confirmPassword) {
+                    showMessage(createAccountMessageArea, 'As senhas não coincidem.'); return;
+                }
+                
+                showMessage(createAccountMessageArea, 'Conta criada com sucesso! Você já pode fazer o login.', true);
+                const submitButton = this.querySelector('button[type="submit"]');
+                if(submitButton) submitButton.disabled = true;
+                
+                await new Promise(r => setTimeout(r, 2500));
+                if(submitButton) submitButton.disabled = false;
+                switchToLoginScreen();
+            });
+        }
+
+        if(topLeftBackFromForgot) topLeftBackFromForgot.addEventListener('click', switchToLoginScreen);
+        if(topLeftBackFromCreate) topLeftBackFromCreate.addEventListener('click', switchToLoginScreen);
+        if(backToLoginLink) backToLoginLink.addEventListener('click', switchToLoginScreen); 
+        if(backToLoginFromCreateLink) backToLoginFromCreateLink.addEventListener('click', switchToLoginScreen);
+
+        const estaLogado = sessionStorage.getItem('usuarioLogadoEcoTechBH') === 'true'; // Alterado para sessionStorage
+        if (estaLogado && userMenuContainer) {
+            userMenuContainer.style.display = 'block'; 
+        }
+
+        if (userIcon && userDropdown) {
+            userIcon.addEventListener('click', function(event) {
+                userDropdown.classList.toggle('active');
+                event.stopPropagation();
+            });
+            document.addEventListener('click', function(event) {
+                if (userDropdown && userIcon && !userDropdown.contains(event.target) && !userIcon.contains(event.target) && userDropdown.classList.contains('active')) {
+                    userDropdown.classList.remove('active');
+                }
+            });
+        }
+        if (logoutButtonFromDropdown) {
+            logoutButtonFromDropdown.addEventListener('click', async function(event) {
+                event.preventDefault();
+                const userChoice = await showCustomConfirm("Você tem certeza que deseja sair?");
+                if (userChoice) {
+                    sessionStorage.removeItem('usuarioLogadoEcoTechBH'); // Alterado para sessionStorage
+                    sessionStorage.removeItem('redirectAfterLogin'); // Alterado para sessionStorage
+                    await showCustomAlert('Você saiu da sua conta.');
+                    window.location.reload(); 
+                }
+            });
+        }
+        
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                if (userDropdown && userDropdown.classList.contains('active')) {
+                    userDropdown.classList.remove('active');
+                }
             }
-            if (email.trim() === '' || !isValidEmail(email)) { 
-                showForgotPasswordMessage('Por favor, insira um e-mail válido.');
-                return;
-            }
-            showForgotPasswordMessage('Se uma conta existir para ' + email + ', um e-mail de redefinição foi enviado.', true);
-            forgotPasswordForm.style.display = 'none'; 
-            backToLoginLink.style.display = 'block'; 
         });
+    });
     </script>
 </body>
 </html>

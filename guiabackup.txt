@@ -55,15 +55,7 @@
     --line-height-content-text: 1.7;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
-body { 
-    font-family: var(--primary-font); 
-    display: flex; 
-    flex-direction: column; 
-    min-height: 100vh; 
-    background-color: var(--bg-body); 
-    color: var(--text-color-body); 
-    line-height: var(--line-height-base);
-}
+body { font-family: var(--primary-font); display: flex; flex-direction: column; min-height: 100vh; background-color: var(--bg-body); color: var(--text-color-body); line-height: var(--line-height-base); }
 .page-wrapper { display: flex; flex-grow: 1; width: 100%; margin: 0; gap: 30px; padding-right: 30px; padding-bottom: 20px; }
 
 .user-menu-container { position: fixed; top: 30px; right: 40px; z-index: 1000; }
@@ -99,23 +91,27 @@ main.content { flex-grow: 1; padding: 40px 48px; background-color: var(--bg-cont
 main.content section { margin-bottom: 45px; }
 main.content section:last-of-type { margin-bottom: 20px; }
 
+/* Estilo base para H2 dentro de main.content */
 main.content h2 {
     color: var(--color-primary);
     font-size: 2.1em;
     font-weight: 700;
     letter-spacing: 0.02em;
-    margin-bottom: 25px; 
+    margin-bottom: 25px; /* Espaçamento padrão abaixo do h2 */
 }
+
+/* AJUSTE: Estilo específico para o H2 principal da página Guia de Descarte */
 main.content #introducao-guia h2 {
-    display: block; 
-    padding-left: 15px; 
-    padding-bottom: 10px; 
-    border-left: 5px solid var(--color-primary); 
-    border-bottom: none; 
-    margin-bottom: 30px; 
+    display: block; /* Faz o h2 ocupar a linha toda */
+    padding-left: 15px; /* Espaçamento para a borda */
+    padding-bottom: 10px; /* Espaçamento inferior, se necessário */
+    border-left: 5px solid var(--color-primary); /* Borda lateral "retângulo azul escuro" */
+    border-bottom: none; /* Remove o sublinhado padrão, se houver */
+    margin-bottom: 30px; /* Ajuste na margem inferior */
 }
-main.content #guia-por-tipo h2 { 
-    display: block; text-align: center; margin-bottom: 30px; border-bottom: none; padding-bottom: 0; 
+
+main.content #guia-por-tipo h2 { /* Específico para o H2 do acordeão */
+    display: block; text-align: center; margin-bottom: 30px; border-bottom: none; padding-bottom: 0; /* Remove padding-bottom se não houver borda */
 }
 main.content p, main.content > section > ul:not(.accordion-content ul) {
     margin-bottom: 20px; font-size: 1.05em; color: var(--text-color-paragraphs); line-height: var(--line-height-content-text);
@@ -137,7 +133,7 @@ main.content strong { font-weight: 600; color: var(--text-color-strong); }
 .accordion-header .accordion-title-text { flex-grow: 1; }
 .accordion-header .accordion-icon { font-size: 0.9em; transition: transform 0.3s ease-in-out; color: var(--color-secondary); }
 .accordion-header[aria-expanded="true"] .accordion-icon { transform: rotate(180deg); }
-.accordion-content { padding: 20px; border-top: 1px solid var(--border-color-medium); background-color: var(--bg-article-guide); display: none; /* Começa fechado */ }
+.accordion-content { padding: 20px; border-top: 1px solid var(--border-color-medium); background-color: var(--bg-article-guide); }
 .accordion-content ul { list-style: disc; padding-left: 25px; margin-bottom: 0; font-size: 1em; color: var(--text-color-paragraphs); line-height: var(--line-height-content-text); }
 .accordion-content ul li { padding-left: 0px; margin-bottom: 10px; position: static; }
 .accordion-content ul li::before { content: ''; }
@@ -176,8 +172,8 @@ footer { width: 100%; text-align: center; padding: 25px 20px; font-size: 0.9em; 
     .menu-item a { padding: 10px 12px; font-size: 0.95em; }
     .menu-icon { margin-right: 10px; font-size: 1.2em; }
     main.content { margin: 20px 0 0 0; padding: 25px 20px; max-width: none; border-radius: 0; box-shadow: none; }
-    main.content h2 { font-size: 1.8em; } 
-    main.content #introducao-guia h2 { padding-left: 10px; border-left-width: 4px; } 
+    main.content h2 { font-size: 1.8em; } /* H2 geral no mobile */
+    main.content #introducao-guia h2 { padding-left: 10px; border-left-width: 4px; } /* H2 principal do guia no mobile */
     .accordion-header { font-size: 1.15em; padding: 12px 15px; }
     .accordion-content { padding: 15px; }
     .user-menu-container { top: 20px; right: 20px; }
@@ -215,7 +211,7 @@ footer { width: 100%; text-align: center; padding: 25px 20px; font-size: 0.9em; 
                 <li><a href="meu-perfil.html">Meu Perfil (em breve)</a></li>
                 <li><a href="minhas-doacoes.html">Minhas Doações (em breve)</a></li>
             </ul>
-            <a href="#" class="logout-button" id="logoutButton">Sair da conta</a>
+            <a href="login.html" class="logout-button">Sair da conta</a>
         </div>
     </div>
 
@@ -228,8 +224,8 @@ footer { width: 100%; text-align: center; padding: 25px 20px; font-size: 0.9em; 
             <ul class="menu-list">
                 <li class="menu-item"><a href="index.html"><i class="fas fa-home menu-icon"></i>Início</a></li>
                 <li class="menu-item"><a href="sobre.html"><i class="fas fa-info-circle menu-icon"></i>Sobre o Projeto</a></li>
-                <li class="menu-item"><a href="guia.html" id="guiaMenuLink"><i class="fas fa-book menu-icon"></i>Guia de Descarte</a></li>
-                <li class="menu-item"><a href="doacoes.html" id="doacoesMenuLink"><i class="fas fa-hand-holding-heart menu-icon"></i>Doações</a></li>
+                <li class="menu-item"><a href="guia.html"><i class="fas fa-book menu-icon"></i>Guia de Descarte</a></li>
+                <li class="menu-item"><a href="doacoes.html"><i class="fas fa-hand-holding-heart menu-icon"></i>Doações</a></li>
                 <li class="menu-item"><a href="pontos.html"><i class="fas fa-map-marker-alt menu-icon"></i>Pontos de Descarte</a></li>
             </ul>
         </div>
@@ -258,7 +254,7 @@ footer { width: 100%; text-align: center; padding: 25px 20px; font-size: 0.9em; 
                         <span class="accordion-title-text"><i class="fas fa-mobile-alt title-icon"></i>Celulares e Tablets</span>
                         <span class="accordion-icon fas fa-chevron-down"></span>
                     </h3>
-                    <div class="accordion-content" id="content-celulares" role="region" aria-labelledby="header-celulares">
+                    <div class="accordion-content" id="content-celulares" role="region" aria-labelledby="header-celulares" style="display: none;">
                         <ul>
                             <li><strong>Faça backup dos seus dados:</strong> Salve fotos, vídeos, contatos e outros arquivos importantes na nuvem (Google Drive, iCloud, etc.) ou em um computador.</li>
                             <li><strong>Remova chips e cartões de memória:</strong> Não se esqueça de retirar o chip da operadora (SIM card) e qualquer cartão de memória MicroSD.</li>
@@ -284,7 +280,7 @@ footer { width: 100%; text-align: center; padding: 25px 20px; font-size: 0.9em; 
                         <span class="accordion-title-text"><i class="fas fa-laptop title-icon"></i>Computadores, Notebooks e Periféricos</span>
                         <span class="accordion-icon fas fa-chevron-down"></span>
                     </h3>
-                    <div class="accordion-content" id="content-computadores" role="region" aria-labelledby="header-computadores">
+                    <div class="accordion-content" id="content-computadores" role="region" aria-labelledby="header-computadores" style="display: none;">
                         <ul>
                             <li><strong>Backup completo:</strong> Salve todos os seus arquivos pessoais, documentos, fotos e programas importantes em um HD externo ou serviço de nuvem.</li>
                             <li><strong>Apague seus dados do HD/SSD:</strong> Para maior segurança, especialmente se o computador for para reuso ou reciclagem não especializada, considere usar softwares de "limpeza de disco" (data wiping) que sobrescrevem os dados, dificultando a recuperação. A simples formatação pode não ser suficiente para dados muito sensíveis.</li>
@@ -304,7 +300,7 @@ footer { width: 100%; text-align: center; padding: 25px 20px; font-size: 0.9em; 
                         <span class="accordion-title-text"><i class="fas fa-battery-full title-icon"></i>Pilhas e Baterias</span>
                         <span class="accordion-icon fas fa-chevron-down"></span>
                     </h3>
-                    <div class="accordion-content" id="content-pilhas" role="region" aria-labelledby="header-pilhas">
+                    <div class="accordion-content" id="content-pilhas" role="region" aria-labelledby="header-pilhas" style="display: none;">
                         <ul>
                             <li><strong>Riscos específicos:</strong> Pilhas e baterias contêm produtos químicos corrosivos e metais pesados. Vazamentos podem contaminar o ambiente e são perigosos ao toque.</li>
                             <li><strong>Separe do lixo comum:</strong> Nunca descarte pilhas e baterias no lixo doméstico indiferenciado.</li>
@@ -320,7 +316,7 @@ footer { width: 100%; text-align: center; padding: 25px 20px; font-size: 0.9em; 
                         <span class="accordion-title-text"><i class="fas fa-plug title-icon"></i>Cabos, Carregadores e Fontes</span>
                         <span class="accordion-icon fas fa-chevron-down"></span>
                     </h3>
-                    <div class="accordion-content" id="content-cabos" role="region" aria-labelledby="header-cabos">
+                    <div class="accordion-content" id="content-cabos" role="region" aria-labelledby="header-cabos" style="display: none;">
                         <ul>
                             <li><strong>Reúna os itens:</strong> Junte todos os cabos (USB, HDMI, de força, de rede), carregadores de celular, fontes de notebook e outros adaptadores de energia que não utiliza mais.</li>
                             <li><strong>Verifique a possibilidade de doação:</strong> Cabos e carregadores em bom estado de funcionamento podem ser muito úteis para outras pessoas, escolas ou instituições.</li>
@@ -335,7 +331,7 @@ footer { width: 100%; text-align: center; padding: 25px 20px; font-size: 0.9em; 
                         <span class="accordion-title-text"><i class="fas fa-tv title-icon"></i>Eletrodomésticos e Equipamentos de Som/Vídeo</span>
                         <span class="accordion-icon fas fa-chevron-down"></span>
                     </h3>
-                    <div class="accordion-content" id="content-eletrodomesticos" role="region" aria-labelledby="header-eletrodomesticos">
+                    <div class="accordion-content" id="content-eletrodomesticos" role="region" aria-labelledby="header-eletrodomesticos" style="display: none;">
                         <ul>
                             <li><strong>Linha Branca (geladeiras, freezers, fogões, máquinas de lavar, micro-ondas):</strong>
                                 <ul>
@@ -400,142 +396,148 @@ footer { width: 100%; text-align: center; padding: 25px 20px; font-size: 0.9em; 
     </footer>
 
 <script>
-// Funções de Modal (showCustomAlert e showCustomConfirm)
+// Função para exibir o modal de ALERTA personalizado
 function showCustomAlert(message) {
   return new Promise((resolve) => {
     const overlay = document.getElementById('customAlertOverlay');
     const messageEl = document.getElementById('customAlertMessage');
     const okButton = document.getElementById('customAlertOkButton');
-    if (!overlay || !messageEl || !okButton) { console.error("Elementos do modal de alerta não encontrados."); return resolve(false); }
+
     messageEl.textContent = message;
     overlay.style.display = 'flex';
+
     const newOkButton = okButton.cloneNode(true);
     okButton.parentNode.replaceChild(newOkButton, okButton);
+
     let escapeListener;
+
     const handleClose = () => {
       overlay.style.display = 'none';
       document.removeEventListener('keydown', escapeListener);
       resolve(true);
     };
+
     newOkButton.addEventListener('click', handleClose);
-    escapeListener = (event) => { if (event.key === 'Escape' && overlay.style.display === 'flex') handleClose(); };
+
+    escapeListener = (event) => {
+      if (event.key === 'Escape' && overlay.style.display === 'flex') {
+        handleClose();
+      }
+    };
     document.addEventListener('keydown', escapeListener);
   });
 }
 
+// Função para exibir o modal de CONFIRMAÇÃO personalizado
 function showCustomConfirm(message) {
   return new Promise((resolve) => {
     const overlay = document.getElementById('customConfirmOverlay');
     const messageEl = document.getElementById('customConfirmMessage');
     const okButton = document.getElementById('customConfirmOkButton');
     const cancelButton = document.getElementById('customConfirmCancelButton');
-    if (!overlay || !messageEl || !okButton || !cancelButton) { console.error("Elementos do modal de confirmação não encontrados."); return resolve(false); }
+
     messageEl.textContent = message;
     overlay.style.display = 'flex';
+
     const newOkButton = okButton.cloneNode(true);
     okButton.parentNode.replaceChild(newOkButton, okButton);
     const newCancelButton = cancelButton.cloneNode(true);
     cancelButton.parentNode.replaceChild(newCancelButton, cancelButton);
+
     let escapeListener;
+
     const handleResolve = (value) => {
       overlay.style.display = 'none';
       document.removeEventListener('keydown', escapeListener);
       resolve(value);
     };
+
     newOkButton.addEventListener('click', () => handleResolve(true));
     newCancelButton.addEventListener('click', () => handleResolve(false));
-    escapeListener = (event) => { if (event.key === 'Escape' && overlay.style.display === 'flex') handleResolve(false); };
+
+    escapeListener = (event) => {
+      if (event.key === 'Escape' && overlay.style.display === 'flex') {
+        handleResolve(false);
+      }
+    };
     document.addEventListener('keydown', escapeListener);
   });
 }
 
-// Lógica principal da aplicação
-document.addEventListener('DOMContentLoaded', async function() { 
+document.addEventListener('DOMContentLoaded', function () {
     const userIcon = document.getElementById('userIcon');
     const userDropdown = document.getElementById('userDropdown');
-    const logoutButton = document.getElementById('logoutButton');
-    const doacoesMenuLink = document.getElementById('doacoesMenuLink');
-    const currentPath = window.location.pathname.split('/').pop() || 'index.html';
 
-    // Lógica do Menu do Usuário
     if (userIcon && userDropdown) {
         userIcon.title = "Opções do Usuário";
         userIcon.setAttribute('aria-label', 'Opções do Usuário');
+
         userIcon.addEventListener('click', function(event) {
             userDropdown.classList.toggle('active');
-            event.stopPropagation(); 
+            event.stopPropagation();
         });
+
         document.addEventListener('click', function(event) {
-            if (userDropdown && userIcon && !userDropdown.contains(event.target) && !userIcon.contains(event.target) && userDropdown.classList.contains('active')) {
+            if (!userDropdown.contains(event.target) && !userIcon.contains(event.target) && userDropdown.classList.contains('active')) {
                 userDropdown.classList.remove('active');
             }
         });
+
+        const logoutButtonFromDropdown = userDropdown.querySelector('.logout-button');
+        if (logoutButtonFromDropdown) {
+            logoutButtonFromDropdown.addEventListener('click', async function(event) {
+                event.preventDefault();
+                const userChoice = await showCustomConfirm("Você tem certeza que deseja sair?");
+                if (userChoice) {
+                    localStorage.removeItem('usuarioLogadoEcoTechBH');
+                    await showCustomAlert('Redirecionando para login...');
+                    window.location.href = 'login.html';
+                }
+            });
+        }
     }
 
-    // Lógica de Logout
-    if (logoutButton) {
-        logoutButton.addEventListener('click', async function(event) {
-            event.preventDefault();
-            const userChoice = await showCustomConfirm("Você tem certeza que deseja sair?");
-            if (userChoice) {
-                sessionStorage.removeItem('usuarioLogadoEcoTechBH'); 
-                sessionStorage.removeItem('redirectAfterLogin'); 
-                await showCustomAlert('Você saiu da sua conta. Redirecionando para a página de login...');
-                window.location.href = 'login.html';
-            }
-        });
-    }
-
-    // Lógica para ativar o item correto no menu lateral
     const menuItems = document.querySelectorAll('.menu-list a');
+    const currentPath = window.location.pathname.split('/').pop();
+
     menuItems.forEach(item => {
         const itemHref = item.getAttribute('href');
-        if (itemHref === currentPath || (currentPath === 'index.html' && itemHref === '') || (currentPath === '' && itemHref === 'index.html')) {
-             item.classList.add('active');
+        if (itemHref === currentPath) {
+            item.classList.add('active');
+        } else if (currentPath === '' && itemHref === 'index.html') {
+            item.classList.add('active');
         } else {
             item.classList.remove('active');
         }
     });
 
-    // Lógica de proteção para o link "Doações" no menu
-    if (doacoesMenuLink) {
-        doacoesMenuLink.addEventListener('click', async function(event) {
-            const isLoggedIn = sessionStorage.getItem('usuarioLogadoEcoTechBH') === 'true'; 
-            if (!isLoggedIn) { 
-                event.preventDefault(); 
-                sessionStorage.setItem('redirectAfterLogin', 'doacoes.html'); 
-                await showCustomAlert("Para realizar esta Ação é necessário realizar o login.");
-                window.location.href = 'login.html';
+    const accordionHeaders = document.querySelectorAll('.accordion-header');
+    accordionHeaders.forEach(header => {
+        header.addEventListener('click', function () {
+            toggleAccordionItem(this);
+        });
+
+        header.addEventListener('keydown', function (event) {
+            if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                toggleAccordionItem(this);
             }
         });
-    }
-    
-    // Lógica específica para a página GUIA.HTML (Acordeão)
-    if (currentPath === 'guia.html') {
-        const accordionHeaders = document.querySelectorAll('.accordion-header');
-        accordionHeaders.forEach(header => {
-            header.addEventListener('click', function () {
-                toggleAccordionItem(this);
-            });
-            header.addEventListener('keydown', function (event) {
-                if (event.key === 'Enter' || event.key === ' ') {
-                    event.preventDefault(); 
-                    toggleAccordionItem(this);
-                }
-            });
-        });
+    });
 
-        function toggleAccordionItem(headerElement) {
-            const contentId = headerElement.getAttribute('aria-controls');
-            const content = document.getElementById(contentId);
-            const isExpanded = headerElement.getAttribute('aria-expanded') === 'true';
+    function toggleAccordionItem(headerElement) {
+        const contentId = headerElement.getAttribute('aria-controls');
+        const content = document.getElementById(contentId);
+        const isExpanded = headerElement.getAttribute('aria-expanded') === 'true';
 
-            headerElement.setAttribute('aria-expanded', String(!isExpanded)); 
-            content.style.display = isExpanded ? 'none' : 'block';
+        headerElement.setAttribute('aria-expanded', !isExpanded);
+        if (isExpanded) {
+            content.style.display = 'none';
+        } else {
+            content.style.display = 'block';
         }
     }
 
-    // Listener de Escape global para o dropdown do usuário
     document.addEventListener('keydown', function(event) {
         if (event.key === 'Escape') {
             if (userDropdown && userDropdown.classList.contains('active')) {
@@ -543,9 +545,6 @@ document.addEventListener('DOMContentLoaded', async function() {
             }
         }
     });
-    
-    // Torna o corpo da página visível, pois não há proteção de rota no carregamento para guia.html
-    document.body.style.visibility = 'visible';
 });
 </script>
 

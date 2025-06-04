@@ -56,7 +56,7 @@ body {
     background-color: var(--bg-body); 
     color: var(--text-color-body); 
     line-height: var(--line-height-base); 
-    visibility: hidden; 
+    visibility: hidden; /* Oculta o corpo inicialmente para verificação de login */
 }
 .page-wrapper { display: flex; flex-grow: 1; width: 100%; margin: 0; gap: 30px; padding-right: 30px; padding-bottom: 20px; }
 .user-menu-container { position: fixed; top: 30px; right: 40px; z-index: 1000; }
@@ -89,19 +89,7 @@ body {
 .menu-item a:hover .menu-icon { color: var(--color-secondary); }
 
 /* Estilos do Conteúdo Principal e Formulário */
-main.content { 
-    flex-grow: 1; 
-    padding: 40px 48px; 
-    background-color: var(--bg-content); 
-    border-radius: var(--border-radius-main); 
-    margin-top: 20px; 
-    margin-bottom: 20px; 
-    box-shadow: 0 6px 18px var(--shadow-medium); 
-    max-width: 960px; /* Padronizado com index.html */
-    width: 100%; /* Ocupa a largura disponível até o max-width */
-    margin-left: auto; /* Centraliza o conteúdo */
-    margin-right: auto; /* Centraliza o conteúdo */
-}
+main.content { flex-grow: 1; padding: 40px 48px; background-color: var(--bg-content); border-radius: var(--border-radius-main); margin-top: 20px; margin-bottom: 20px; box-shadow: 0 6px 18px var(--shadow-medium); max-width: 900px; }
 main.content h2 { 
     margin-bottom: 25px; color: var(--color-primary, #1a237e); font-size: 2.3em;
     font-weight: 700; letter-spacing: 0.02em; padding-bottom: 10px;
@@ -342,7 +330,6 @@ footer { width: 100%; text-align: center; padding: 25px 20px; font-size: 0.9em; 
     </footer>
 
 <script>
-// Funções de Modal (showCustomAlert e showCustomConfirm)
 function showCustomAlert(message) {
   return new Promise((resolve) => {
     const overlay = document.getElementById('customAlertOverlay');
@@ -391,21 +378,19 @@ function showCustomConfirm(message) {
   });
 }
 
-// Lógica principal da aplicação
 document.addEventListener('DOMContentLoaded', async function() { 
-    const estaLogado = sessionStorage.getItem('usuarioLogadoEcoTechBH') === 'true';
+    const estaLogado = sessionStorage.getItem('usuarioLogadoEcoTechBH') === 'true'; // Alterado para sessionStorage
     const currentPath = window.location.pathname.split('/').pop() || 'index.html';
 
     if (currentPath === 'doacoes.html' && !estaLogado) {
         document.body.style.visibility = 'hidden'; 
-        sessionStorage.setItem('redirectAfterLogin', 'doacoes.html');
+        sessionStorage.setItem('redirectAfterLogin', 'doacoes.html'); // Alterado para sessionStorage
         await showCustomAlert("Para acessar a página de Doações, é necessário realizar o login.");
         window.location.href = 'login.html';
         return; 
     }
     
     document.body.style.visibility = 'visible';
-
 
     const userIcon = document.getElementById('userIcon');
     const userDropdown = document.getElementById('userDropdown');
@@ -431,8 +416,8 @@ document.addEventListener('DOMContentLoaded', async function() {
             event.preventDefault();
             const userChoice = await showCustomConfirm("Você tem certeza que deseja sair?");
             if (userChoice) {
-                sessionStorage.removeItem('usuarioLogadoEcoTechBH');
-                sessionStorage.removeItem('redirectAfterLogin');
+                sessionStorage.removeItem('usuarioLogadoEcoTechBH'); // Alterado para sessionStorage
+                sessionStorage.removeItem('redirectAfterLogin'); // Alterado para sessionStorage
                 await showCustomAlert('Você saiu da sua conta. Redirecionando para a página de login...');
                 window.location.href = 'login.html';
             }
@@ -451,10 +436,10 @@ document.addEventListener('DOMContentLoaded', async function() {
 
     if (doacoesMenuLink) {
         doacoesMenuLink.addEventListener('click', async function(event) {
-            const isLoggedIn = sessionStorage.getItem('usuarioLogadoEcoTechBH') === 'true';
+            const isLoggedIn = sessionStorage.getItem('usuarioLogadoEcoTechBH') === 'true'; // Alterado para sessionStorage
             if (!isLoggedIn && currentPath !== 'doacoes.html') { 
                 event.preventDefault(); 
-                sessionStorage.setItem('redirectAfterLogin', 'doacoes.html');
+                sessionStorage.setItem('redirectAfterLogin', 'doacoes.html'); // Alterado para sessionStorage
                 await showCustomAlert("Para realizar esta Ação é necessário realizar o login.");
                 window.location.href = 'login.html';
             }
